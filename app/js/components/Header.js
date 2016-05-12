@@ -1,24 +1,62 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import { Link } from 'react-router'
+
 import { connect } from 'react-redux';
 
+import NavLink from './NavLink'
+import { login, logout } from '../actions/context';
+
 /**
- * @author Jeff Risberg
- * @since May 2016
+ * Appears at top of screen
+ *
+ * @author Jeff Risberg, Brandon Risberg
+ * @since April 30, 2016
  */
 class Header extends React.Component {
 
-    constructor() {
-        super();
-    }
-
     render() {
+
+        var headerText = "Not logged in";
+        let loginLogout = <Link to="/login" style={{marginLeft: '10px'}}>Login</Link>;
+        if (false && this.props.donor.donorId != null) {
+            var firstName = this.props.donor.firstName;
+            var points = this.props.donor.points;
+
+            headerText = firstName + " " + points + " points";
+            loginLogout = <a onClick={this.props.logout} style={{marginLeft: '10px'}}>Logout</a>;
+        }
+
         return (
-            <div style={{width: '600px', background: '#ddd'}}>
-                Header
+            <div>
+                <div className="row">
+                    <div className="container">
+                        <div className="logo col-md-4 col-xs-4">
+                            <img src="images/RE08Logo.jpg" className="hidden-xs"/>
+                        </div>
+
+                        <div className="col-md-8 col-xs-7">
+                            <div className="account-header-links text-right hidden-xs">
+                                {loginLogout}
+                            </div>
+
+                            <div className="account-info text-right">
+                                {headerText}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        );
+        )
     }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        context: state.context
+    };
+};
+export default connect(
+    mapStateToProps,
+    {logout}
+)(Header);
+

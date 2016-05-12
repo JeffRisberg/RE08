@@ -1,6 +1,9 @@
-{"_id":"1","id":"1","vendorId":"1","name":"Default JG Portal"}
-{"_id":"2","id":"2","vendorId":"2","name":"Cisco","showFavorites":"true"}
-{"_id":"3","id":"3","vendorId":"3","name":"Dalio","showFavorites":"false"}
-{"_id":"4","id":"4","vendorId":"4","name":"WellsFargo","showFavorites":"true"}
-{"_id":"5","id":"5","vendorId":"5","name":"Optical Underground customer"}
-{"_id":"6","id":"6","vendorId":"5","name":"Optical Underground employees"}
+{"_id":"1","id":"1","vendorId":"1","portalStatus":"active","headerImage":"Image01","mainText":"JustGive is the destination for online giving"}
+{"_id":"2","id":"2","vendorId":"1","portalStatus":"pending","headerImage":"Image02","mainText":"JustGive is the destination for online giving"}
+{"_id":"3","id":"3","vendorId":"2","portalStatus":"deleted","headerImage":"Image03","mainText":"Cisco employee giving portal"}
+{"_id":"4","id":"4","vendorId":"2","portalStatus":"active","headerImage":"Image01","mainText":"Cisco employee giving portal"}
+{"_id":"5","id":"5","vendorId":"2","portalStatus":"pending","headerImage":"Image05","mainText":"Cisco employee giving portal"}
+{"_id":"6","id":"6","vendorId":"3","portalStatus":"active","headerImage":"Image04","mainText":"My holiday gift to you..."}
+{"_id":"7","id":"7","vendorId":"4","portalStatus":"active","headerImage":"Image02","mainText":"Wells Fargo Rewards allows you to use your points for charity"}
+{"_id":"8","id":"8","vendorId":"5","portalStatus":"deleted","headerImage":"Image03","mainText":"Optical Underground is pleased to offer a giving program for customers"}
+{"_id":"9","id":"9","vendorId":"5","portalStatus":"active","headerImage":"Image05","mainText":"Optical Underground is now offering a matching program for its giving program for customers"}

@@ -5,14 +5,14 @@ import fetch from 'isomorphic-fetch';
 
 import { SET_VENDOR } from '../constants/ActionTypes'
 
-export const fetchVendor = (vendorId) => {
-    return function (dispatch) {
+export const fetchVendor = () => {
+    return function (dispatch, getState) {
 
-        return fetch('/ws/vendor/' + vendorId, {})
+        const vendorId = getState().context.vendorId;
+
+        return fetch('/ws/vendors/' + vendorId, {})
             .then(response => response.json())
             .then((json) => {
-
-                console.log('fetched vendor ' + JSON.stringify(json.data, null, 2))
 
                 dispatch({
                         type: SET_VENDOR,

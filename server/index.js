@@ -8,11 +8,14 @@ const app = express();
 const mocks = globSync('./mocks/**/*.js', {cwd: __dirname}).map(require);
 
 const PATH_STYLES = path.resolve(__dirname, '../app/styles');
+const PATH_IMAGES = path.resolve(__dirname, '../app/images');
+const PATH_JS = path.resolve(__dirname, '../app/js');
+
 const PATH_DIST = path.resolve(__dirname, '../dist');
 
-app.use(bodyParser.urlencoded({extended: false}));
-
 app.use('/styles', express.static(PATH_STYLES));
+app.use('/images', express.static(PATH_IMAGES));
+app.use('/js', express.static(PATH_JS));
 app.use(express.static(PATH_DIST));
 
 app.get('/', (req, res) => {
@@ -32,7 +35,7 @@ var nedb = require('nedb');
 app.vendorsDB = new nedb({filename: 'vendors', autoload: true});
 app.portalsDB = new nedb({filename: 'portals', autoload: true});
 app.portalPagesDB = new nedb({filename: 'portalPages', autoload: true});
-app.portalTextsDB = new nedb({filename: 'portalTexts', autoload: true});
+app.portalBlocksDB = new nedb({filename: 'portalBlocks', autoload: true});
 
 app.categoryDB = new nedb({filename: 'categories', autoload: true});
 app.charityDB = new nedb({filename: 'charities', autoload: true});

@@ -5,10 +5,12 @@ import fetch from 'isomorphic-fetch';
 
 import { SET_PORTAL } from '../constants/ActionTypes'
 
-export const fetchPortal = (portalId) => {
-    return function (dispatch) {
+export const fetchPortal = () => {
+    return function (dispatch, getState) {
 
-        return fetch('/ws/portal/' + portalId, {})
+        const portalId = getState().context.portalId;
+
+        return fetch('/ws/portals/' + portalId, {})
             .then(response => response.json())
             .then((json) => {
 

@@ -11,7 +11,7 @@ export const fetchContext = () => {
     return function (dispatch, getState) {
 
         var token = (getState().context == null) ? '' : getState().context.token;
-        return fetch('/ws/basket/context', {
+        return fetch('/ws/contexts', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export const fetchContext = () => {
             .then(response => response.json())
             .then((json) => {
                 dispatch({
-                    type: SET_DONOR,
+                    type: SET_CONTEXT,
                     context: json.data
                 });
             });

@@ -4,8 +4,7 @@ const context = (state = [], action = {}) => {
   switch (action.type) {
     case SET_CONTEXT:
     {
-      var donor = action.context;
-      console.log('donor set: ' + JSON.stringify(donor, null, 2))
+      var context = action.context;
       return context;
     }
     case CLEAR_CONTEXT:

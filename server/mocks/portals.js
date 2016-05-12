@@ -7,12 +7,12 @@ module.exports = function (app) {
     portalsRouter.use(bodyParser.json());
 
     var portalsDB = app.portalsDB;
+    var portalBlocksDB = app.portalBlocksDB;
 
     portalsRouter.get('/', function (req, res) {
         delete req.query["_"];
         portalsDB.find(req.query).exec(function (error, portals) {
-            res.send(
-               portals
+            res.send({"status": "ok", "data": portals}
             )
         })
     });
@@ -22,12 +22,12 @@ module.exports = function (app) {
         portalsDB.find({}).sort({id: -1}).limit(1).exec(function (err, portals) {
 
             if (portals.length != 0)
-                req.body.vendor.id = portals[0].id + 1;
+                req.body.portal.id = portals[0].id + 1;
             else
-                req.body.vendor.id = 1;
+                req.body.portal.id = 1;
 
             // Insert the new record
-            portalsDB.insert(req.body.vendor, function (err, newvendor) {
+            portalsDB.insert(req.body.portal, function (err, newvendor) {
                 res.status(201);
                 res.send({'status': 'ok', 'data': [newvendor]});
             })
@@ -35,14 +35,26 @@ module.exports = function (app) {
     });
 
     portalsRouter.get('/:id', function (req, res) {
-        portalsDB.find({id: req.params.id}).exec(function (error, portals) {
-            if (portals.length > 0)
-                res.send({
-                    portals
-                });
-            else {
-                res.status(404);
-            }
+
+        portalBlocksDB.find({}).exec(function (error, portalBlocks) {
+
+            portalsDB.find({id: req.params.id}).exec(function (error, portals) {
+                if (portals.length > 0) {
+                    portals.forEach(function (portal) {
+                        const portalId = portal.id;
+                        var x = [];
+                        portalBlocks.forEach(function (portalBlock) {
+                            if (portalBlock.portalId == portalId)
+                            x.push(portalBlock);
+                        });
+                        portal['blocks'] = x;
+                    })
+                    res.send({"status": "ok", "data": portals});
+                }
+                else {
+                    res.status(404);
+                }
+            });
         });
     });
 
@@ -61,4 +73,5 @@ module.exports = function (app) {
     });
 
     app.use('/ws/portals', portalsRouter);
-};
+}
+;

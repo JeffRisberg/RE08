@@ -1,0 +1,50 @@
+body {
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    background: #f3f4f3;
+}
+
+/* General purpose CSS classes */
+.white {
+    background-color: white;
+}
+
+.darkgrey, .darkgrey a {
+    background-color: #44464a;
+    color: #d7d3c7;
+}
+
+/* Content areas */
+
+.content-region {
+    background: white;
+    padding: 4px 30px 20px 30px;
+    margin-bottom: 20px;
+}
+
+.content-header {
+    border-bottom: 3px solid red;
+    font-family: "georgia, serif";
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
+    box-sizing: border-box;
+}
+
+/* Footer formatting */
+.footer {
+    font-size: 12px;
+}
+
+div.footer-links {
+    min-height: 40px;
+    line-height: 40px;
+}
+
+div.copyright {
+    min-height: 51px;
+    line-height: 51px;
+    background-color: #000;
+    color: #d7d3c7;
+}

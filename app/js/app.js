@@ -5,7 +5,6 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger';
 
 import categories from './reducers/categories';
 import currentCharities from './reducers/currentCharities';
@@ -39,11 +38,10 @@ const reducers = combineReducers({
     routing: routerReducer
 });
 
-const logger = createLogger();
 const store = createStore(
     reducers,
     initialContent,
-    applyMiddleware(routerMiddleware(hashHistory), thunkMiddleware, logger)
+    applyMiddleware(routerMiddleware(hashHistory), thunkMiddleware)
 );
 
 ReactDOM.render(

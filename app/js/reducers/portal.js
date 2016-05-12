@@ -5,7 +5,6 @@ const portal = (state = [], action = {}) => {
         case SET_PORTAL:
         {
             var portal = action.portal;
-            console.log('portal set: ' + JSON.stringify(portal, null, 2))
             return portal;
         }
         default:

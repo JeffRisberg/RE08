@@ -11,9 +11,7 @@ module.exports = function (app) {
     vendorsRouter.get('/', function (req, res) {
         delete req.query["_"];
         vendorsDB.find(req.query).exec(function (error, vendors) {
-            res.send(
-               vendors
-            )
+            res.send({"status": "ok", "data": vendors});
         })
     });
 
@@ -37,9 +35,7 @@ module.exports = function (app) {
     vendorsRouter.get('/:id', function (req, res) {
         vendorsDB.find({id: req.params.id}).exec(function (error, vendors) {
             if (vendors.length > 0)
-                res.send({
-                    vendors
-                });
+                res.send({"status": "ok", "data": vendors});
             else {
                 res.status(404);
             }
