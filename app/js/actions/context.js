@@ -7,11 +7,12 @@ import { push } from 'react-router-redux'
 
 import { SET_CONTEXT, CLEAR_CONTEXT } from '../constants/ActionTypes'
 
-export const fetchContext = () => {
+export const fetchContext = (pathname) => {
     return function (dispatch, getState) {
 
+        if (pathname === '') pathname = "justgive";
         var token = (getState().context == null) ? '' : getState().context.token;
-        return fetch('/ws/contexts', {
+        return fetch('/ws/contexts/' + pathname, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

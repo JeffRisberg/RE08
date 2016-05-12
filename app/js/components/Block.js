@@ -8,10 +8,8 @@ import ReactDOM from 'react-dom';
 class Block extends React.Component {
 
     render() {
-        console.log("block!");
         const block = this.props.block;
         const blockType = block.type;
-        console.log(blockType);
 
         if (blockType === 'text') {
             return (

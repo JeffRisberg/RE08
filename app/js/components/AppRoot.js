@@ -16,9 +16,11 @@ import { fetchVendor } from '../actions/vendor';
 class AppRoot extends React.Component {
 
     componentDidMount() {
+        const pathName = window.location.pathname.substring(1);
+
         if (this.props.portal === undefined || this.props.portal == null
             || this.props.vendor === undefined || this.props.vendor == null) {
-            this.props.fetchContext().then(() => {
+            this.props.fetchContext(pathName).then(() => {
                     this.props.fetchVendor();
                     this.props.fetchPortal();
                 }

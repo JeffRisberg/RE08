@@ -1,27 +1,27 @@
-{"_id":"1","id":"1","portalId":"1","symbol":"block1","type":"text","text":"<h2>Donate now</h2>We support one-time or monthly donations"}
-{"_id":"10","id":"10","portalId":"4","symbol":"block1","type":"text","text":"<h2>Donate now</h2>We support one-time or monthly donations"}
+{"_id":"1","id":"1","portalId":"1","symbol":"block1","type":"text","text":"<h2>Donate Now</h2>We support one-time or monthly donations"}
+{"_id":"10","id":"10","portalId":"4","symbol":"block1","type":"text","text":"<h2>Donate Now</h2>We support one-time or monthly donations"}
 {"_id":"11","id":"11","portalId":"4","symbol":"block2","type":"text","text":"<h2>Search</h2>Search by cause or by charity, by location, or by keyword."}
 {"_id":"12","id":"12","portalId":"4","symbol":"block3","type":"text","text":"<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"}
-{"_id":"13","id":"13","portalId":"5","symbol":"block1","type":"text","text":"<h2>Donate now</h2>We support one-time or monthly donations"}
+{"_id":"13","id":"13","portalId":"5","symbol":"block1","type":"text","text":"<h2>Donate Now</h2>We support one-time or monthly donations"}
 {"_id":"14","id":"14","portalId":"5","symbol":"block2","type":"text","text":"<h2>Search</h2>Search by cause or by charity, by location, or by keyword."}
 {"_id":"15","id":"15","portalId":"5","symbol":"block3","type":"text","text":"<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"}
-{"_id":"16","id":"16","portalId":"6","symbol":"block1","type":"text","text":"<h2>Donate now</h2>We support one-time or monthly donations"}
-{"_id":"17","id":"17","portalId":"6","symbol":"block2","type":"text","text":"<h2>Search</h2>Search by cause or by charity, by location, or by keyword."}
-{"_id":"18","id":"18","portalId":"6","symbol":"block3","type":"text","text":"<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"}
-{"_id":"19","id":"19","portalId":"7","symbol":"block1","type":"text","text":"<h2>Donate now</h2>We support one-time or monthly donations"}
+{"_id":"16","id":"16","portalId":"6","symbol":"block1","type":"text","text":"It gives me great pleasure to do this with you."}
+{"_id":"17","id":"17","portalId":"6","symbol":"block2","type":"text","text":"Please select your chosen charities"}
+{"_id":"18","id":"18","portalId":"6","symbol":"block3","type":"text","text":"Enter your claim code to check the balance"}
+{"_id":"19","id":"19","portalId":"7","symbol":"block1","type":"text","text":"<h2>Donate Now</h2>Wells Fargo Rewards is a new program"}
 {"_id":"2","id":"2","portalId":"1","symbol":"block2","type":"text","text":"<h2>Search</h2>Search by cause or by charity, by location, or by keyword."}
-{"_id":"20","id":"20","portalId":"7","symbol":"block2","type":"text","text":"<h2>Search</h2>Search by cause or by charity, by location, or by keyword."}
-{"_id":"21","id":"21","portalId":"7","symbol":"block3","type":"text","text":"<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"}
-{"_id":"22","id":"22","portalId":"8","symbol":"block1","type":"text","text":"<h2>Donate now</h2>We support one-time or monthly donations"}
-{"_id":"23","id":"23","portalId":"8","symbol":"block2","type":"text","text":"<h2>Search</h2>Search by cause or by charity, by location, or by keyword."}
-{"_id":"24","id":"24","portalId":"8","symbol":"block3","type":"text","text":"<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"}
-{"_id":"25","id":"25","portalId":"9","symbol":"block1","type":"text","text":"<h2>Donate now</h2>We support one-time or monthly donations"}
+{"_id":"20","id":"20","portalId":"7","symbol":"block2","type":"text","text":"<h2>Your Favorites</h2>Check your favorite charities"}
+{"_id":"21","id":"21","portalId":"7","symbol":"block3","type":"text","text":"<h2>Use Points or Cash</h2>Donate with Points or Cash"}
+{"_id":"22","id":"22","portalId":"8","symbol":"block1","type":"image","url":"https://unsplash.it/300/200?image=452"}
+{"_id":"23","id":"23","portalId":"8","symbol":"block2","type":"image","url":"https://unsplash.it/300/200?image=294"}
+{"_id":"24","id":"24","portalId":"8","symbol":"block3","type":"image","url":"https://unsplash.it/300/200?image=209"}
+{"_id":"25","id":"25","portalId":"9","symbol":"block1","type":"text","text":"<h2>Donate Now</h2>We support one-time or monthly donations"}
 {"_id":"26","id":"26","portalId":"9","symbol":"block2","type":"text","text":"<h2>Search</h2>Search by cause or by charity, by location, or by keyword."}
 {"_id":"27","id":"27","portalId":"9","symbol":"block3","type":"text","text":"<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"}
 {"_id":"3","id":"3","portalId":"1","symbol":"block3","type":"text","text":"<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"}
 {"_id":"4","id":"4","portalId":"2","symbol":"block1","type":"image","url":"https://unsplash.it/300/200?image=237"}
 {"_id":"5","id":"5","portalId":"2","symbol":"block2","type":"image","url":"https://unsplash.it/300/200?image=421"}
 {"_id":"6","id":"6","portalId":"2","symbol":"block3","type":"text","text":"<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"}
-{"_id":"7","id":"7","portalId":"3","symbol":"block1","type":"text","text":"<h2>Donate now</h2>We support one-time or monthly donations"}
+{"_id":"7","id":"7","portalId":"3","symbol":"block1","type":"text","text":"<h2>Donate Now</h2>We support one-time or monthly donations"}
 {"_id":"8","id":"8","portalId":"3","symbol":"block2","type":"image","url":"https://unsplash.it/300/200?image=123"}
 {"_id":"9","id":"9","portalId":"3","symbol":"block3","type":"image","url":"https://unsplash.it/300/200?image=327"}

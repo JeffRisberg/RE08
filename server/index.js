@@ -18,17 +18,7 @@ app.use('/images', express.static(PATH_IMAGES));
 app.use('/js', express.static(PATH_JS));
 app.use(express.static(PATH_DIST));
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../app/index.html'));
-});
-
-// Run server to listen on port 3000.
-const server = app.listen(3000, () => {
-    console.log('listening on *:3000');
-});
-
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static('static'));
 
 var nedb = require('nedb');
 
@@ -43,4 +33,12 @@ app.topCharityDB = new nedb({filename: 'topCharities', autoload: true});
 
 mocks.forEach(function (route) {
     route(app);
+});
+
+app.get('/**', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../app/index.html'));
+});
+
+const server = app.listen(3000, () => {
+    console.log('listening on 3000');
 });

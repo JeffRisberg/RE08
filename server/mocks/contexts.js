@@ -9,9 +9,9 @@ module.exports = function (app) {
     var vendorsDB = app.vendorsDB;
     var portalsDB = app.portalsDB;
 
-    contextsRouter.get('/', function (req, res) {
+    contextsRouter.get('/:pathname', function (req, res) {
         delete req.query["_"];
-        vendorsDB.find({id: '1'}).exec(function (error, vendors) {
+        vendorsDB.find({url: req.params.pathname}).exec(function (error, vendors) {
 
             const vendor = vendors[0];
 

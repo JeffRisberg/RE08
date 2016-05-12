@@ -15,6 +15,8 @@ class Home extends React.Component {
         const headerImageName = this.props.portal[0].headerImage;
         const headerSrc = "images/" + headerImageName + ".jpg";
 
+        const mainText = this.props.portal[0].mainText;
+
         const blocks = this.props.portal[0].blocks.map((block, index) => {
             return (
                 <div key={index} className="col-md-4">
@@ -27,6 +29,9 @@ class Home extends React.Component {
             <div>
                 <div>
                     <img src={headerSrc} width="100%"/>
+                </div>
+                <div className="text-center" style={{fontFamily: 'Georgia', fontSize: '20px'}}>
+                    {mainText}
                 </div>
                 <div className="content-region">
                     <div className="row">
