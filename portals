@@ -5,5 +5,5 @@
 {"_id":"5","id":"5","vendorId":"2","portalStatus":"pending","headerImage":"Image05","mainText":"Cisco employee giving portal"}
 {"_id":"6","id":"6","vendorId":"3","portalStatus":"active","headerImage":"ImageDalio","mainText":"My holiday gift to you..."}
 {"_id":"7","id":"7","vendorId":"4","portalStatus":"active","headerImage":"ImageWF","mainText":"Wells Fargo Rewards allows you to use your points for charity"}
-{"_id":"8","id":"8","vendorId":"5","portalStatus":"deleted","headerImage":"Image04","mainText":"Optical Underground is pleased to offer a giving program for customers"}
-{"_id":"9","id":"9","vendorId":"5","portalStatus":"active","headerImage":"Image05","mainText":"Optical Underground is now offering a matching program for its giving program for customers"}
+{"_id":"8","id":"8","vendorId":"5","portalStatus":"deleted","headerImage":"ImageOU","mainText":"Optical Underground is pleased to offer a giving program for customers"}
+{"_id":"9","id":"9","vendorId":"5","portalStatus":"active","headerImage":"ImageOU","mainText":"Optical Underground is now offering a matching program for its giving program for customers"}
