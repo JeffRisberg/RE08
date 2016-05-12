@@ -1,0 +1,6 @@
+{"_id":"1","id":"1","portalId":"1","name":"Landing"}
+{"_id":"2","id":"2","portalId":"1","name":"Donation"}
+{"_id":"3","id":"3","portalId":"1","name":"Checkout"}
+{"_id":"4","id":"4","portalId":"2","name":"Landing"}
+{"_id":"5","id":"5","portalId":"2","name":"Donation"}
+{"_id":"6","id":"6","portalId":"2","name":"Checkout"}

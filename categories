@@ -1,0 +1,9 @@
+{"_id":"1","id":"1","name":"Animals","charities":[{"charityId":"6"},{"charityId":"9"},{"charityId":"5"}]}
+{"_id":"2","id":"2","name":"Arts","charities":[{"charityId":"6"},{"charityId":"9"},{"charityId":"5"}]}
+{"_id":"3","id":"3","name":"Children","charities":[{"charityId":"9"},{"charityId":"10"},{"charityId":"11"}]}
+{"_id":"4","id":"4","name":"Education","charities":[{"charityId":"12"},{"charityId":"4"},{"charityId":"12"}]}
+{"_id":"5","id":"5","name":"Global Aid","charities":[{"charityId":"12"},{"charityId":"4"},{"charityId":"12"}]}
+{"_id":"6","id":"6","name":"Health","charities":[{"charityId":"3"},{"charityId":"3"},{"charityId":"13"}]}
+{"_id":"7","id":"7","name":"Human Rights","charities":[{"charityId":"3"},{"charityId":"3"},{"charityId":"13"}]}
+{"_id":"8","id":"8","name":"Seniors","charities":[{"charityId":"11"},{"charityId":"8"},{"charityId":"14"}]}
+{"_id":"9","id":"9","name":"Veterans","charities":[{"charityId":"11"},{"charityId":"8"},{"charityId":"14"}]}

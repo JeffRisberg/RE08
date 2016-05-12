@@ -1,0 +1,16 @@
+{"_id":"1","id":"1","categoryId":"5","name":"Red Cross","ein":"94-12345678","description":"Recovery after disasters","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"10","id":"10","categoryId":"4","name":"Crayons to Classrooms","ein":"73-23211268","description":"Support teachers in classrooms","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"11","id":"11","categoryId":"8","name":"United Way","ein":"73-23211268","description":"Support teachers in classrooms","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"12","id":"12","categoryId":"4","name":"Citizen Schools, Inc.","ein":"04-3259160","description":"Operates schools for disadvataged","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"13","id":"13","categoryId":"4","name":"Urban Pathways Charter Schools","ein":"23-2934986","description":"Operates schools","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"14","id":"14","categoryId":"9","name":"Senior Center USA","ein":"27-1983213","description":"Advocates for Seniors","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"15","id":"15","categoryId":"7","name":"Human Rights Campaign","ein":"52-1481896","description":"Human rights advocacy","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"16","id":"16","categoryId":"2","name":"Adler Planetarium Museum","ein":"36-6210902","description":"Science and Art Museum","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"2","id":"2","categoryId":"1","name":"ASPCA","ein":"13-1623829","description":"Protect dogs and cats","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"3","id":"3","categoryId":"9","name":"Wounded Warrior Project","ein":"20-2370934","description":"Support veterans","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"4","id":"4","categoryId":"6","name":"American Cancer Society","ein":"94-12343423","description":"Medical research","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"5","id":"5","categoryId":"5","name":"Smithsonian Institute","ein":"56-23444567","description":"Historical preservation","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"6","id":"6","categoryId":"3","name":"Big Brothers Big Sisters","ein":"72-12345678","description":"Help children","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"7","id":"7","categoryId":"1","name":"World Wildlife Foundation","ein":"75-56453423","description":"Preserve land for animals","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"8","id":"8","categoryId":"2","name":"KQED","ein":"63-64536784","description":"Public television network","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
+{"_id":"9","id":"9","categoryId":"3","name":"UNICEF","ein":"72-125654678","description":"help children","addressLine1":"addressLine1","state":"state","city":"city","zip":"zip"}
