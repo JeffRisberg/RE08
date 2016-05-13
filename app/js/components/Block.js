@@ -20,7 +20,7 @@ class Block extends React.Component {
         if (blockType === 'image') {
             return (
                 <div>
-                    <img src={block.url}/>
+                    <img src={block.url} height="250" width="100%" />
                 </div>
             )
         }

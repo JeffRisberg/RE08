@@ -12,32 +12,34 @@ import Block from './Block';
 class Home extends React.Component {
 
     render() {
-        const headerImageName = this.props.portal[0].headerImage;
-        const headerSrc = "images/" + headerImageName + ".jpg";
+        //const headerImageName = this.props.portal[0].headerImage;
+        //const headerSrc = "images/" + headerImageName + ".jpg";
 
-        const mainText = this.props.portal[0].mainText;
+        //const mainText = this.props.portal[0].mainText;
 
-        const blocks = this.props.portal[0].blocks.map((block, index) => {
-            return (
-                <div key={index} className="col-md-4">
-                    <Block block={block}/>
-                </div>
-            )
-        })
+        const blocks = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(index => {
+            const rowBlocks = this.props.portal[0].blocks.filter((block) => (block.row == ("" + index)));
+            console.log(rowBlocks);
+            if (rowBlocks.length > 0) {
+                return (
+                    <div key={index} className="row">
+                        {rowBlocks.map((block, index) => {
+                            const theClass = "col-md-" + block.width;
+                            return <div key={index} className={theClass}>
+                                <Block block={block}/>
+                            </div>
+                        })}
+                    </div>
+                );
+            }
+            else
+                return null;
+        });
+        console.log(blocks);
 
         return (
-            <div>
-                <div>
-                    <img src={headerSrc} width="100%"/>
-                </div>
-                <div className="text-center" style={{fontFamily: 'Georgia', fontSize: '20px'}}>
-                    {mainText}
-                </div>
-                <div className="content-region">
-                    <div className="row">
-                        {blocks}
-                    </div>
-                </div>
+            <div className="content-region">
+                {blocks}
             </div>
         )
     }

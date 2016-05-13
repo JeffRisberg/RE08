@@ -1,6 +1,6 @@
 {"_id":"1","id":"1","vendorId":"1","portalStatus":"active","url":"justgive"}
 {"_id":"2","id":"2","vendorId":"2","portalStatus":"active","url":"cisco"}
-{"_id":"3","id":"3","vendorId":"3","portalStatus":"active","url":"wellsfargo"}
-{"_id":"4","id":"4","vendorId":"4","portalStatus":"active","url":"ou"}
-{"_id":"5","id":"5","vendorId":"5","portalStatus":"active","url":"dalio1"}
-{"_id":"6","id":"6","vendorId":"5","portalStatus":"active","url":"dalio1"}
+{"_id":"3","id":"3","vendorId":"3","portalStatus":"active","url":"dalio1"}
+{"_id":"4","id":"4","vendorId":"3","portalStatus":"active","url":"dalio2"}
+{"_id":"5","id":"5","vendorId":"4","portalStatus":"active","url":"wellsfargo"}
+{"_id":"6","id":"6","vendorId":"5","portalStatus":"active","url":"ou"}

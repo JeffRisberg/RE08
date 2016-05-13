@@ -11,19 +11,13 @@ module.exports = function (app) {
 
     contextsRouter.get('/:pathname', function (req, res) {
         delete req.query["_"];
-        vendorsDB.find({url: req.params.pathname}).exec(function (error, vendors) {
+        portalsDB.find({url: req.params.pathname}).exec(function (error, portals) {
 
-            const vendor = vendors[0];
+            const portal = portals[0];
 
-            portalsDB.find({vendorId: vendor.id}).exec(function (error, portals) {
-
-                const portal = portals[0];
-
-                res.send({
-                    status: "ok",
-                    data: {vendorId: vendor.id, portalId: portal.id}
-                }
-                );
+            res.send({
+                status: "ok",
+                data: {vendorId: portal.vendorId, portalId: portal.id}
             })
         })
     });
