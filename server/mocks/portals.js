@@ -7,7 +7,7 @@ module.exports = function (app) {
     portalsRouter.use(bodyParser.json());
 
     var portalsDB = app.portalsDB;
-    var portalBlocksDB = app.portalBlocksDB;
+    var portalBlocksMap = app.portalBlocksMap;
 
     portalsRouter.get('/', function (req, res) {
         delete req.query["_"];
@@ -36,25 +36,19 @@ module.exports = function (app) {
 
     portalsRouter.get('/:id', function (req, res) {
 
-        portalBlocksDB.find({}).exec(function (error, portalBlocks) {
+        portalsDB.find({id: req.params.id}).exec(function (error, portals) {
+            if (portals.length > 0) {
+                portals.forEach(function (portal) {
+                    const portalId = portal.id;
+                    var portalBlocks = portalBlocksMap[""+portalId];
 
-            portalsDB.find({id: req.params.id}).exec(function (error, portals) {
-                if (portals.length > 0) {
-                    portals.forEach(function (portal) {
-                        const portalId = portal.id;
-                        var x = [];
-                        portalBlocks.forEach(function (portalBlock) {
-                            if (portalBlock.portalId == portalId)
-                            x.push(portalBlock);
-                        });
-                        portal['blocks'] = x;
-                    })
-                    res.send({"status": "ok", "data": portals});
-                }
-                else {
-                    res.status(404);
-                }
-            });
+                    portal['blocks'] = portalBlocks;
+                })
+                res.send({"status": "ok", "data": portals});
+            }
+            else {
+                res.status(404);
+            }
         });
     });
 

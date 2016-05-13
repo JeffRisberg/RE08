@@ -3,6 +3,255 @@ body {
     background: #f3f4f3;
 }
 
+.home_main {
+    background: #fff;
+    padding: 0 20px;
+}
+.jumbotron .top_promo {
+    border-bottom: 5px solid #FECC53;
+}
+.carousel {
+    margin-bottom: 0;
+    line-height: inherit;
+}
+.carousel-control {
+    width: 5%;
+    margin-top: 0;
+    font-size: 120px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    background-color: transparent;
+    border: 0;
+    z-index: 10;
+}
+.carousel-indicators {
+    bottom: 0;
+    margin-bottom: 0;
+}
+.carousel-control .icon-prev, .carousel-control .icon-next {
+    font-size: 130px;
+    line-height: 14px;
+}
+.branding-box {
+    padding: 15px 15px 25px 15px;
+    /* Fallback for web browsers that doesn't support RGBa */
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    color: #fff;
+}
+.branding-box A {
+    text-decoration: none;
+}
+.branding-box H1 {
+    text-transform: uppercase;
+    font-weight: 200;
+    font-size: 30px;
+    color: #fff;
+    margin-top: 5px;
+}
+.branding-box P {
+    color: #fff;
+    font-size: 18px;
+}
+.branding-box SPAN {
+    color: #fecc53;
+}
+
+.promoLink {
+    color: #fff;
+}
+#topPromos {
+    margin-top: 20px;
+}
+.secondary {
+    margin-top: 20px;
+}
+.tertiary {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.home_promos_sm SPAN {
+    font-style: italic;
+    font-size: 13px;
+}
+.secondary IMG {
+
+    width: 40%;
+
+    border-radius: 4px;
+}
+.secondary h2 {
+    margin: 0;
+}
+
+.secondary .btn {
+    text-align: center;
+}
+@media (max-width: 480px) {
+    .branding-box {
+        border-radius: 0;
+    }
+    .branding-box P {
+        padding: 0 30px 5px 30px;
+    }
+    .branding-box .btn-promo {
+        margin-left: 30px;
+    }
+    .carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
+        top: 70%;
+    }
+    .icon-next {
+        margin-right: 10px;
+    }
+}
+@media (max-width: 767px) {
+    .secondary IMG {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-left: 0;
+    }
+    .tertiary {
+        margin-top: 20px;
+    }
+    .carousel-indicators {
+        display: none;
+    }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+    .secondary IMG {
+
+        margin-bottom: 10px;
+    }
+}
+@media (min-width: 1200px) {
+    .branding-box {
+        padding: 20px;
+        display: inline;
+        float: right;
+        margin-left: 3.5%;
+        margin-right: 0;
+        position: absolute;
+        max-width: 500px;
+        top: 100px;
+
+        /* Fallback for web browsers that doesn't support RGBa */
+        background: rgb(126, 36, 31, 0.6);
+        /* RGBa with 0.6 opacity */
+        background: rgba(126,36,31, 0.6);
+        /* For IE 5.5 - 7*/
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+        /* For IE 8*/
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+    }
+    .turq {
+        background: rgba(4,101,123, 0.9);
+    }
+
+    .red {
+        background: rgba(123,4,4, 0.9);
+    }
+
+    .strong_orange {
+        background: rgba(210,96,33, 0.9);
+    }
+    .cyan {
+        background: rgba(4,101,123, 0.9);
+    }
+
+    .dk_purple {
+        background: rgba(76,47,103, 0.9);
+    }
+
+    .disaster_red {
+        background: rgba(196,3,10, 0.9);
+    }
+
+    .light_disaster_red {
+        background: rgba(196,3,10, 0.8);
+    }
+
+    .soft_red {
+        background: rgba(211,81,71, 0.9);
+    }
+    .pink {
+        background: rgba(195,25,109, 0.9);
+    }
+    .upleft {
+        left: 30px;
+        top: 20px;
+    }
+    .bottomleft {
+        right: 450px;
+    }
+    .upright {
+        top: 20px;
+        right: 60px;
+    }
+    .bottomright {
+        right: 60px;
+
+    }
+    .fullbottom {
+        max-width: none;
+        width: 100%;
+        right: 0;
+        bottom: 0px;
+        top: auto;
+        padding: 5px 50px;
+    }
+    .fullbottom P {
+        width: 80%;
+        float: left;
+        padding-bottom: 10px;
+    }
+    .home_main {
+        width: 1130px;
+    }
+    .sub_main {
+        width: 1170px;
+    }
+    .lime-green {
+        background: rgba(3,106,19, 0.9);
+    }
+}
+
+/* PROMO BUTTON */
+.btn-promo {
+    color: #454544;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #fed164;
+    background-image: -moz-linear-gradient(top, #fff9eb, #fed164);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff9eb), to(#fed164));
+    background-image: -webkit-linear-gradient(top, #fff9eb, #fed164);
+    background-image: -o-linear-gradient(top, #fff9eb, #fed164);
+    background-image: linear-gradient(to bottom, #fff9eb, #fed164);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff9eb', endColorstr='#fed164', GradientType=0);
+    border-color: #fdfcfc #fdfcfc #fdfcfc;
+    border-color: rgba(255,255,255, 0.5) ;
+    *background-color: #fed164;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-promo:hover,
+.btn-promo:focus,
+.btn-promo:active,
+.btn-promo.active,
+.btn-promo.disabled,
+.btn-promo[disabled] {
+
+    background-color: #fed164;
+    *background-color: #fed164;
+}
+.btn-promo:active,
+.btn-promo.active {
+    background-color: #c67605 \9;
+}
+
+
+/* END PROMO BUTTON */
+
 /* General purpose CSS classes */
 .white {
     background-color: white;

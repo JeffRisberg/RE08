@@ -22,10 +22,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 var nedb = require('nedb');
 
+app.portalBlocksMap = require("../portalBlocks.json");
+
 app.vendorsDB = new nedb({filename: 'vendors', autoload: true});
 app.portalsDB = new nedb({filename: 'portals', autoload: true});
 app.portalPagesDB = new nedb({filename: 'portalPages', autoload: true});
-app.portalBlocksDB = new nedb({filename: 'portalBlocks', autoload: true});
 
 app.categoryDB = new nedb({filename: 'categories', autoload: true});
 app.charityDB = new nedb({filename: 'charities', autoload: true});

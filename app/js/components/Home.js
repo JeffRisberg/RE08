@@ -12,21 +12,15 @@ import Block from './Block';
 class Home extends React.Component {
 
     render() {
-        //const headerImageName = this.props.portal[0].headerImage;
-        //const headerSrc = "images/" + headerImageName + ".jpg";
-
-        //const mainText = this.props.portal[0].mainText;
-
         const blocks = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(index => {
             const rowBlocks = this.props.portal[0].blocks.filter((block) => (block.row == ("" + index)));
-            console.log(rowBlocks);
             if (rowBlocks.length > 0) {
                 return (
                     <div key={index} className="row">
                         {rowBlocks.map((block, index) => {
                             const theClass = "col-md-" + block.width;
                             return <div key={index} className={theClass}>
-                                <Block block={block}/>
+                                <Block key={index} block={block}/>
                             </div>
                         })}
                     </div>
@@ -35,7 +29,6 @@ class Home extends React.Component {
             else
                 return null;
         });
-        console.log(blocks);
 
         return (
             <div className="content-region">

@@ -1,0 +1,117 @@
+{
+  "1": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "https://unsplash.it/300/200?image=237"
+    },
+    {
+      "row": "2", "col": "1", "width": "4", "type": "text",
+      "text": "<h2>Donate Now</h2>We support one-time or monthly donations"
+    },
+    {
+      "row": "2", "col": "2", "width": "4", "type": "text",
+      "text": "<h2>Search</h2>Search by cause or by charity, by location, or by keyword."
+    },
+    {
+      "row": "2", "col": "3", "width": "4", "type": "text",
+      "text": "<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"
+    }
+  ],
+  "2": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "https://unsplash.it/300/200?image=237"
+    },
+    {
+      "row": "2", "col": "1", "width": "4", "type": "image",
+      "url": "/images/Image02.jpg"
+    },
+    {
+      "row": "2", "col": "2", "width": "4", "type": "image",
+      "url": "https://unsplash.it/300/200?image=421"
+    },
+    {
+      "row": "2", "col": "3", "width": "4", "type": "text",
+      "text": "<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"
+    }
+  ],
+  "3": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageDalio.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "6", "type": "text",
+      "text": "<h2>Search</h2>Search by cause or by charity, by location, or by keyword."
+    },
+    {
+      "row": "2", "col": "2", "width": "6", "type": "text",
+      "text": "<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"
+    }
+  ],
+  "4": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "text",
+      "text": "Do unto others as you would have them do unto you."
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "image",
+      "url": "https://unsplash.it/1000/300?image=1036"
+    },
+    {
+      "row": "3", "col": "1", "width": "12", "type": "text",
+      "text": "It gives me great pleasure to do this with you."
+    }
+  ],
+  "5": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "slider",
+      "images": [
+        {"url": "/images/ImageWF.jpg"},
+        {
+          "url": "/images/Image01.jpg",
+          "color": "dk_purple", "location": "upleft",
+          "headerText": "COMPANY GIVING FOR <span>GREATER GOOD</span>",
+          "subText": "Connect your giving programs to your community and <span>social responsibility goals.</span> Choose solutions that make the most impact.",
+          "buttonText": "Learn More",
+          "buttonLink": "www.justgive.org"
+        },
+        {
+          "url": "/images/Image06.jpg",
+          "color": "disaster_red", "location": "upright",
+          "headerText": "NONPROFITS: <span>GET MORE</span> ONLINE DONATIONS",
+          "subText": "Our efficient tools and services—<span>with free donation buttons and fundraising pages</span>—help you raise more money.",
+          "buttonText":"Sign Up Today",
+          "buttonLink": "www.justgive.org"
+        },
+        {"url": "https://unsplash.it/1000/305?image=1036",
+          "color": "turq", "location": "bottomleft",
+          "headerText": "THIS WAS CONFIGURED IN PORTAL CONFIG",
+          "subText": "This content was stored on the database side in Portal Config and sent to front-end.",
+          "buttonText":"Click here",
+          "buttonLink": "www.justgive.org"
+        }
+      ]
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "text",
+      "text": "Wells Fargo rewards are your way to convert points to charitable donations"
+    }
+  ],
+  "6": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageOU.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "6", "type": "text",
+      "text": "<h2>Donate Now</h2>We support one-time or monthly donations"
+    },
+    {
+      "row": "2", "col": "2", "width": "6", "type": "image",
+      "url": "https://unsplash.it/300/200?image=123"
+    }
+  ]
+}
+
+
