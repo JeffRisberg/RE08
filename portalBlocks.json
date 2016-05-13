@@ -2,7 +2,7 @@
   "1": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "https://unsplash.it/300/200?image=237"
+      "url": "https://unsplash.it/1000/200?image=1036"
     },
     {
       "row": "2", "col": "1", "width": "4", "type": "text",
@@ -20,19 +20,28 @@
   "2": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "https://unsplash.it/300/200?image=237"
+      "url": "/images/ImageCisco.jpg",
+      "color": "dk_purple", "location": "upleft",
+      "headerText": "CISCO EMPLOYEE GIVING",
+      "subText": "Choose charities that make the most impact.",
+      "buttonText": "Learn More",
+      "buttonLink": "www.justgive.org"
     },
     {
-      "row": "2", "col": "1", "width": "4", "type": "image",
-      "url": "/images/Image02.jpg"
+      "row": "2", "col": "1", "width": "12", "type": "text",
+      "text": "&nbsp;"
     },
     {
-      "row": "2", "col": "2", "width": "4", "type": "image",
-      "url": "https://unsplash.it/300/200?image=421"
+      "row": "3", "col": "1", "width": "4", "type": "image",
+      "url": "https://unsplash.it/300/200?image=883"
     },
     {
-      "row": "2", "col": "3", "width": "4", "type": "text",
-      "text": "<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"
+      "row": "3", "col": "2", "width": "4", "type": "image",
+      "url": "/images/ImageCiscoSign.jpg"
+    },
+    {
+      "row": "3", "col": "3", "width": "4", "type": "text",
+      "text": "<h2>Give through Payroll Deductions</h2>These will be applied automatically - this is the easiest way to give! <p>Contact your HR rep if you have questions"
     }
   ],
   "3": [
@@ -46,7 +55,7 @@
     },
     {
       "row": "2", "col": "2", "width": "6", "type": "text",
-      "text": "<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"
+      "text": "<h2>Make donations</h2>Donate to your chosen charities."
     }
   ],
   "4": [
@@ -104,12 +113,16 @@
       "url": "/images/ImageOU.jpg"
     },
     {
-      "row": "2", "col": "1", "width": "6", "type": "text",
+      "row": "2", "col": "1", "width": "12", "type": "text",
+      "text": "&nbsp;"
+    },
+    {
+      "row": "3", "col": "1", "width": "6", "type": "text",
       "text": "<h2>Donate Now</h2>We support one-time or monthly donations"
     },
     {
-      "row": "2", "col": "2", "width": "6", "type": "image",
-      "url": "https://unsplash.it/300/200?image=123"
+      "row": "3", "col": "2", "width": "6", "type": "image",
+      "url": "https://unsplash.it/300/200?image=882"
     }
   ]
 }

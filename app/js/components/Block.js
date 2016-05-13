@@ -18,9 +18,29 @@ class Block extends React.Component {
             )
         }
         if (blockType === 'image') {
+            const colorClassName = block.color;
+            const locationClassName = block.location;
+            const headerText = block.headerText;
+            const subText = block.subText;
+            const buttonText = block.buttonText;
+            const className = "branding-box " + colorClassName + " " + locationClassName;
+
             return (
                 <div>
                     <img src={block.url} height="250" width="100%"/>
+                    {(locationClassName !== undefined) ?
+                        <div className={className}>
+
+                            <h1 dangerouslySetInnerHTML={{__html: headerText}}>
+                            </h1>
+
+                            <p dangerouslySetInnerHTML={{__html: subText}}>
+                            </p>
+                            <a href="" className="btn btn-promo"
+                               dangerouslySetInnerHTML={{__html: buttonText}}>
+                            </a>
+                        </div>
+                        : null}
                 </div>
             )
         }
