@@ -4,7 +4,7 @@
 import fetch from 'isomorphic-fetch';
 import { arrayOf, normalize } from 'normalizr'
 
-import {SET_CURRENT_CATEGORY, SET_CATEGORY_CHARITIES, APPEND_CURRENT_CHARITIES, SET_CHARITY_SEARCH_RESULTS, RESET_CHARITY_SEARCH_RESULTS} from '../constants/ActionTypes'
+import {SET_CURRENT_CATEGORY, SET_CATEGORY_CHARITIES, APPEND_CURRENT_CHARITIES, FETCH_CHARITY_SEARCH_RESULTS_SUCCESS, RESET_CHARITY_SEARCH_RESULTS, FETCH_CHARITY_SEARCH_RESULTS_REQUEST, FETCH_CHARITY_SEARCH_RESULTS_ERROR} from '../constants/ActionTypes'
 import { CHARITY_SCHEMA } from '../constants/schemas'
 
 export const queryCategoryCharities = (category) => {
@@ -71,11 +71,16 @@ export const queryCharityByEin = (ein) => {
                     );
                 });
         }
+
     };
 };
 
 export const searchCharities = (keywords, zip, city, state, offset, limit) => {
     return function (dispatch) {
+        dispatch({
+                type: FETCH_CHARITY_SEARCH_RESULTS_REQUEST
+            }
+        );
 
         var url = '/ws/charities?keywords=' + keywords + '&zip=' + zip + '&city=' + city + '&state=' + state + '&offset=' + offset + '&limit=' + limit;
 
@@ -90,9 +95,17 @@ export const searchCharities = (keywords, zip, city, state, offset, limit) => {
                 );
                 //console.log('charity search pagination: ' + JSON.stringify(json.pagination, null, 2))
                 dispatch({
-                        type: SET_CHARITY_SEARCH_RESULTS,
+                        type: FETCH_CHARITY_SEARCH_RESULTS_SUCCESS,
                         charities: json.data,
                         pagination: json.pagination
+                    }
+                );
+            })
+            .catch((error) => {
+                console.log('failed: ' + error)
+                dispatch({
+                        type: FETCH_CHARITY_SEARCH_RESULTS_ERROR,
+                        error: 'Error searching : ' + error
                     }
                 );
             });

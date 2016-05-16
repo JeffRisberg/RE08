@@ -15,6 +15,12 @@
     {
       "row": "2", "col": "3", "width": "4", "type": "text",
       "text": "<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"
+    },
+    {
+      "row": "3", "col": "1", "width": "4", "type": "categories", "id": "catList1"
+    },
+    {
+      "row": "3", "col": "12", "width": "4", "type": "charities", "id": "charityList1", "categorySource": "catList1"
     }
   ],
   "2": [
@@ -90,14 +96,15 @@
           "color": "disaster_red", "location": "upright",
           "headerText": "NONPROFITS: <span>GET MORE</span> ONLINE DONATIONS",
           "subText": "Our efficient tools and services—<span>with free donation buttons and fundraising pages</span>—help you raise more money.",
-          "buttonText":"Sign Up Today",
+          "buttonText": "Sign Up Today",
           "buttonLink": "www.justgive.org"
         },
-        {"url": "https://unsplash.it/1000/305?image=1036",
+        {
+          "url": "https://unsplash.it/1000/305?image=1036",
           "color": "turq", "location": "bottomleft",
           "headerText": "THIS WAS CONFIGURED IN PORTAL CONFIG",
           "subText": "This content was stored on the database side in Portal Config and sent to front-end.",
-          "buttonText":"Click here",
+          "buttonText": "Click here",
           "buttonLink": "www.justgive.org"
         }
       ]

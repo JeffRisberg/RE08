@@ -1,65 +1,59 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import { Link } from 'react-router'
+
 import { connect } from 'react-redux';
 
-import { getCharities } from '../actions/currentCharities';
+import { queryCategoryCharities } from '../actions/currentCharities';
 
-import Charity from './Charity';
+import Charity from './Charity'
 
 /**
+ * Renders a list of charity objects, by subscribing to a categoryList and fetching its charities.
+ *
  * @author Jeff Risberg
- * @since May 2016
+ * @since March 2016, Updated May 2016
  */
 class CharityList extends React.Component {
-
     constructor() {
         super();
     }
 
     componentDidMount() {
-        this.props.getCharities();
+        // make the first fetch
+        this.props.queryCategoryCharities();
     }
 
     render() {
-        let charitys = this.props.charities.map((charity, index) => {
+        // if there is a change in selection, requery the charities.
+
+        if (this.props.charities != null) {
+            var charityNodes = this.props.charities.map(function (charity, index) {
+                return (
+                    <Charity charity={charity} key={index}></Charity>
+                );
+            });
+
             return (
-                <Charity key={index}
-                           id={charity.id}
-                           date={charity.date}
-                           amount={charity.amount}
-                           status={charity.status}/>
-            )
-        });
-
-        return (
-            <div className="charityList">
-                <h1>Charitys</h1>
-
                 <table className="table">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
                     <tbody>
-                    {charitys}
+                    {charityNodes}
                     </tbody>
                 </table>
-            </div>
-        );
+            );
+        }
+        else {
+            return null;
+        }
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        charities: state.charities
+        charities: state.charities,
+        selections: state.selections
     };
 };
-
 export default connect(
     mapStateToProps,
-    {getCharities}
+    {queryCategoryCharities}
 )(CharityList);

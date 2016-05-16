@@ -1,4 +1,4 @@
-import { SET_CURRENT_CHARITIES, APPEND_CURRENT_CHARITIES, SET_CHARITY_SEARCH_RESULTS, RESET_CHARITY_SEARCH_RESULTS } from '../constants/ActionTypes'
+import { SET_CURRENT_CHARITIES, APPEND_CURRENT_CHARITIES, FETCH_CHARITY_SEARCH_RESULTS_SUCCESS, RESET_CHARITY_SEARCH_RESULTS, FETCH_CHARITY_SEARCH_RESULTS_REQUEST, FETCH_CHARITY_SEARCH_RESULTS_ERROR } from '../constants/ActionTypes'
 
 const currentCharities = (state = [], action = {}) => {
     switch (action.type) {
@@ -32,7 +32,11 @@ const currentCharities = (state = [], action = {}) => {
             }
             return updatedState;
         }
-        case SET_CHARITY_SEARCH_RESULTS:
+        case FETCH_CHARITY_SEARCH_RESULTS_REQUEST:
+        {
+            return Object.assign({}, state, {searchResults: {loading: true}});
+        }
+        case FETCH_CHARITY_SEARCH_RESULTS_SUCCESS:
         {
             const charityEins = action.charities.map((charity) => {
                 return charity.ein
@@ -43,12 +47,17 @@ const currentCharities = (state = [], action = {}) => {
             const updatedState = Object.assign({}, state, {
                 searchResults: {
                     charityEins: charityEins,
-                    pagination: action.pagination
+                    pagination: action.pagination,
+                    loading: false
                 }
             });
             console.log('added search results to charity state: ' + JSON.stringify(updatedState, null, 2))
 
             return updatedState;
+        }
+        case FETCH_CHARITY_SEARCH_RESULTS_ERROR:
+        {
+            return Object.assign({}, state, {searchResults: {error: action.error, loading: false}});
         }
         case RESET_CHARITY_SEARCH_RESULTS:
         {

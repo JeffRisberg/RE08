@@ -10,6 +10,7 @@ import categories from './reducers/categories';
 import currentCharities from './reducers/currentCharities';
 import context from './reducers/context';
 import portal from './reducers/portal';
+import selections from './reducers/selections';
 import topCharities from './reducers/topCharities';
 import vendor from './reducers/vendor';
 
@@ -24,6 +25,7 @@ var initialContent = {
     currentCharities: {idList: [], records: {}, searchResults: {charityEins: [], pagination: null}},
     context: null,
     portal: null,
+    selections: {},
     topCharities: {idList: [], records: {}},
     vendor: null
 };
@@ -33,6 +35,7 @@ const reducers = combineReducers({
     currentCharities,
     context,
     portal,
+    selections,
     topCharities,
     vendor,
     routing: routerReducer

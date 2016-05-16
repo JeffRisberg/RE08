@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import CategoryList from './CategoryList'
+import CharityList from './CharityList'
+
 /**
  * @author Jeff Risberg
  * @since May 2016
@@ -42,6 +45,16 @@ class Block extends React.Component {
                         </div>
                         : null}
                 </div>
+            )
+        }
+        if (blockType === 'categories') {
+            return (
+                <CategoryList blockId={block.id} />
+            )
+        }
+        if (blockType === 'charities') {
+            return (
+                <CharityList />
             )
         }
         if (blockType === 'slider') {
