@@ -20,7 +20,7 @@
       "row": "3", "col": "1", "width": "4", "type": "categories", "id": "catList1"
     },
     {
-      "row": "3", "col": "12", "width": "4", "type": "charities", "id": "charityList1", "categorySource": "catList1"
+      "row": "3", "col": "12", "width": "4", "type": "charities", "id": "charityList1", "categorySourceId": "catList1"
     }
   ],
   "2": [

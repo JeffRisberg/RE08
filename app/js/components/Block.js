@@ -54,7 +54,7 @@ class Block extends React.Component {
         }
         if (blockType === 'charities') {
             return (
-                <CharityList />
+                <CharityList blockId={block.id} categorySourceId={block.categorySourceId} />
             )
         }
         if (blockType === 'slider') {
