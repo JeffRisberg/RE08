@@ -15,9 +15,6 @@ import vendor from './reducers/vendor';
 
 import AppRoot from './components/AppRoot.js';
 import Home from './components/Home.js';
-import Login from './components/Login.js';
-import CharityList from './components/CharityList.js';
-import DonationList from './components/DonationList.js';
 
 var initialContent = {
     categories: null,
@@ -49,9 +46,6 @@ ReactDOM.render(
         <Router history={hashHistory}>
             <Route path="/" component={AppRoot}>
                 <IndexRoute component={Home}/>
-                <Route path="login" component={Login}/>
-                <Route path="charityList" component={CharityList}/>
-                <Route path="DonationList" component={DonationList}/>
             </Route>
         </Router>
     </Provider>,

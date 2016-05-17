@@ -1,14 +1,16 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-
 import { Link } from 'react-router'
+import Form from "react-jsonschema-form";
+import { connect } from 'react-redux';
 
-import fetch from 'isomorphic-fetch';
+import { login, logout } from '../actions/context';
 
 /**
  * The login component handles login and logout of a donor.
  *
- * @author Jeff Risberg, Brandon Risberg
+ * A jsonSchema form is used for input.
+ *
+ * @author Jeff Risberg, Peter Cowan
  * @since March 2016
  */
 class Login extends React.Component {
@@ -16,64 +18,72 @@ class Login extends React.Component {
     constructor() {
         super();
 
-        this.logout = this.logout.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.schema = {
+            "title": null,
+            "type": "object",
+            "required": [
+                "login", "password"
+            ],
+            "properties": {
+                "login": {
+                    "type": "string",
+                    "title": "Username:"
+                },
+                "password": {
+                    "type": "string",
+                    "title": "Password:"
+                }
+            }
+        };
+
+        this.uiSchema = {
+            "password": {
+                "ui:widget": "password"
+            }
+        };
     }
 
-    logout() {
-        if (this.props.donor != undefined && this.props.donor != null) {
-            this.props.logout(this.props.donor.token);
-        }
-    }
+    handleSubmit({formData}) {
+        var loginValue = formData.login.trim();
+        var password = formData.password.trim();
 
-    handleSubmit(e) {
-        e.preventDefault();
-
-        const login = ReactDOM.findDOMNode(this.refs.login).value.trim();
-        const password = ReactDOM.findDOMNode(this.refs.password).value.trim();
-
-        // send login request to back end
-        return fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            contentType: "application/json",
-            dataType: 'json',
-            body: JSON.stringify({login: login, password: password})
-        }).then(() => {
-            this.context.router.push('/');
-        })
+        this.props.login(loginValue, password);
     }
 
     render() {
-        if (this.props.donor != undefined && this.props.donor != null)
+        if (this.props.context.donor != undefined && this.props.context.donor != null)
             return (
                 <div>
                     <p>
-                        You are logged in as {this.props.donor.firstName} {this.props.donor.lastName}
+                        You are logged in as {this.props.context.donor.firstName} {this.props.context.lastName}
                     </p>
-                    <button onClick={this.logout}>Logout</button>
+                    <button onClick={() => {this.props.logout(this.props.context.token)}}>Logout</button>
                 </div>
             );
         else
             return (
                 <div style={{width: '500px'}}>
-                    <form onSubmit={this.handleSubmit}>
-                        <h2>Please Login</h2>
-                        Login: <input type="text" ref="login"/>
-                        <br/>
-                        Password: <input type="password" ref="password"/>
-                        <br/>
-                        <input type="submit" value="Submit" />
-                    </form>
+                    <Form schema={this.schema}
+                          uiSchema={this.uiSchema}
+                          onSubmit={this.handleSubmit}>
+                        <div>
+                            <input type="submit" value="Login"/>
+                        </div>
+                    </Form>
                 </div>
             )
     }
 }
-Login.contextTypes = {
-    router: React.PropTypes.object.isRequired
+
+const mapStateToProps = (state) => {
+    return {
+        context: state.context
+    };
 };
 
-export default Login;
+export default connect(
+    mapStateToProps,
+    {login, logout}
+)(Login);

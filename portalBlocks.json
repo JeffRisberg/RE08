@@ -2,7 +2,7 @@
   "1": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "https://unsplash.it/1000/200?image=1036"
+      "url": "/images/Image01.jpg"
     },
     {
       "row": "2", "col": "1", "width": "4", "type": "text",
@@ -149,6 +149,15 @@
     {
       "row": "3", "col": "2", "width": "6", "type": "image",
       "url": "https://unsplash.it/300/200?image=882"
+    }
+  ],
+  "7": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/Image01.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "login"
     }
   ]
 }

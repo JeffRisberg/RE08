@@ -4,3 +4,4 @@
 {"_id":"4","id":"4","vendorId":"3","portalStatus":"active","url":"dalio2"}
 {"_id":"5","id":"5","vendorId":"4","portalStatus":"active","url":"wellsfargo"}
 {"_id":"6","id":"6","vendorId":"5","portalStatus":"active","url":"ou"}
+{"_id":"7","id":"7","vendorId":"1","portalStatus":"active","url":"login"}
