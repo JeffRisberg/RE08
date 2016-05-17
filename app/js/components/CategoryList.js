@@ -4,13 +4,14 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import { queryCategories } from '../actions/categories';
+import { setSelection } from '../actions/selections';
 
 import Category from './Category'
 
 /**
- * Renders a list of category objects, and upon selection, broadcasts to CharityList objects.
+ * Renders a list of category objects, and upon selection, broadcasts to selections.
  *
- * @author Jeff Risberg
+ * @author Jeffrey Risberg
  * @since May 2016
  */
 class CategoryList extends React.Component {
@@ -19,38 +20,61 @@ class CategoryList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.queryCategories();
+        const blockId = this.props.blockId;
+
+        if (blockId != null && blockId != undefined) {
+            this.props.queryCategories(blockId);
+        }
+    }
+
+    selectCategory(category) {
+        const blockId = this.props.blockId;
+
+        this.props.setSelection(blockId, category);
     }
 
     render() {
-        if (this.props.categories !== undefined) {
-            const categoryListId = this.props.blockId;
-            const categoryRecords = this.props.categories.idList.map(id => this.props.categories.records[id]);
+        const blockId = this.props.blockId;
 
-            var categoryNodes = categoryRecords.map(function (category, index) {
+        if (blockId != null && blockId != undefined) {
+            var selectedValue = this.props.selections[blockId];
+
+            if (this.props.categories != null) {
+                if (selectedValue == null) {
+                    selectedValue = this.props.categories[0];
+                }
+
+                var categoryNodes = this.props.categories.map((category, index) => {
+                    return (
+                        <Category key={index} category={category} active={category.name == selectedValue.name}
+                                  onClick={this.selectCategory.bind(this, category)}>
+                        </Category>
+                    );
+                });
+
                 return (
-                    <Category categoryListId={categoryListId} category={category} key={index}></Category>
+                    <div>
+                        {categoryNodes}
+                    </div>
                 );
-            });
-
-            return (
-                <div>
-                    {categoryNodes}
-                </div>
-            );
+            }
+            else {
+                return null;
+            }
         }
         else {
-            return null;
+            return <div>Missing blockId</div>;
         }
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        categories: state.categories
+        categories: state.categories,
+        selections: state.selections
     };
 };
 export default connect(
     mapStateToProps,
-    {queryCategories}
+    {queryCategories, setSelection}
 )(CategoryList);

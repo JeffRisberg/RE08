@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import CategoryList from './CategoryList'
 import CharityList from './CharityList'
+import TopCharitiesScroller from './TopCharitiesScroller'
 
 /**
  * @author Jeff Risberg
@@ -14,6 +15,11 @@ class Block extends React.Component {
         const block = this.props.block;
         const blockType = block.type;
 
+        if (blockType === 'hr') {
+            return (
+                <hr/>
+            )
+        }
         if (blockType === 'text') {
             return (
                 <div dangerouslySetInnerHTML={{__html: block.text}}>
@@ -49,12 +55,17 @@ class Block extends React.Component {
         }
         if (blockType === 'categories') {
             return (
-                <CategoryList blockId={block.id} />
+                <CategoryList blockId={block.blockId} />
             )
         }
         if (blockType === 'charities') {
             return (
-                <CharityList blockId={block.id} categorySourceId={block.categorySourceId} />
+                <CharityList blockId={block.blockId} categorySourceId={block.categorySourceId} />
+            )
+        }
+        if (blockType === 'topCharities') {
+            return (
+                <TopCharitiesScroller blockId={block.blockId} />
             )
         }
         if (blockType === 'slider') {

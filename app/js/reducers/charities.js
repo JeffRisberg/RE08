@@ -1,36 +1,38 @@
-import { SET_CURRENT_CHARITIES, APPEND_CURRENT_CHARITIES, FETCH_CHARITY_SEARCH_RESULTS_SUCCESS, RESET_CHARITY_SEARCH_RESULTS, FETCH_CHARITY_SEARCH_RESULTS_REQUEST, FETCH_CHARITY_SEARCH_RESULTS_ERROR } from '../constants/ActionTypes'
+import { SET_CHARITIES, APPEND_CHARITIES, FETCH_CHARITY_SEARCH_RESULTS_SUCCESS, RESET_CHARITY_SEARCH_RESULTS, FETCH_CHARITY_SEARCH_RESULTS_REQUEST, FETCH_CHARITY_SEARCH_RESULTS_ERROR } from '../constants/ActionTypes'
 
-const currentCharities = (state = [], action = {}) => {
+const charities = (state = [], action = {}) => {
     switch (action.type) {
-        case SET_CURRENT_CHARITIES: // clear prior charities
+        case SET_CHARITIES: // clear prior charities
         {
-            const idList = [];
-            const records = {};
+            const blockId = action.blockId;
+            const charities = action.charities;
 
+            const records = state.records;
+
+            var idList = [];
             action.charities.forEach(record => {
                 records[record.ein] = record;
                 idList.push(record.ein);
             });
 
-            return {idList, records};
+            const idLists = Object.assign({}, state.idLists, { [blockId]: idList });
+
+            return {idLists, records};
         }
-        case APPEND_CURRENT_CHARITIES:
+        case APPEND_CHARITIES:
         {
-            const updatedState = Object.assign({}, state);
+            const blockId = action.blockId;
+            const charities = action.charities;
 
-            for (let key in action.charities) {
-                let charity = action.charities[key];
+            var idList = [];
+            action.charities.forEach(record => {
+                state.records[record.ein] = record;
+                idList.push(record.ein);
+            });
 
-                console.log('charity ' + JSON.stringify(charity, null, 2))
-                const ein = charity.ein;
+            const idLists = Object.assign({}, state.idLists, { [blockId]: idList });
 
-                if (updatedState.idList.indexOf(ein) < 0) {
-                    updatedState.idList.push(ein);
-                    console.log('added ' + ein + ' to currentCharities.idList')
-                }
-                updatedState.records[ein] = charity;
-            }
-            return updatedState;
+            return {idLists, records};
         }
         case FETCH_CHARITY_SEARCH_RESULTS_REQUEST:
         {
@@ -73,4 +75,4 @@ const currentCharities = (state = [], action = {}) => {
     }
 };
 
-export default currentCharities;
+export default charities;

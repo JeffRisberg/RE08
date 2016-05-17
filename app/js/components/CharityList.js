@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 import { connect } from 'react-redux';
 
-import { queryCategoryCharities } from '../actions/currentCharities';
+import { queryCategoryCharities } from '../actions/charities';
 
 import Charity from './Charity'
 
@@ -16,34 +16,60 @@ import Charity from './Charity'
 class CharityList extends React.Component {
     constructor() {
         super();
+
+        this.currentCategory = null
     }
 
     componentDidMount() {
-        // make the first fetch
-        this.props.queryCategoryCharities();
+        this.reloadIfNeeded();
     }
 
     render() {
-        // if there is a change in selection, requery the charities.
+        this.reloadIfNeeded();
 
-        if (this.props.charities != null) {
-            var charityNodes = this.props.charities.map(function (charity, index) {
+        const blockId = this.props.blockId;
+
+        if (blockId != null && blockId != undefined) {
+            const charityIds = this.props.charities.idLists[blockId] || [];
+            const charityRecords = charityIds.map(id => this.props.charities.records[id]);
+
+            const charityListHeader = (this.currentCategory != null)
+                ? <div style={{fontWeight: 'bold', fontSize: '15px'}}>Displaying charities
+                for {this.currentCategory.name}</div>
+                : null;
+
+            var charityNodes = charityRecords.map((charity, index) => {
                 return (
                     <Charity charity={charity} key={index}></Charity>
                 );
             });
 
             return (
-                <table className="table">
-                    <tbody>
-                    {charityNodes}
-                    </tbody>
-                </table>
+                <div>
+                    {charityListHeader}
+                    <table className="table">
+                        <tbody>
+                        {charityNodes}
+                        </tbody>
+                    </table>
+                </div>
             );
         }
         else {
-            return null;
+            return <div>Missing blockId</div>;
         }
+    }
+
+    reloadIfNeeded() {
+        const blockId = this.props.blockId;
+        const sourceId = this.props.categorySourceId;
+        const sourceCategory = this.props.selections[sourceId];
+
+        // If there is a change in selection, requery the charities
+        if (sourceCategory != undefined && sourceCategory != null && this.currentCategory != sourceCategory) {
+            this.props.queryCategoryCharities(sourceCategory, blockId);
+        }
+        this.currentCategory = sourceCategory;
     }
 }
 

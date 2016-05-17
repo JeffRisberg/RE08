@@ -15,6 +15,7 @@ module.exports = function (app) {
 
             topCharityDB.find(req.query).exec(function (error, topCharities) {
 
+                var result = [];
                 // Substitute the charity record for the id field
                 topCharities.map(function (tc) {
                     var charityId = tc["charityId"];
@@ -23,28 +24,15 @@ module.exports = function (app) {
                     charities.forEach((c) => {
                         if (c.id == charityId) charity = c;
                     });
-                    tc['charity'] = charity;
+                    charity['logoImage'] = tc['logoImage'];
+                    result.push(charity)
                 });
+
                 res.send({
                     'status': "success",
-                    'data': topCharities
+                    'data': result
                 });
             });
-        });
-    });
-
-    topCharitiesRouter.get('/:id', function (req, res) {
-        topCharityDB.find({id: req.params.id}).exec(function (error, topCharities) {
-            if (listCharities.length > 0)
-                res.send({
-                    'status': "success",
-                    'data': topCharities[0]
-                });
-            else {
-                res.send({
-                    'data': null
-                });
-            }
         });
     });
 

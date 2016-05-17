@@ -7,11 +7,10 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
 
 import categories from './reducers/categories';
-import currentCharities from './reducers/currentCharities';
+import charities from './reducers/charities';
 import context from './reducers/context';
 import portal from './reducers/portal';
 import selections from './reducers/selections';
-import topCharities from './reducers/topCharities';
 import vendor from './reducers/vendor';
 
 import AppRoot from './components/AppRoot.js';
@@ -21,22 +20,20 @@ import CharityList from './components/CharityList.js';
 import DonationList from './components/DonationList.js';
 
 var initialContent = {
-    categories: {idList: [], records: {}, selected: null},
-    currentCharities: {idList: [], records: {}, searchResults: {charityEins: [], pagination: null}},
+    categories: null,
+    charities: {idLists: {}, records: {}},
     context: null,
     portal: null,
     selections: {},
-    topCharities: {idList: [], records: {}},
     vendor: null
 };
 
 const reducers = combineReducers({
     categories,
-    currentCharities,
+    charities,
     context,
     portal,
     selections,
-    topCharities,
     vendor,
     routing: routerReducer
 });
