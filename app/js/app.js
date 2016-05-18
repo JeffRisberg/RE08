@@ -9,6 +9,7 @@ import thunkMiddleware from 'redux-thunk'
 import categories from './reducers/categories';
 import charities from './reducers/charities';
 import context from './reducers/context';
+import donor from './reducers/donor';
 import portal from './reducers/portal';
 import selections from './reducers/selections';
 import vendor from './reducers/vendor';
@@ -20,6 +21,7 @@ var initialContent = {
     categories: null,
     charities: {idLists: {}, records: {}},
     context: null,
+    donor: null,
     portal: null,
     selections: {},
     vendor: null
@@ -29,6 +31,7 @@ const reducers = combineReducers({
     categories,
     charities,
     context,
+    donor,
     portal,
     selections,
     vendor,

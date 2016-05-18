@@ -19,7 +19,7 @@ class Header extends React.Component {
 
         var headerText = "Not logged in";
         let loginLogout = <Link to="/login" style={{marginLeft: '10px'}}>Login</Link>;
-        if (false && this.props.donor.donorId != null) {
+        if (this.props.donor != null) {
             var firstName = this.props.donor.firstName;
             var points = this.props.donor.points;
 
@@ -55,6 +55,7 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
     return {
         context: state.context,
+        donor: state.donor,
         vendor: state.vendor
     };
 };

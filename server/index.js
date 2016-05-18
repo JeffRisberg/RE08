@@ -32,7 +32,10 @@ app.authTokenDB = new nedb({filename: 'authTokens', autoload: true});
 app.basketItemDB = new nedb({filename: 'basketItems', autoload: true});
 app.categoryDB = new nedb({filename: 'categories', autoload: true});
 app.charityDB = new nedb({filename: 'charities', autoload: true});
+app.donorDB = new nedb({filename: 'donors', autoload: true});
+app.donationDB = new nedb({filename: 'donations', autoload: true});
 app.topCharityDB = new nedb({filename: 'topCharities', autoload: true});
+app.transactionDB = new nedb({filename: 'transactions', autoload: true});
 
 mocks.forEach(function (route) {
     route(app);

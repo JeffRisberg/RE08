@@ -21,12 +21,27 @@ class CharityList extends React.Component {
     }
 
     componentDidMount() {
-        this.reloadIfNeeded();
+        const blockId = this.props.blockId;
+        const sourceId = this.props.categorySourceId;
+        const sourceCategory = this.props.selections[sourceId];
+
+        if (sourceCategory != undefined) {
+            this.props.queryCategoryCharities(sourceCategory, blockId);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const blockId = this.props.blockId;
+        const sourceId = this.props.categorySourceId;
+        const currentSourceCategory = this.props.selections[sourceId];
+        const newSourceCategory = nextProps.selections[sourceId];
+
+        if (newSourceCategory != undefined && currentSourceCategory != newSourceCategory) {
+            this.props.queryCategoryCharities(newSourceCategory, blockId);
+        }
     }
 
     render() {
-        this.reloadIfNeeded();
-
         const blockId = this.props.blockId;
 
         if (blockId != null && blockId != undefined) {
@@ -58,18 +73,6 @@ class CharityList extends React.Component {
         else {
             return <div>Missing blockId</div>;
         }
-    }
-
-    reloadIfNeeded() {
-        const blockId = this.props.blockId;
-        const sourceId = this.props.categorySourceId;
-        const sourceCategory = this.props.selections[sourceId];
-
-        // If there is a change in selection, requery the charities
-        if (sourceCategory != undefined && sourceCategory != null && this.currentCategory != sourceCategory) {
-            this.props.queryCategoryCharities(sourceCategory, blockId);
-        }
-        this.currentCategory = sourceCategory;
     }
 }
 

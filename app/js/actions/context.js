@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch';
 
 import { push } from 'react-router-redux'
 
-import { SET_CONTEXT, CLEAR_CONTEXT } from '../constants/ActionTypes'
+import { SET_CONTEXT, CLEAR_CONTEXT, SET_DONOR, CLEAR_DONOR } from '../constants/ActionTypes'
 
 export const fetchContext = (pathname) => {
     return function (dispatch, getState) {

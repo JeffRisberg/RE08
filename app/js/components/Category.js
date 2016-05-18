@@ -15,14 +15,14 @@ class Category extends React.Component {
     render() {
         if (this.props.active) {
             return (
-                <div style={{padding: '2', background: 'black', color: 'white'}} onClick={this.props.onClick}>
+                <div style={{padding: 2, background: 'black', color: 'white'}} onClick={this.props.onClick}>
                     <strong>{this.props.category.name}</strong>
                 </div>
             )
         }
         else {
             return (
-                <div style={{padding: '2'}} onClick={this.props.onClick}>
+                <div style={{padding: 2}} onClick={this.props.onClick}>
                     <strong>{this.props.category.name}</strong>
                 </div>
             )

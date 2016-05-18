@@ -4,6 +4,9 @@ export const CLEAR_CONTEXT = 'CLEAR_CONTEXT';
 export const SET_PORTAL = 'SET_PORTAL';
 export const SET_VENDOR = 'SET_VENDOR';
 
+export const SET_DONOR = 'SET_DONOR';
+export const CLEAR_DONOR = 'CLEAR_DONOR';
+
 export const SET_SELECTION = 'SET_SELECTION';
 
 export const SET_CHARITIES = 'SET_CHARITIES';
