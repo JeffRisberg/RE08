@@ -35,7 +35,7 @@ export const toLogin = () => {
 
         dispatch({
                 type: SET_PAGE_NAME,
-                name: 'Login'
+                pageName: 'Login'
             }
         );
     };
@@ -63,7 +63,7 @@ export const login = (login, password) => {
                 );
                 dispatch({
                         type: SET_PAGE_NAME,
-                        name: 'Landing'
+                        pageName: 'Landing'
                     }
                 );
             });

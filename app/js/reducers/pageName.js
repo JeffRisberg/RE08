@@ -4,7 +4,7 @@ const pageName = (state = [], action = {}) => {
     switch (action.type) {
         case SET_PAGE_NAME:
         {
-            var pageName = action.name;
+            var pageName = action.pageName;
             return pageName;
         }
         default:
