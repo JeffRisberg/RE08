@@ -6,7 +6,7 @@ import { Link } from 'react-router'
 import Block from './Block';
 
 /**
- * Renders the blocks in a page.
+ * Renders the blocks in a page.  Subscribes to portal content, and pageName content.
  *
  * @author Jeffrey Risberg
  * @since May 2016

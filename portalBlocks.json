@@ -42,10 +42,13 @@
   "2": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/Image01.jpg"
+      "url": "/images/Image02.jpg"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "login"
+      "row": "2", "col": "1", "width": "12", "type": "text", "text": "If you have a login, enter it here:"
+    },
+    {
+      "row": "3", "col": "1", "width": "12", "type": "login"
     }
   ],
   "3": [

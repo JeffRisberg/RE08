@@ -16,8 +16,6 @@ import Charity from './Charity'
 class CharityList extends React.Component {
     constructor() {
         super();
-
-        this.currentCategory = null
     }
 
     componentDidMount() {
@@ -43,14 +41,16 @@ class CharityList extends React.Component {
 
     render() {
         const blockId = this.props.blockId;
+        const sourceId = this.props.categorySourceId;
+        const sourceCategory = this.props.selections[sourceId];
 
         if (blockId != null && blockId != undefined) {
             const charityIds = this.props.charities.idLists[blockId] || [];
             const charityRecords = charityIds.map(id => this.props.charities.records[id]);
 
-            const charityListHeader = (this.currentCategory != null)
+            const charityListHeader = (sourceCategory != null)
                 ? <div style={{fontWeight: 'bold', fontSize: '15px'}}>Displaying charities
-                for {this.currentCategory.name}</div>
+                for {sourceCategory.name}</div>
                 : null;
 
             var charityNodes = charityRecords.map((charity, index) => {
