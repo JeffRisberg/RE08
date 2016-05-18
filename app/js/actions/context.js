@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch';
 
 import { push } from 'react-router-redux'
 
-import { SET_CONTEXT, CLEAR_CONTEXT, SET_DONOR, CLEAR_DONOR } from '../constants/ActionTypes'
+import { SET_CONTEXT, CLEAR_CONTEXT, SET_PAGE_NAME, SET_DONOR, CLEAR_DONOR } from '../constants/ActionTypes'
 
 export const fetchContext = (pathname) => {
     return function (dispatch, getState) {
@@ -29,6 +29,18 @@ export const fetchContext = (pathname) => {
     };
 };
 
+export const toLogin = () => {
+
+    return function (dispatch, getState) {
+
+        dispatch({
+                type: SET_PAGE_NAME,
+                name: 'Login'
+            }
+        );
+    };
+};
+
 export const login = (login, password) => {
     return function (dispatch) {
 
@@ -49,7 +61,11 @@ export const login = (login, password) => {
                         donor: json.data
                     }
                 );
-                dispatch(push("/"));
+                dispatch({
+                        type: SET_PAGE_NAME,
+                        name: 'Landing'
+                    }
+                );
             });
     };
 };

@@ -8,6 +8,7 @@ module.exports = function (app) {
 
     var portalsDB = app.portalsDB;
     var portalBlocksMap = app.portalBlocksMap;
+    var portalPagesMap = app.portalPagesMap;
 
     portalsRouter.get('/', function (req, res) {
         delete req.query["_"];
@@ -40,9 +41,20 @@ module.exports = function (app) {
             if (portals.length > 0) {
                 portals.forEach(function (portal) {
                     const portalId = portal.id;
-                    var portalBlocks = portalBlocksMap[""+portalId];
+                    const portalPages = portalPagesMap[""+portalId];
+                    const pageMap = {}
 
-                    portal['blocks'] = portalBlocks;
+                    portalPages.forEach(function (portalPage) {
+                        const portalPageName = portalPage.name;
+                        const portalPageId = portalPage.id;
+
+                        var portalBlocks = portalBlocksMap["" + portalPageId];
+                        portalPage['blocks'] = portalBlocks;
+
+                        pageMap[portalPageName] = portalPage;
+                    })
+
+                    portal['pages'] = pageMap;
                 })
                 res.send({"status": "ok", "data": portals});
             }

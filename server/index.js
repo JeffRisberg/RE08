@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 var nedb = require('nedb');
 
 app.portalBlocksMap = require("../portalBlocks.json");
+app.portalPagesMap = require("../portalPages.json");
 
 app.vendorsDB = new nedb({filename: 'vendors', autoload: true});
 app.portalsDB = new nedb({filename: 'portals', autoload: true});

@@ -42,6 +42,33 @@
   "2": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/Image01.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "login"
+    }
+  ],
+  "3": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/Image01.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "donate"
+    }
+  ],
+  "4": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/Image01.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "checkout"
+    }
+  ],
+  "5": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
       "url": "/images/ImageCisco.jpg",
       "color": "dk_purple", "location": "upleft",
       "headerText": "CISCO EMPLOYEE GIVING",
@@ -66,7 +93,34 @@
       "text": "<h2>Give through Payroll Deductions</h2>These will be applied automatically - this is the easiest way to give! <p>Contact your HR rep if you have questions"
     }
   ],
-  "3": [
+  "6": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageCisco.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "login"
+    }
+  ],
+  "7": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageCisco.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "donate"
+    }
+  ],
+  "8": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageCisco.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "checkout"
+    }
+  ],
+  "9": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
       "url": "/images/ImageDalio.jpg"
@@ -83,21 +137,34 @@
       "row": "3", "col": "1", "width": "12", "type": "topCharities", "blockId": "topCat1", "direction": "horizontal"
     }
   ],
-  "4": [
+  "10": [
     {
-      "row": "1", "col": "1", "width": "12", "type": "text",
-      "text": "Do unto others as you would have them do unto you."
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageDalio.jpg"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "image",
-      "url": "https://unsplash.it/1000/300?image=1036"
-    },
-    {
-      "row": "3", "col": "1", "width": "12", "type": "text",
-      "text": "It gives me great pleasure to do this with you."
+      "row": "2", "col": "1", "width": "12", "type": "login"
     }
   ],
-  "5": [
+  "11": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageDalio.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "donate"
+    }
+  ],
+  "12": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageDalio.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "checkout"
+    }
+  ],
+  "13": [
     {
       "row": "1", "col": "1", "width": "12", "type": "slider",
       "images": [
@@ -133,7 +200,34 @@
       "text": "Wells Fargo rewards are your way to convert points to charitable donations"
     }
   ],
-  "6": [
+  "14": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageWF.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "login"
+    }
+  ],
+  "15": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageWF.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "donate"
+    }
+  ],
+  "16": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageWF.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "checkout"
+    }
+  ],
+  "17": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
       "url": "/images/ImageOU.jpg"
@@ -151,13 +245,31 @@
       "url": "https://unsplash.it/300/200?image=882"
     }
   ],
-  "7": [
+  "18": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/Image01.jpg"
+      "url": "/images/ImageOU.jpg"
     },
     {
       "row": "2", "col": "1", "width": "12", "type": "login"
+    }
+  ],
+  "19": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageOU.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "donate"
+    }
+  ],
+  "20": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "image",
+      "url": "/images/ImageOU.jpg"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "checkout"
     }
   ]
 }

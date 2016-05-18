@@ -16,7 +16,7 @@ export const fetchVendor = () => {
 
                 dispatch({
                         type: SET_VENDOR,
-                        vendor: json.data
+                        vendor: json.data[0]
                     }
                 );
             });

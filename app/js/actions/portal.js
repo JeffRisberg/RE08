@@ -16,7 +16,7 @@ export const fetchPortal = () => {
 
                 dispatch({
                         type: SET_PORTAL,
-                        portal: json.data
+                        portal: json.data[0]
                     }
                 );
             });

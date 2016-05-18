@@ -6,14 +6,19 @@ import { Link } from 'react-router'
 import Block from './Block';
 
 /**
+ * Renders the blocks in a page.
+ *
  * @author Jeffrey Risberg
  * @since May 2016
  */
-class Home extends React.Component {
+class Page extends React.Component {
 
     render() {
-        const blocks = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(index => {
-            const rowBlocks = this.props.portal[0].blocks.filter((block) => (block.row == ("" + index)));
+        const pageName = this.props.pageName;
+        const blocks = this.props.portal.pages[pageName].blocks;
+
+        const blockNodes = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(index => {
+            const rowBlocks = blocks.filter((block) => (block.row == ("" + index)));
             if (rowBlocks.length > 0) {
                 return (
                     <div key={index} className="row">
@@ -32,7 +37,7 @@ class Home extends React.Component {
 
         return (
             <div className="content-region">
-                {blocks}
+                {blockNodes}
             </div>
         )
     }
@@ -40,10 +45,11 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        pageName: state.pageName,
         portal: state.portal
     };
 };
 export default connect(
     mapStateToProps
-)(Home);
+)(Page);
 

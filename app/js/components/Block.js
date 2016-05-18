@@ -8,6 +8,8 @@ import CharityList from './CharityList'
 import TopCharitiesScroller from './TopCharitiesScroller'
 
 /**
+ * Renders one block in a page.
+ *
  * @author Jeff Risberg
  * @since May 2016
  */

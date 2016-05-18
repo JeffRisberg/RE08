@@ -10,18 +10,21 @@ import categories from './reducers/categories';
 import charities from './reducers/charities';
 import context from './reducers/context';
 import donor from './reducers/donor';
+import orderHistory from './reducers/orderHistory';
+import pageName from './reducers/pageName';
 import portal from './reducers/portal';
 import selections from './reducers/selections';
 import vendor from './reducers/vendor';
 
 import AppRoot from './components/AppRoot.js';
-import Home from './components/Home.js';
+import Page from './components/Page.js';
 
 var initialContent = {
     categories: null,
     charities: {idLists: {}, records: {}},
     context: null,
     donor: null,
+    pageName: 'Landing',
     portal: null,
     selections: {},
     vendor: null
@@ -32,6 +35,8 @@ const reducers = combineReducers({
     charities,
     context,
     donor,
+    orderHistory,
+    pageName,
     portal,
     selections,
     vendor,
@@ -48,7 +53,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={hashHistory}>
             <Route path="/" component={AppRoot}>
-                <IndexRoute component={Home}/>
+                <IndexRoute component={Page}/>
             </Route>
         </Router>
     </Provider>,
