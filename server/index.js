@@ -29,6 +29,7 @@ app.vendorsDB = new nedb({filename: 'vendors', autoload: true});
 app.portalsDB = new nedb({filename: 'portals', autoload: true});
 app.portalPagesDB = new nedb({filename: 'portalPages', autoload: true});
 
+app.contextsDB = new nedb({filename: 'contexts', autoload: true});
 app.authTokenDB = new nedb({filename: 'authTokens', autoload: true});
 app.basketItemDB = new nedb({filename: 'basketItems', autoload: true});
 app.categoryDB = new nedb({filename: 'categories', autoload: true});

@@ -5,9 +5,6 @@ export const SET_PORTAL = 'SET_PORTAL';
 export const SET_VENDOR = 'SET_VENDOR';
 export const SET_PAGE_NAME = 'SET_PAGE_NAME';
 
-export const SET_DONOR = 'SET_DONOR';
-export const CLEAR_DONOR = 'CLEAR_DONOR';
-
 export const SET_SELECTION = 'SET_SELECTION';
 
 export const FETCH_CATEGORIES_REQUEST = 'FETCH_CATEGORIES_REQUEST';

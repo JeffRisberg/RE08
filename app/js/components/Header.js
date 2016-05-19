@@ -15,15 +15,18 @@ import { toLogin, logout } from '../actions/context';
 class Header extends React.Component {
 
     render() {
-        const vendorName = this.props.vendor.name;
+        const vendorName =
+            (this.props.context != null && this.props.context.vendor != null) ?
+                this.props.context.vendor.name : "";
 
         var headerText = "Not logged in";
         let loginLogout = <a onClick={this.props.toLogin} style={{marginLeft: '10px'}}>Login</a>;
-        if (this.props.donor != null) {
-            var firstName = this.props.donor.firstName;
-            var points = this.props.donor.points;
+        if (this.props.context != null && this.props.context.donor != null) {
+            var firstName = this.props.context.donor.firstName;
+            var lastName = this.props.context.donor.lastName;
+            var points = this.props.context.donor.points;
 
-            headerText = firstName + " " + points + " points";
+            headerText = firstName + " " + lastName + " " + points + " points";
             loginLogout = <a onClick={this.props.logout} style={{marginLeft: '10px'}}>Logout</a>;
         }
 
@@ -54,8 +57,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        donor: state.donor,
-        vendor: state.vendor
+        context: state.context,
     };
 };
 export default connect(

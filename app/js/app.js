@@ -5,11 +5,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
+import * as storage from 'redux-storage'
+import createEngine from 'redux-storage-engine-localstorage';
+import filter from 'redux-storage-decorator-filter'
 
 import categories from './reducers/categories';
 import charities from './reducers/charities';
 import context from './reducers/context';
-import donor from './reducers/donor';
 import orders from './reducers/orders';
 import pageName from './reducers/pageName';
 import portal from './reducers/portal';
@@ -23,7 +25,6 @@ var initialContent = {
     categories: null,
     charities: {idLists: {}, records: {}},
     context: null,
-    donor: null,
     orders: {idList: [], records: {}, history: {}},
     pageName: 'Landing',
     portal: null,
@@ -35,7 +36,6 @@ const reducers = combineReducers({
     categories,
     charities,
     context,
-    donor,
     orders,
     pageName,
     portal,
@@ -44,19 +44,31 @@ const reducers = combineReducers({
     routing: routerReducer
 });
 
+//only store the context data for now to keep user logged in when there
+//is a hard refresh
+const storageEngine = filter(createEngine('justgive'), ['context','orders']);
+const storageMiddleware = storage.createMiddleware(storageEngine);
+
 const store = createStore(
     reducers,
     initialContent,
-    applyMiddleware(routerMiddleware(hashHistory), thunkMiddleware)
+    applyMiddleware(routerMiddleware(hashHistory), thunkMiddleware, storageMiddleware)
 );
 
-ReactDOM.render(
-    <Provider store={store}>
-        <Router history={hashHistory}>
-            <Route path="/" component={AppRoot}>
-                <IndexRoute component={Page}/>
-            </Route>
-        </Router>
-    </Provider>,
-    document.getElementById('app-root')
-);
+const load = storage.createLoader(storageEngine);
+load(store)
+    .then((newState) => {
+        ReactDOM.render(
+            <Provider store={store}>
+                <Router history={hashHistory}>
+                    <Route path="/" component={AppRoot}>
+                        <IndexRoute component={Page}/>
+                    </Route>
+                </Router>
+            </Provider>,
+            document.getElementById('app-root')
+        );
+
+    })
+    .catch(() => console.log('Failed to load previous state'));
+

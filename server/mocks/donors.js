@@ -1,3 +1,6 @@
+/**
+ * TO BE DEPRECATED
+ */
 module.exports = function (app) {
     var express = require('express');
     var donorsRouter = express.Router();
