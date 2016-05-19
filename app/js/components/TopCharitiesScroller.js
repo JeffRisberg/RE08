@@ -12,10 +12,6 @@ import { getTopCharities } from '../actions/charities';
  */
 class TopCharitiesScroller extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         const blockId = this.props.blockId;
 

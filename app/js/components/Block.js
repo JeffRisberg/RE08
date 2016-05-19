@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Login from './Login'
 import Slider from './Slider'
 import CategoryList from './CategoryList'
-import CharityList from './CharityList'
+import CategoryCharities from './CategoryCharities'
 import TopCharitiesScroller from './TopCharitiesScroller'
 
 /**
@@ -74,7 +74,7 @@ class Block extends React.Component {
         }
         if (blockType === 'charities') {
             return (
-                <CharityList blockId={block.blockId} categorySourceId={block.categorySourceId}/>
+                <CategoryCharities blockId={block.blockId} categorySourceId={block.categorySourceId}/>
             )
         }
         if (blockType === 'topCharities') {

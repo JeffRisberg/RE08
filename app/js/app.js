@@ -10,7 +10,7 @@ import categories from './reducers/categories';
 import charities from './reducers/charities';
 import context from './reducers/context';
 import donor from './reducers/donor';
-import orderHistory from './reducers/orderHistory';
+import orders from './reducers/orders';
 import pageName from './reducers/pageName';
 import portal from './reducers/portal';
 import selections from './reducers/selections';
@@ -24,6 +24,7 @@ var initialContent = {
     charities: {idLists: {}, records: {}},
     context: null,
     donor: null,
+    orders: {idList: [], records: {}, history: {}},
     pageName: 'Landing',
     portal: null,
     selections: {},
@@ -35,7 +36,7 @@ const reducers = combineReducers({
     charities,
     context,
     donor,
-    orderHistory,
+    orders,
     pageName,
     portal,
     selections,
