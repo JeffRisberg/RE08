@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
-import { SET_CATEGORIES, SET_SELECTION } from '../constants/ActionTypes'
+import { SET_CATEGORIES, SET_SELECTION, SET_BLOCK_STATE } from '../constants/ActionTypes'
+import { REQUEST, SUCCESS, ERROR } from '../constants/StateTypes'
 
 const shouldFetchCategories = (state) => {
     return state.categories == null;
@@ -11,6 +12,12 @@ export const queryCategories = (blockId) => {
     return function (dispatch, getState) {
 
         if (shouldFetchCategories(getState())) {
+
+            dispatch({
+                type: SET_BLOCK_STATE,
+                blockId: blockId,
+                state: REQUEST
+            });
 
             return fetch('/ws/categories/guide', {})
                 .then(response => response.json())
@@ -28,6 +35,22 @@ export const queryCategories = (blockId) => {
                         type: SET_CATEGORIES,
                         categories: json.data
                     });
+
+                    dispatch({
+                        type: SET_BLOCK_STATE,
+                        blockId: blockId,
+                        state: SUCCESS
+                    });
+                })
+                .catch((error) => {
+                    console.log('failed: ' + error)
+                    dispatch({
+                            type: SET_BLOCK_STATE,
+                            blockId: blockId,
+                            state: ERROR,
+                            error: 'Error loading categories : ' + error
+                        }
+                    );
                 });
         } else {
             Promise.resolve();

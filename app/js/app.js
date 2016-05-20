@@ -9,6 +9,7 @@ import * as storage from 'redux-storage'
 import createEngine from 'redux-storage-engine-localstorage';
 import filter from 'redux-storage-decorator-filter'
 
+import blockStates from './reducers/blockStates';
 import categories from './reducers/categories';
 import charities from './reducers/charities';
 import context from './reducers/context';
@@ -22,6 +23,7 @@ import AppRoot from './components/AppRoot.js';
 import Page from './components/Page.js';
 
 var initialContent = {
+    blockStates: {},
     categories: null,
     charities: {idLists: {}, records: {}},
     context: null,
@@ -33,6 +35,7 @@ var initialContent = {
 };
 
 const reducers = combineReducers({
+    blockStates,
     categories,
     charities,
     context,
