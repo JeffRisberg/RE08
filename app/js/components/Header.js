@@ -16,8 +16,8 @@ class Header extends React.Component {
 
     render() {
         const vendorName =
-            (this.props.context != null && this.props.context.vendor != null) ?
-                this.props.context.vendor.name : "";
+            (this.props.vendor != null && this.props.vendor != null) ?
+                this.props.vendor.name : "";
 
         var headerText = "Not logged in";
         let loginLogout = <a onClick={this.props.toLogin} style={{marginLeft: '10px'}}>Login</a>;
@@ -57,7 +57,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        context: state.context,
+        context: state.context
     };
 };
 export default connect(

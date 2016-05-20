@@ -70,5 +70,5 @@ load(store)
         );
 
     })
-    .catch(() => console.log('Failed to load previous state'));
+    //.catch(() => console.log('Failed to load previous state'));
 

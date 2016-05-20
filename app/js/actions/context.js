@@ -7,11 +7,13 @@ import { push } from 'react-router-redux'
 
 import { SET_CONTEXT, CLEAR_CONTEXT, SET_PAGE_NAME, APPEND_ORDERS } from '../constants/ActionTypes'
 
-export const fetchContext = () => {
+export const fetchContext = (pathName) => {
     return function (dispatch, getState) {
 
+        if (pathName === '') pathName = "justgive";
+
         var token = (getState().context == null) ? '' : getState().context.token;
-        return fetch('/ws/context/', {
+        return fetch('/ws/context/' + pathName, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -40,7 +42,7 @@ export const setContext = (data) => {
 
         const context = Object.assign({}, data)
         if (data.order != null && data.order != undefined) {
-            content.orderId = data.order.id;
+            context.orderId = data.order.id;
         }
         delete context['order'];
         dispatch({
@@ -49,7 +51,7 @@ export const setContext = (data) => {
             }
         );
     }
-}
+};
 
 export const toLogin = () => {
     return function (dispatch, getState) {
@@ -64,7 +66,6 @@ export const toLogin = () => {
 export const login = (login, password) => {
     return function (dispatch, getState) {
 
-        console.log('logging in ' + login);
         return fetch('/ws/context/login', {
             method: 'POST',
             headers: {
@@ -102,7 +103,6 @@ export const logout = () => {
         })
             .then(response => response.json())
             .then((json) => {
-                console.log('logged out');
                 dispatch(setContext(json.data));
             });
     };

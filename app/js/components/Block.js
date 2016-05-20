@@ -59,27 +59,27 @@ class Block extends React.Component {
         }
         if (blockType === 'login') {
             return (
-                <Login blockId={block.blockId}/>
+                <Login block={block} blockId={block.blockId}/>
             )
         }
         if (blockType === 'slider') {
             return (
-                <Slider blockId={block.blockId}/>
+                <Slider block={block} blockId={block.blockId}/>
             )
         }
         if (blockType === 'categories') {
             return (
-                <CategoryList blockId={block.blockId}/>
+                <CategoryList block={block} blockId={block.blockId}/>
             )
         }
         if (blockType === 'charities') {
             return (
-                <CategoryCharities blockId={block.blockId} categorySourceId={block.categorySourceId}/>
+                <CategoryCharities block={block} blockId={block.blockId} categorySourceId={block.categorySourceId}/>
             )
         }
         if (blockType === 'topCharities') {
             return (
-                <TopCharitiesScroller blockId={block.blockId}/>
+                <TopCharitiesScroller block={block} blockId={block.blockId}/>
             )
         }
     }

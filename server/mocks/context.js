@@ -25,85 +25,114 @@ module.exports = function (app) {
         return uuid;
     }
 
-    /* just return a default for now */
-    contextRouter.get('/', function (req, res) {
-        delete req.query["_"];
-        contextsDB.find({}).exec(function (error, contexts) {
-
-            //const context = contexts[0];
-
-            res.send({
-                status: "ok",
-                data: {portalId: 1, vendorId: 1}
-            })
-        })
-    });
-
     contextRouter.get('/:pathname', function (req, res) {
         delete req.query["_"];
         portalsDB.find({url: req.params.pathname}).exec(function (error, portals) {
+            var token = generateUUID();
 
             const portal = portals[0];
 
-            res.send({
-                status: "ok",
-                data: {vendorId: portal.vendorId, portalId: portal.id}
+            transactionDB.find({}).sort({id: -1}).limit(1).exec(function (err, transactions) {
+                var newTransactionId = 1;
+
+                if (transactions.length != 0) {
+                    newTransactionId = parseInt(transactions[0].id) + 1;
+                }
+
+                var newTransaction = {id: newTransactionId};
+                // Insert the new record
+                transactionDB.insert(newTransaction, function (err, result) {
+
+                    var newAuthToken = {
+                        token: token,
+                        donorId: null,
+                        orderId: newTransactionId
+                    };
+
+                    authTokenDB.insert(newAuthToken, function (err, authTokenResult) {
+                        res.status(201);
+
+                        res.send({
+                            status: "ok",
+                            data: {
+                                token: token,
+                                donor: null,
+                                order: newTransaction,
+                                vendorId: portal.vendorId,
+                                portalId: portal.id
+                            }
+                        })
+                    })
+                })
             })
         })
     });
 
     contextRouter.post('/login', function (req, res) {
-        var login = req.body.login;
-        var password = req.body.password;
+        var token = req.headers['auth-token'];
 
-        // FIXME:  should check password as well
-        donorDB.find({login: login}).limit(1).exec(function (err, donors) {
-            var token = generateUUID();
+        authTokenDB.find({token: token}).exec(function (err, tokens) {
+            if (tokens.length > 0) {
+                const authToken = tokens[0];
 
-            if (donors.length != 0) {
-                var donor = donors[0];
-                var donorId = donor.id;
+                transactionDB.find({id: authToken.orderId}).exec(function (err, transactions) {
+                    if (transactions.length > 0) {
+                        const transaction = transactions[0];
 
-                transactionDB.find({}).sort({id: -1}).limit(1).exec(function (err, transactions) {
-                    var newTransactionId = 1;
+                        var login = req.body.login;
+                        var password = req.body.password;
 
-                    if (transactions.length != 0) {
-                        newTransactionId = parseInt(transactions[0].id) + 1;
-                    }
+                        // FIXME:  should check password as well
+                        donorDB.find({login: login}).limit(1).exec(function (err, donors) {
 
-                    var newTransaction = {id: newTransactionId, donorId: donorId};
-                    // Insert the new record
-                    transactionDB.insert(newTransaction, function (err, newTransaction) {
+                            if (donors.length != 0) {
+                                var donor = donors[0];
+                                var donorId = donor.id;
 
-                        var newAuthToken = {
-                            token: token,
-                            donorId: donorId,
-                            firstName: donor.firstName,
-                            lastName: donor.lastName,
-                            orderId: newTransactionId
-                        };
+                                var newAuthToken = {
+                                    token: token,
+                                    donorId: donorId,
+                                    orderId: authToken.orderId
+                                };
 
-                        authTokenDB.insert(newAuthToken, function (err, result) {
-                            res.status(201);
-                            var context = {
-                                token: token,
-                                donor: donor,
-                                orderId: newTransactionId
-                            };
-                            res.send(JSON.stringify({data: context}));
+                                authTokenDB.update({token: token}, newAuthToken, {}, function (err, authTokenResult) {
+                                    res.status(201);
+                                    var context = {
+                                        token: token,
+                                        donor: donor,
+                                        order: transaction
+                                    };
+                                    res.send(JSON.stringify({data: context}));
+                                });
+                            } else {
+                                res.status(404);
+                                res.send(JSON.stringify({data: null}));
+                            }
                         });
-                    });
+                    }
                 });
-            } else {
-                res.status(404);
-                res.send(JSON.stringify({data: null}));
             }
-        })
+        });
     });
 
     contextRouter.post('/logout', function (req, res) {
-        res.status(201);
-        res.send(JSON.stringify({data: null}));
+        var token = req.headers['auth-token'];
+
+        authTokenDB.find({token: token}).exec(function (err, tokens) {
+            if (tokens.length > 0) {
+                const authToken = tokens[0];
+
+                transactionDB.find({id: authToken.orderId}).exec(function (err, transactions) {
+                    res.status(201);
+                    var context = {
+                        token: token,
+                        donor: null,
+                        order: transactions[0]
+                    };
+                    res.send(JSON.stringify({data: context}));
+                })
+            }
+        });
     });
 
     /** return the giving history */

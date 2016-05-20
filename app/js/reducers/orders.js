@@ -8,12 +8,9 @@ const orders = (state = [], action = {}) => {
 
             action.orders.forEach(order => {
                 const id = order.id;
-                console.log(JSON.stringify(order, null, 2))
-                console.log('order ID ' + id)
 
                 if (updatedState.idList.indexOf(id) < 0) {
                     updatedState.idList.push(id);
-                    console.log('added ' + id + ' to orders.idList')
                 }
                 updatedState.records[id] = order;
             });
@@ -35,6 +32,5 @@ const orders = (state = [], action = {}) => {
             return state;
     }
 };
-
 
 export default orders;
