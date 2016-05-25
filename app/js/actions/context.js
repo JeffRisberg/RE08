@@ -4,16 +4,28 @@
 import fetch from 'isomorphic-fetch';
 
 import { push } from 'react-router-redux'
+import {setBlockState } from '../actions/blockStates'
 
-import { SET_CONTEXT, CLEAR_CONTEXT, SET_PAGE_NAME, APPEND_ORDERS } from '../constants/ActionTypes'
+import { SET_SELECTION, SET_PAGE_NAME, SET_CONTEXT, CLEAR_CONTEXT, APPEND_ORDERS } from '../constants/ActionTypes'
+import { SUCCESS, ERROR } from '../constants/StateTypes'
 
-export const fetchContext = (pathName) => {
+export const toDonate = (ein) => {
+    return function (dispatch, getState) {
+        dispatch({
+                type: SET_SELECTION,
+                name: 'ein',
+                value: ein
+            }
+        );
+        dispatch(push('/page/Donate'));
+    };
+};
+
+export const fetchContext = () => {
     return function (dispatch, getState) {
 
-        if (pathName === '') pathName = "justgive";
-
         var token = (getState().context == null) ? '' : getState().context.token;
-        return fetch('/ws/context/' + pathName, {
+        return fetch('/ws/context/', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -31,19 +43,14 @@ export const setContext = (data) => {
     return function (dispatch, getState) {
         console.log('raw context: ' + JSON.stringify(data))
         const order = Object.assign({}, data.order);
-        if (data.order != null && data.order != undefined) {
-            delete order['activeItem'];
-            dispatch({
-                    type: APPEND_ORDERS,
-                    orders: [order]
-                }
-            );
-        }
+        delete order['activeItem'];
+        dispatch({
+                type: APPEND_ORDERS,
+                orders: [order]
+            }
+        );
 
-        const context = Object.assign({}, data)
-        if (data.order != null && data.order != undefined) {
-            context.orderId = data.order.id;
-        }
+        const context = Object.assign({}, data, {orderId: data.order.id})
         delete context['order'];
         dispatch({
                 type: SET_CONTEXT,
@@ -53,19 +60,10 @@ export const setContext = (data) => {
     }
 };
 
-export const toLogin = () => {
-    return function (dispatch, getState) {
-        dispatch({
-                type: SET_PAGE_NAME,
-                pageName: 'Login'
-            }
-        );
-    };
-};
-
-export const login = (login, password) => {
+export const login = (blockId, login, password) => {
     return function (dispatch, getState) {
 
+        console.log('logging in ' + login);
         return fetch('/ws/context/login', {
             method: 'POST',
             headers: {
@@ -79,13 +77,41 @@ export const login = (login, password) => {
         })
             .then(response => response.json())
             .then((json) => {
-                dispatch(setContext(json.data));
+                if (json.status === "success") {
+                    dispatch(setContext(json.data));
+                    dispatch(setBlockState(blockId, SUCCESS));
+                    dispatch(push("/page/Landing"));
+                } else {
+                    dispatch(setBlockState(blockId, ERROR, json.messages[0]));
+                }
+            })
+            .catch((error) => {
+                console.log('failed: ' + error);
+                dispatch(setBlockState(blockId, ERROR, error));
+            });
+    };
+};
 
-                dispatch({
-                        type: SET_PAGE_NAME,
-                        pageName: 'Landing'
-                    }
-                );
+export const loginNewAccount = (formData) => {
+    return function (dispatch, getState) {
+
+        console.log('logging in ' + formData.login);
+        return fetch('/ws/context/loginNewAccount', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'auth-token': getState().context.token
+            },
+            contentType: "application/json",
+            dataType: 'json',
+            body: JSON.stringify(formData)
+        })
+            .then(response => response.json())
+            .then((json) => {
+
+                dispatch(setContext(json.data));
+                dispatch(push("/"));
             });
     };
 };
@@ -103,6 +129,7 @@ export const logout = () => {
         })
             .then(response => response.json())
             .then((json) => {
+                console.log('logged out');
                 dispatch(setContext(json.data));
             });
     };
