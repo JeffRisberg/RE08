@@ -1,10 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux';
-
+import BlockStateHelper from '../helpers/BlockStateHelper'
 import Charity from './Charity'
 import CharityList from './CharityList'
-
+import { connect } from 'react-redux';
 import { searchCharities, clearSearchResults } from '../actions/charities';
+import {REQUEST, SUCCESS, ERROR } from '../constants/StateTypes'
 
 class Search extends React.Component {
     constructor() {
@@ -25,6 +25,7 @@ class Search extends React.Component {
     }
 
     render() {
+
         var searchOptions = (!this.state.showOptions) ? null
             : (
             <div>
@@ -57,8 +58,8 @@ class Search extends React.Component {
         );
 
         if (this.props.charityEins == null) {
-            const spinner = (this.props.loading) ? (<div><img src="/resources/images/spinner.gif" alt="&#128336;"/></div>) : null;
-            const errorMessage = (this.props.error != null) ? (<div style={{color: 'red'}}>{this.props.error}</div>) : null;
+            const spinner = (this.props.blockState.isLoading()) ? (<div><img src="/resources/images/spinner.gif" alt="&#128336;"/></div>) : null;
+            const errorMessage = (this.props.blockState.isError()) ? (<div style={{color: 'red'}}>{this.props.blockState.getErrorMessage()}</div>) : null;
             return (
                 <div className="content-region">
                     <div className="content-header">Search for a Charity</div>
@@ -67,7 +68,7 @@ class Search extends React.Component {
                     {errorMessage}
                 </div>);
         } else {
-            console.log('loading? ' + this.props.loading)
+            console.log('loading? ' + (this.props.blockState.isLoading()))
             let resultsNav = null;
             if (this.props.pagination !== null && this.props.pagination.resultCount > this.props.pagination.resultsPerPage) {
 
@@ -101,7 +102,7 @@ class Search extends React.Component {
 
             const charityRecords = this.props.charityEins.map(
                 (ein) => {
-                    return this.props.currentCharities.records[ein];
+                    return this.props.charities.records[ein];
                 });
 
             const charityResults = (charityRecords.length > 0)
@@ -112,7 +113,6 @@ class Search extends React.Component {
                     <div className="content-header">Search for a Charity</div>
 
                     {searchBar}
-                    <hr/>
                     <div>
                         {charityResults}
                     </div>
@@ -137,7 +137,7 @@ class Search extends React.Component {
     }
 
     handleSearchCharities() {
-        this.props.searchCharities(this.state.keywords, this.state.zip, this.state.city, this.state.state, this.state.offset, this.state.limit)
+        this.props.searchCharities(this.props.block.name, this.state.keywords, this.state.zip, this.state.city, this.state.state, this.state.offset, this.state.limit)
     }
 
     handleChange(e) {
@@ -154,13 +154,12 @@ class Search extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        charityEins: state.currentCharities.searchResults.charityEins,
-        pagination: state.currentCharities.searchResults.pagination,
-        loading: state.currentCharities.searchResults.loading,
-        error: state.currentCharities.searchResults.error,
-        currentCharities: state.currentCharities
+        charityEins: state.charities.searchResults.charityEins,
+        pagination: state.charities.searchResults.pagination,
+        blockState: new BlockStateHelper(state.blockStates[ownProps.block.id]),
+        charities: state.charities
     };
 };
 export default connect(

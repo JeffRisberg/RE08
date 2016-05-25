@@ -10,11 +10,15 @@
   },
   "author": "Jeff Risberg",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JeffRisberg/RE08"
+  },
   "devDependencies": {
-    "babel-core": "^6.5.1",
-    "babel-loader": "^6.2.2",
+    "babel-core": "^6.9.0",
+    "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.5.0",
-    "babel-plugin-transform-object-rest-spread": "^6.5.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-react": "^6.5.0",
     "file-loader": "^0.8.5",
     "react-hot-loader": "^1.3.0",
@@ -22,7 +26,7 @@
     "body-parser": "^1.4.3",
     "nedb": "^1.8.0",
     "glob": "^7.0.3",
-    "webpack": "^1.12.14"
+    "webpack": "^1.13.1"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
@@ -33,14 +37,14 @@
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "react-jsonschema-form": "^0.27.0",
-    "redux": "^3.4.0",
+    "redux": "^3.5.1",
     "redux-storage": "^4.0.0",
     "redux-storage-decorator-filter": "1.1.4",
     "redux-storage-engine-localstorage": "1.1.0",
     "redux-logger": "^2.6.1",
     "react-redux": "^4.4.2",
-    "react-router": "^2.3.0",
-    "react-router-redux": "^4.0.2",
+    "react-router": "^2.4.1",
+    "react-router-redux": "^4.0.4",
     "redux-thunk": "^2.0.1"
   }
 }

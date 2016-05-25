@@ -6,6 +6,9 @@ import Slider from './Slider'
 import CategoryList from './CategoryList'
 import CategoryCharities from './CategoryCharities'
 import TopCharitiesScroller from './TopCharitiesScroller'
+import Search from './Search'
+import Donate from './Donate'
+import Match from './Match'
 
 /**
  * Renders one block in a page.
@@ -40,7 +43,7 @@ class Block extends React.Component {
 
             return (
                 <div>
-                    <img src={block.url} height="250" width="100%"/>
+                    <img src={"/resources"+block.url} height="250" width="100%"/>
                     {(locationClassName !== undefined) ?
                         <div className={className}>
 
@@ -59,27 +62,42 @@ class Block extends React.Component {
         }
         if (blockType === 'login') {
             return (
-                <Login block={block} blockId={block.blockId}/>
+                <Login block={block}/>
             )
         }
         if (blockType === 'slider') {
             return (
-                <Slider block={block} blockId={block.blockId}/>
+                <Slider block={block}/>
             )
         }
         if (blockType === 'categories') {
             return (
-                <CategoryList block={block} blockId={block.blockId}/>
+                <CategoryList block={block}/>
             )
         }
         if (blockType === 'charities') {
             return (
-                <CategoryCharities block={block} blockId={block.blockId} categorySourceId={block.categorySourceId}/>
+                <CategoryCharities block={block}/>
             )
         }
         if (blockType === 'topCharities') {
             return (
-                <TopCharitiesScroller block={block} blockId={block.blockId}/>
+                <TopCharitiesScroller block={block}/>
+            )
+        }
+        if (blockType === 'searchCharities') {
+            return (
+                <Search block={block}/>
+            )
+        }
+        if (blockType === 'donate') {
+            return (
+                <Donate block={block}/>
+            )
+        }
+        if (blockType === 'match') {
+            return (
+                <Match block={block}/>
             )
         }
     }
