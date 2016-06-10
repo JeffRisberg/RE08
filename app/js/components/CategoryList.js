@@ -1,9 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router'
 
 import { connect } from 'react-redux';
 
-import { queryCategories } from '../actions/categories';
+import { fetchCategories } from '../actions/categories';
 import { setSelection } from '../actions/selections';
 
 import Category from './Category'
@@ -20,21 +19,21 @@ class CategoryList extends React.Component {
     }
 
     componentDidMount() {
-        const blockId = this.props.blockId;
+        const blockId = this.props.block.id;
 
         if (blockId != null && blockId != undefined) {
-            this.props.queryCategories(blockId);
+            this.props.fetchCategories(blockId);
         }
     }
 
     selectCategory(category) {
-        const blockId = this.props.blockId;
+        const blockId = this.props.block.id;
 
         this.props.setSelection(blockId, category);
     }
 
     render() {
-        const blockId = this.props.blockId;
+        const blockId = this.props.block.id;
 
         if (blockId != null && blockId != undefined) {
             var selectedValue = this.props.selections[blockId];
@@ -76,5 +75,5 @@ const mapStateToProps = (state) => {
 };
 export default connect(
     mapStateToProps,
-    {queryCategories, setSelection}
+    {fetchCategories, setSelection}
 )(CategoryList);

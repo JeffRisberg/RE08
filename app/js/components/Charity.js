@@ -1,34 +1,52 @@
 import React from 'react'
-import { Link } from 'react-router'
+
+import { connect } from 'react-redux';
+
+import { displayDonate } from '../actions/pageName';
 
 /**
  * Renders one charity
  *
  * @author Jeff Risberg
- * @since March 2016
+ * @since March 2016 (Revised May 2016)
  */
 class Charity extends React.Component {
+
+    constructor() {
+        super();
+
+        this.handleDonate = this.handleDonate.bind(this);
+    }
+
+    handleDonate() {
+        this.props.displayDonate(this.props.charity.ein);
+    }
 
     render() {
         return (
             <tr>
                 <td><p>
                     <strong>{this.props.charity.name}</strong>
-                <br/>
-                {this.props.charity.city},&nbsp;
-                {this.props.charity.state}&nbsp;
-                {this.props.charity.zip}
-                <br/>
-                Tax ID: {this.props.charity.ein}
+                    <br/>
+                    {this.props.charity.city},&nbsp;
+                    {this.props.charity.state}&nbsp;
+                    {this.props.charity.zip}
+                    <br/>
+                    Tax ID: {this.props.charity.ein}
                 </p></td>
                 <td style={{textAlign: 'right'}}>
-                    <Link to={"/donate/" + this.props.charity.ein} className="btn">
-                        Donate Now
-                    </Link>
+                    <a onClick={this.handleDonate} className="btn">Donate Now</a>
                 </td>
             </tr>
         )
     }
 }
 
-export default Charity;
+const mapStateToProps = (state) => {
+    return {
+    };
+};
+export default connect(
+    mapStateToProps,
+    {displayDonate}
+)(Charity);

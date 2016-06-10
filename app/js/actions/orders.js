@@ -4,19 +4,19 @@
 import fetch from 'isomorphic-fetch';
 import { normalize } from 'normalizr'
 
-import { APPEND_ORDERS, APPEND_DONATIONS, APPEND_CURRENT_CHARITIES, SET_GIVING_HISTORY } from '../constants/ActionTypes'
+import { APPEND_ORDERS, APPEND_DONATIONS, APPEND_CHARITIES, SET_GIVING_HISTORY } from '../constants/ActionTypes'
 import {ORDER_SCHEMA } from '../constants/schemas'
 
 const shouldFetchOrder = (state, orderId) => {
-    return !state().orders.idList[orderId];
+    return !state.orders.idList[orderId];
 };
 
-export const queryOrderById = (orderId) => {
-
+export const fetchOrderById = (orderId) => {
+    
     return function (dispatch, getState) {
 
         if (shouldFetchOrder(getState(), orderId)) {
-            return fetch('/ws/donors/' + getState().context.donor.Id + '/history/' + orderId, {
+            return fetch('/ws/donors/' + getState().context.donor.id + '/history/' + orderId, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export const queryOrderById = (orderId) => {
                     }
 
                     dispatch({
-                        type: APPEND_CURRENT_CHARITIES,
+                        type: APPEND_CHARITIES,
                         charities: normalizedJson.entities.charities
                     });
 
@@ -59,7 +59,7 @@ const shouldFetchOrderHistory = (state, year) => {
     console.log('state.orders.history[year] ' + state.orders.history[year]);
 //    console.log('state.orders.history[year].length ' + state.orders.history[year].length);
     return state.orders.history[year] === undefined || state.orders.history[year].length == 0;
-}
+};
 
 export const queryOrderHistory = (context, year = new Date().getFullYear()) => {
     return function (dispatch, getState) {

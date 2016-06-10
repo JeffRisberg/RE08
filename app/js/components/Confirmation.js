@@ -1,16 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import Donation from './Donation'
-import { queryOrderById } from '../actions/orders';
-
-function selectOrder(state, orderId) {
-    const record = state.orders.records[orderId];
-    console.log('orders ' + JSON.stringify(state.orders.records, null, 2))
-    console.log('selected order ' + JSON.stringify(record, null, 2))
-    return record
-}
+import { fetchOrderById } from '../actions/orders';
 
 /**
  * Render the confirmation screen
@@ -24,20 +16,17 @@ class Confirmation extends React.Component {
     }
 
     componentDidMount() {
-        this.props.queryOrderById(this.props.params.orderId);
+        var orderId = this.props.selections['Confirmation'];
+        this.props.fetchOrderById(orderId);
     }
 
     render() {
-        console.log('order ' + this.props.order)
-
         if (this.props.order != null && this.props.order != undefined) {
+
             console.log('order ' + JSON.stringify(this.props.order, null, 2))
             const donations = this.props.order.donations;
 
-            console.log('donation records ' + donations)
             if (donations != null && donations != undefined && donations.length > 0) {
-                console.log('donation records ' + JSON.stringify(donations, null, 2))
-
                 var donationNodes = donations.map(function (donation) {
                     return (
                         <Donation donation={donation} key={donation.id}></Donation>
@@ -50,7 +39,7 @@ class Confirmation extends React.Component {
 
                         <p>Thank you for your generous donations.</p>
 
-                        <p>Your confirmation number is {this.props.params.orderId}</p>
+                        <p>Your confirmation number is {this.props.order.id}</p>
 
                         <div style={{padding: '10px', border: '1px solid gray'}}>
                             {donationNodes}
@@ -63,13 +52,21 @@ class Confirmation extends React.Component {
     }
 }
 
+function selectOrder(state, orderId) {
+    if (orderId) {
+        return state.orders.records[orderId]
+    }
+    return null;
+}
+
 const mapStateToProps = (state, ownProps) => {
     return {
-        order: selectOrder(state, ownProps.params.orderId)
+        selections: state.selections,
+        order: selectOrder(state, state.selections['Confirmation'])
     };
 };
 
 export default connect(
     mapStateToProps,
-    {queryOrderById}
+    {fetchOrderById}
 )(Confirmation);

@@ -25,12 +25,12 @@ const orders = (state = [], action = {}) => {
             });
 
             var updatedState = Object.assign({}, state, {history: {[action.year]: {idList: idList}}});
-            console.log('set giving history: ' + JSON.stringify(updatedState, null, 2))
             return updatedState;
         }
         default:
             return state;
     }
 };
+
 
 export default orders;

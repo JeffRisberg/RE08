@@ -16,19 +16,22 @@ class Donation extends React.Component {
         var charityName = this.props.donation.charity.name;
         var amount = this.props.donation.amount;
         var recipientName = (this.props.donation.gift == null) ? null : this.props.donation.gift.recipientName;
+        var memorialName = (this.props.donation.gift == null) ? null : this.props.donation.gift.memorialName;
 
         return (
             <div style={{marginBottom: '15px'}}>
-                <a href="">{charityName}</a>
-                <br/>Amount: ${amount.toFixed(2)}
+                <a href="">{charityName}</a><br/>
+                Amount: ${amount.toFixed(2)}
                 <br/>
-                Program: {this.props.donation.designation}
+                Designation: {this.props.donation.designation}
                 <br/>
-                Share Name: {this.props.donation.shareName ? "X" : ""},
-                Share Email: {this.props.donation.shareEmail ? "X" : ""},
-                Share Address: {this.props.donation.shareAddress ? "X" : ""}
+                Share Name: {this.props.donation.shareName ? "Yes" : "No"},
+                Share Address: {this.props.donation.shareAddress ? "Yes" : "No"},
+                Share Email: {this.props.donation.shareEmail ? "Yes" : "No"}
                 <br/>
                 Gift Name: {recipientName}
+                <br/>
+                Memorial Name: {memorialName}
                 <hr/>
             </div>
         );

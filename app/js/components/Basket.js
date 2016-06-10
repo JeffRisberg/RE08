@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import { clearBasket, removeDonation } from '../actions/context';
+import { displayLogin, displayCheckout, displayUpdateDonation } from '../actions/pageName';
 
 import Donation from './Donation'
 
@@ -13,8 +13,8 @@ import Donation from './Donation'
  * @since March 2016
  */
 class Basket extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {order: null};
         this.clearBasket = this.clearBasket.bind(this);
@@ -27,10 +27,11 @@ class Basket extends React.Component {
     }
 
     render() {
-        if (this.props.context != null) {
-            if (this.props.order == null || this.props.order === undefined) return null;
+        if (this.props.context != undefined && this.props.context != null) {
 
-            const donations = this.props.order.donations;
+            const donations = (this.props.order !== null && this.props.order !== undefined) ?
+                this.props.order.donations : null;
+
             if (donations != null && donations != undefined && donations.length > 0) {
                 let self = this;
                 var donationItems = donations.map(function (donation) {
@@ -40,26 +41,28 @@ class Basket extends React.Component {
                                 <Donation donation={donation} key={donation.id}></Donation>
                             </div>
                             <div className="col-md-4" style={{textAlign: 'right'}}>
-                                <Link to={"/updateDonation/" + donation.id} className="btn"
-                                      key={'link' + donation.id}>
-                                    Update Donation
-                                </Link>
 
-                                <button onClick={ () => {self.props.removeDonation(donation.id)}}>Remove Donation</button>
+                                <button onClick={ () => {self.props.displayUpdateDonation(donation)}}>Update Donation
+                                </button>
+
+                                <button onClick={ () => {self.props.removeDonation(donation.id)}}>Remove Donation
+                                </button>
                             </div>
                         </div>
                     );
                 });
 
                 const checkoutButton = (this.props.context.donor != undefined && this.props.context.donor != null)
-                ? (<div style={{padding: '10px', border: '1px solid gray'}}>
-                    <Link to={"checkout/"} className="btn">
+                    ? (<div style={{padding: '10px', border: '1px solid gray'}}>
+                    <a onClick={this.props.displayCheckout}>
                         Proceed to Checkout
-                    </Link>
+                    </a>
                 </div>)
                     : (<div style={{padding: '10px', border: '1px solid gray'}}>
-                    <p>Please <Link to="/login">log in</Link> first to check out.</p>
-                </div>)
+                    <p>
+                        Please <a onClick={this.props.displayLogin}>log in</a> first to check out.
+                    </p>
+                </div>);
 
                 return (
                     <div className="content-region">
@@ -76,8 +79,12 @@ class Basket extends React.Component {
                 );
             }
             else {
-                // fetch still pending
-                return null;
+                return (
+                    <div className="content-region">
+                        <div className="content-header">Giving Basket</div>
+                        <div>Your basket is empty.</div>
+                    </div>
+                )
             }
         }
         else {
@@ -93,7 +100,6 @@ class Basket extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('state.context.order ' + JSON.stringify(state.orders.records[state.context.orderId], null, 2))
     return {
         context: state.context,
         order: state.orders.records[state.context.orderId]
@@ -102,5 +108,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    {clearBasket, removeDonation}
+    {clearBasket, removeDonation, displayUpdateDonation, displayLogin, displayCheckout}
 )(Basket);

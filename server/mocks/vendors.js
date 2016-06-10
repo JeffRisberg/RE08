@@ -56,5 +56,5 @@ module.exports = function (app) {
         });
     });
 
-    app.use('/ws/vendors', vendorsRouter);
+    app.use('/ws/vendor', vendorsRouter);
 };

@@ -1,10 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router'
 
 import moment from 'moment';
 
 /**
  * Renders one givingHistoryItem
+ *
+ * @author Jeff Risberg
+ * @since March 2016
  */
 class GivingHistoryItem extends React.Component {
 
@@ -15,12 +17,10 @@ class GivingHistoryItem extends React.Component {
     }
 
     render() {
-
         const transactionId = this.props.order.id;
         const transDateTimeStr = this.props.order.transactionDate;
         const charityName = this.props.donation.charity.name;
-        const points = this.props.donation.amount;
-        const amount = points / 10;
+        const amount = this.props.donation.amount;
 
         return (
             <tr>
@@ -28,15 +28,12 @@ class GivingHistoryItem extends React.Component {
                 <td>{moment(transDateTimeStr,"MMMM Do, YYYY h:mm:ss A").format("MM/DD/YYYY")}</td>
                 <td>{transactionId}</td>
                 <td>{charityName}</td>
-                <td>{points.toFixed(0)} Points (${amount.toFixed(2)} to the charity)</td>
+                <td>${amount.toFixed(2)}</td>
             </tr>
         );
     }
 
     handleCheckDonation() {
-
-        console.log("adding checked donation " + this.props.donation.charity.name + " for " + this.props.donation.amount);
-
         this.props.checkDonation(this.props.donation.id);
     }
 }

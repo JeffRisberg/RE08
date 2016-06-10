@@ -3,6 +3,258 @@ body {
     background: #f3f4f3;
 }
 
+/* General purpose CSS classes */
+.white {
+    background-color: white;
+}
+
+.darkgrey, .darkgrey a {
+    background-color: #44464a;
+    color: #d7d3c7;
+}
+
+a.margin-l {
+    margin-left: 9px;
+}
+
+a.margin-r {
+    margin-right: 9px;
+}
+
+/* Header links */
+.top-border {
+    border-top: 8px solid #bb0826;
+    margin-bottom: 14px;
+}
+
+.logo {
+    margin-bottom: 14px;
+}
+
+.account-header-links {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.account-header-links a {
+    font-size: 13px;
+    color: #404040;
+}
+
+.account-info {
+    font-size: 13px;
+    font-weight: bold;
+    color: #bb0826;
+}
+
+.basket {
+    height: 48px;
+    width: 48px;
+    float: right;
+    background-image: url('../images/Basket.jpg');
+}
+
+.giving-history {
+    height: 48px;
+    width: 48px;
+    float: right;
+    background-image: url('../images/GivingHistory.jpg');
+}
+
+/* Small screen header links */
+@media screen and (max-width: 768px) {
+    .top-border {
+        border-top: 4px solid #bb0826;
+        margin-bottom: 8px;
+    }
+
+    .logo {
+        margin-bottom: 8px;
+    }
+
+    .account-info {
+        font-size: 12px;
+        line-height: 32px;
+    }
+
+    .glyphicon-menu-hamburger {
+        font-size: 24px;
+        line-height: 32px;
+        color: #44464a;
+    }
+
+    .dropdown-menu li a {
+        line-height: 24px;
+        border-bottom: 1px solid #e0e3e2;
+    }
+}
+
+/* Nav bar */
+.navbar-nav>li {
+    float: none;
+}
+
+.nav-pills>li>a {
+    color: #d7d3c7;
+    background-color: #44464a;
+    padding: 14px 10px 19px;
+    font-size: 16px;
+    line-height: 18px;
+    border-radius: 0px;
+    border-top: 4px solid transparent;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover .nav-pills>li>a:focus, .nav-pills>li>a:hover {
+    color: #fff;
+    background-color: #000;
+    border-top: 4px solid #bb0826;
+    font-weight: 700;
+    margin: 0 -1px;
+}
+
+/* Triangles for selected nav items */
+.nav-pills>li.active>a:after {
+    content: "";
+    position: absolute;
+    margin-left: -8px;
+    left: 50%;
+    bottom: 0;
+    border-style: solid;
+    border-width: 0 8px 8px;
+    border-color: transparent transparent #fff;
+    z-index: 2;
+}
+
+.tabpanel-background {
+    background-color: #f3f4f3;
+    margin: 0px -15px;
+}
+
+.tab-pane {
+    height: 182px;
+    background-color: #fff;
+}
+
+.tab-pane .row {
+    margin: 0px;
+}
+
+.tab-pane .row .cell {
+    margin: 16px 0px;
+    height: 145px;
+    text-align: center;
+    border-right: 1px solid #e0e3e2;
+}
+
+.tab-pane .row .cell.noborder {
+    border-right: none;
+}
+
+.tab-pane .row .cell a {
+    color: #44464a;
+    margin-top: 24px;
+    display: inline-block;
+}
+
+.tab-pane .row .cell a img {
+    margin-bottom: 20px;
+}
+
+.tab-pane .row .cell a.rewards-home {
+    font-weight: bold;
+    color: #bb0826;
+}
+
+.tab-shadow {
+    height: 5px;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#afb0b0+0,c9c9c9+100 */
+    background: #afb0b0; /* Old browsers */
+    background: -moz-linear-gradient(top,  #afb0b0 0%, #c9c9c9 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #afb0b0 0%,#c9c9c9 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #afb0b0 0%,#c9c9c9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#afb0b0', endColorstr='#c9c9c9',GradientType=0 ); /* IE6-9 */
+}
+
+/* Small screen nav bar */
+@media screen and (max-width: 768px) {
+    .nav-justified > li {
+        display: table-cell;
+        width: 1%;
+    }
+
+    .nav-pills>li>a {
+        padding: 12px 0px;
+        font-size: 12px;
+        line-height: 14px;
+        margin-bottom: 0px;
+    }
+}
+
+/* PURPLE BUTTON */
+.btn {
+    color: #FFFFFF;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    background-color: #2F0B54;
+    *background-color: #2F0B54;
+    background-image: -moz-linear-gradient(top, #9268BD, #2F0B54);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9268BD), to(#2F0B54));
+    background-image: -webkit-linear-gradient(top, #9268BD, #2F0B54);
+    background-image: -o-linear-gradient(top, #9268BD, #2F0B54);
+    background-image: linear-gradient(to bottom, #9268BD, #2F0B54);
+    background-repeat: repeat-x;
+    border-color: #2F0B54;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9268BD', endColorstr='#2F0B54', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn:hover,
+.btn:active,
+.btn.active,
+.btn.disabled,
+.btn[disabled] {
+    color: #FFFFFF;
+    background-color: #2F0B54;
+    *background-color: #003bb3;
+}
+
+/* Content formatting */
+
+ul.horizontal-slide {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+ul.horizontal-slide li[class*="col"] {
+    display: inline-block;
+    float: none;
+}
+
+ul.horizontal-slide li[class*="col"]:first-child {
+    margin-left: 0;
+}
+
+.content-region {
+    background: white;
+    padding: 4px 30px 20px 30px;
+    margin-bottom: 20px;
+}
+
+.content-header {
+    border-bottom: 3px solid red;
+    font-family: "georgia, serif";
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
+    box-sizing: border-box;
+}
+
 .home_main {
     background: #fff;
     padding: 0 20px;
@@ -313,15 +565,15 @@ ul.horizontal-slide li[class*="col"]:first-child {
 
 .content-region {
     background: white;
-    padding: 4px 30px 20px 30px;
-    margin-bottom: 20px;
+    padding: 5px 30px 5px 30px;
+    margin-bottom: 10px;
 }
 
 .content-header {
     border-bottom: 3px solid red;
     font-family: "georgia, serif";
     font-size: 24px;
-    margin-top: 20px;
+    margin-top: 5px;
     margin-bottom: 10px;
     font-weight: 500;
     line-height: 1.1;
@@ -344,3 +596,4 @@ div.copyright {
     background-color: #000;
     color: #d7d3c7;
 }
+

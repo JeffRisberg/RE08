@@ -4,8 +4,7 @@ const portal = (state = [], action = {}) => {
     switch (action.type) {
         case SET_PORTAL:
         {
-            var portal = action.portal;
-            return portal;
+            return action.portal;
         }
         default:
             return state;

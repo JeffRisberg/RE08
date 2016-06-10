@@ -1,4 +1,3 @@
-
 import { SET_SELECTION } from '../constants/ActionTypes'
 
 export const setSelection = (name, value) => {

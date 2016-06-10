@@ -1,72 +1,70 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import { getTopCharities } from '../actions/charities';
+import {REQUEST, ERROR} from '../constants/StateTypes'
+
+import ListCharity from './ListCharity';
 
 /**
  * Draws a left-right horizontal scroller of the top charities.
  *
- * @author Jeff Risberg
+ * @author Peter Cowan, Jeff Risberg
  * @since April 2016
  */
 class TopCharitiesScroller extends React.Component {
 
-    componentDidMount() {
-        const blockId = this.props.blockId;
+    constructor(props) {
+        super(props);
+        this.getListItems = this.getListItems.bind(this);
+    }
 
-        if (blockId != null && blockId != undefined) {
-            this.props.getTopCharities(blockId);
-        }
+    componentDidMount() {
+        this.props.getTopCharities(this.props.block.id);
     }
 
     render() {
-        const blockId = this.props.blockId;
+        const spinner = (this.props.blockState && this.props.blockState.state === REQUEST) ? (<div><img src="/resources/images/spinner.gif" alt="&#128336;"/></div>) : null;
+        const errorMessage = (this.props.blockState && this.props.blockState.state === ERROR && this.props.blockState.message != null) ? (<div style={{color: 'red'}}>{this.props.topCharities.error}</div>) : null;
+        const imageItems = this.getListItems();
 
-        if (blockId != null && blockId != undefined) {
-            const charityIds = this.props.charities.idLists[blockId] || [];
-            console.log(charityIds);
-            const charityRecords = charityIds.map(id => this.props.charities.records[id]);
+        return (
+            <div className="content-region">
+                <div className="content-header">Top Charities</div>
 
-            const charityNodes =
-                charityRecords.map((charity, index) => {
-                    var imagePath = '/images/' + charity.logoImage.path;
-                    var imageFile = charity.logoImage.fileName;
-
-                    return (
-                        <li key={index} className="col-md-2">
-                            <img className="thumbnail" src={ imagePath + imageFile} width="128" height="77"/>
-                            <br/>
-                            <Link to={"/donate/" + charity.ein} className="btn">
-                                Donate Now
-                            </Link>
-                        </li>
-                    );
-                });
-
-            return (
-                <div className="content-region">
-                    <div className="content-header">Top Charities</div>
-
-                    <div className="row">
-                        <div className="col-md-12">
-                            <ul className="horizontal-slide">
-                                {charityNodes}
-                            </ul>
-                        </div>
+                <div className="row">
+                    <div className="col-md-12">
+                        <ul className="horizontal-slide">
+                            {spinner}
+                            {errorMessage}
+                            {imageItems}
+                        </ul>
                     </div>
                 </div>
+            </div>
+        );
+    }
+
+    getListItems() {
+        if (this.props.topCharities == undefined) return null;
+
+        const topCharities =
+            this.props.topCharities.idList.map((id) => {
+                return this.props.topCharities.records[id]
+            });
+
+        // Remember that the topCharities are listCharity objects
+        return topCharities.map(function (topCharity, index) {
+            return (<ListCharity listCharity={topCharity} index={index} key={index}/>
             );
-        }
-        else {
-            return <div>Missing blockId</div>;
-        }
+        });
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        charities: state.charities
+        topCharities: state.topCharities,
+        blockState: state.blockStates[ownProps.block.id]
     };
 };
 

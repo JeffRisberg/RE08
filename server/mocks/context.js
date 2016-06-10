@@ -14,6 +14,8 @@ module.exports = function (app) {
     var portalsDB = app.portalsDB;
     var transactionDB = app.transactionDB;
 
+    var currentPortal = null;
+
     function generateUUID() {
         var d = new Date().getTime();
 
@@ -25,9 +27,9 @@ module.exports = function (app) {
         return uuid;
     }
 
-    contextRouter.get('/:pathname', function (req, res) {
+    contextRouter.get('/', function (req, res) {
         delete req.query["_"];
-        portalsDB.find({url: req.params.pathname}).exec(function (error, portals) {
+        portalsDB.find({url: "justgive"}).exec(function (error, portals) {
             var token = generateUUID();
 
             const portal = portals[0];
@@ -51,6 +53,8 @@ module.exports = function (app) {
 
                     authTokenDB.insert(newAuthToken, function (err, authTokenResult) {
                         res.status(201);
+
+                        currentPortal = portal;
 
                         res.send({
                             status: "ok",
@@ -100,13 +104,14 @@ module.exports = function (app) {
                                     var context = {
                                         token: token,
                                         donor: donor,
-                                        order: transaction
+                                        order: transaction,
+                                        vendorId: currentPortal.vendorId,
+                                        portalId: currentPortal.id
                                     };
-                                    res.send(JSON.stringify({data: context}));
+                                    res.send({status: "success", data: context});
                                 });
                             } else {
-                                res.status(404);
-                                res.send(JSON.stringify({data: null}));
+                                res.status(404).end();
                             }
                         });
                     }

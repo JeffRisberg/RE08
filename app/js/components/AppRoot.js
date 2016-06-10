@@ -1,13 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import Header from './Header'
 import Footer from './Footer'
 
-import { fetchContext } from '../actions/context';
 import { fetchPortal } from '../actions/portal';
-import { fetchVendor } from '../actions/vendor';
+import { fetchContext } from '../actions/context';
 
 /**
  * @author Jeff Risberg
@@ -16,15 +14,10 @@ import { fetchVendor } from '../actions/vendor';
 class AppRoot extends React.Component {
 
     componentDidMount() {
-        const pathName = window.location.pathname.substring(1);
-
         if (this.props.portal === undefined || this.props.portal == null
             || this.props.vendor === undefined || this.props.vendor == null) {
-            this.props.fetchContext(pathName).then(() => {
-                    this.props.fetchVendor();
-                    this.props.fetchPortal();
-                }
-            )
+            this.props.fetchContext()
+            this.props.fetchPortal(1)
         }
     }
 
@@ -58,6 +51,7 @@ AppRoot.contextTypes = {
 
 const mapStateToProps = (state) => {
     return {
+        pageName: (state.pageName) ? state.pageName : 'Landing',
         portal: state.portal,
         vendor: state.vendor
     };
@@ -65,6 +59,6 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    {fetchContext, fetchVendor, fetchPortal}
+    {fetchContext, fetchPortal}
 )(AppRoot);
 

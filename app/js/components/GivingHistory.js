@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux';
 
 import { queryOrderHistory } from '../actions/orders';
@@ -17,6 +16,7 @@ function filterOrderHistory(state, year = new Date().getFullYear()) {
     }
     return []
 }
+
 /**
  * Fetches and renders a donor's giving history
  *
@@ -38,16 +38,16 @@ class GivingHistory extends React.Component {
     }
 
     render() {
+        if (this.props.context != undefined && this.props.context != null &&
+            this.props.context.donor != undefined && this.props.context.donor != null) {
 
-        if (this.props.context != undefined && this.props.context != null) {
             let checkDonationHandler = (donation) => {
                 return this.checkDonation(donation);
             };
-            var givingHistoryItemNodes = (this.props.orders === undefined || this.props.orders == null)
+            const givingHistoryItemNodes = (this.props.orders === undefined || this.props.orders == null)
                 ? null : this.props.orders.map(function (order, index) {
 
                 return order.donations.map((donation) => {
-
                     return (
                         <GivingHistoryItem order={order} donation={donation} checkDonation={checkDonationHandler}
                                            key={order.id + '' + donation.id}>
@@ -55,24 +55,26 @@ class GivingHistory extends React.Component {
                     );
                 })
             });
+
             var currentYear = new Date().getFullYear();
             const selectOptions = [currentYear - 4, currentYear - 3, currentYear - 2, currentYear - 1, currentYear].map((year => {
                 let selected = (year == this.state.year) ? "selected" : '';
                 return (<option selected={selected}>{year}</option>)
-            }))
+            }));
 
             return (
                 <div className="content-region">
                     <div className="content-header">Giving History</div>
 
                     <p>
-                        Below is a history of your past donations made using your
-                        Wells Fargo Go Far Rewards.
+                        Below is a history of your past donations.
                     </p>
 
-                    <p>To donate again to a charity click on the charity name. Or to repeat
+                    <p>
+                        To donate again to a charity click on the charity name. Or to repeat
                         the same donation, check the box next to the charity(ies), then
-                        click the "Add Selected Donation(s) to Basket" button.</p>
+                        click the "Add Selected Donation(s) to Basket" button.
+                    </p>
 
                     <p>TIP: for a detailed history of your donations for your tax records,
                         go to <a>Account Activity</a>.
@@ -97,9 +99,9 @@ class GivingHistory extends React.Component {
                             </thead>
                             <tbody>
                             {givingHistoryItemNodes}
-                            <br/> <input type="submit" value="Add Checked Items to Giving Basket"/>
                             </tbody>
                         </table>
+                        <br/> <input type="submit" value="Add Checked Items to Giving Basket"/>
                     </form>
                 </div>
             );
@@ -115,14 +117,15 @@ class GivingHistory extends React.Component {
 
     checkDonation(donationId) {
         var index = this.state.donationIds.indexOf(donationId);
+
         if (this.state.donationIds[index] === undefined) {
             this.state.donationIds.push(donationId);
-        } else {
+        }
+        else {
             if (index > -1) {
                 this.state.donationIds.splice(index, 1);
             }
         }
-        console.log("donationIds: " + JSON.stringify(this.state.donationIds))
     }
 
     handleAddCheckedDonations(e) {
@@ -133,9 +136,7 @@ class GivingHistory extends React.Component {
     }
 
     selectYear(e) {
-        console.log("changing " + e.target.name + " to " + e.target.value);
         this.setState({[e.target.name]: e.target.value}, () => {
-            console.log('selected year: ' + this.state.year);
             this.props.queryOrderHistory(this.props.context, this.state.year);
         });
     }

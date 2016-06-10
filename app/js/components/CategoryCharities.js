@@ -1,9 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router'
 
 import { connect } from 'react-redux';
 
-import { queryCategoryCharities } from '../actions/charities';
+import { fetchCategoryCharities } from '../actions/charities';
 
 import Charity from './Charity'
 
@@ -16,38 +15,38 @@ import Charity from './Charity'
 class CategoryCharities extends React.Component {
 
     componentDidMount() {
-        const blockId = this.props.blockId;
-        const sourceId = this.props.categorySourceId;
-        const sourceCategory = this.props.selections[sourceId];
+        const blockId = this.props.block.id;
+        const sourceName = this.props.block.categorySourceName;
+        const sourceCategory = this.props.selections[sourceName];
 
         if (sourceCategory != undefined) {
-            this.props.queryCategoryCharities(sourceCategory, blockId);
+            this.props.fetchCategoryCharities(blockId, sourceCategory);
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        const blockId = this.props.blockId;
-        const sourceId = this.props.categorySourceId;
-        const currentSourceCategory = this.props.selections[sourceId];
-        const newSourceCategory = nextProps.selections[sourceId];
+        const blockId = this.props.block.id;
+        const sourceName = this.props.block.categorySourceName;
+        const currentSourceCategory = this.props.selections[sourceName];
+        const newSourceCategory = nextProps.selections[sourceName];
 
         if (newSourceCategory != undefined && currentSourceCategory != newSourceCategory) {
-            this.props.queryCategoryCharities(newSourceCategory, blockId);
+            this.props.fetchCategoryCharities(blockId, newSourceCategory);
         }
     }
 
     render() {
-        const blockId = this.props.blockId;
-        const sourceId = this.props.categorySourceId;
-        const sourceCategory = this.props.selections[sourceId];
+        const blockId = this.props.block.id;
+        const sourceName = this.props.block.categorySourceName;
+        const sourceCategory = this.props.selections[sourceName];
 
         if (blockId != null && blockId != undefined) {
             const charityIds = this.props.charities.idLists[blockId] || [];
             const charityRecords = charityIds.map(id => this.props.charities.records[id]);
 
             const charityListHeader = (sourceCategory != null)
-                ? <div style={{fontWeight: 'bold', fontSize: '15px'}}>Displaying charities
-                for {sourceCategory.name}</div>
+                ?
+                <div style={{fontWeight: 'bold', fontSize: '15px'}}>Displaying charities for {sourceCategory.name}</div>
                 : null;
 
             var charityNodes = charityRecords.map((charity, index) => {
@@ -81,5 +80,5 @@ const mapStateToProps = (state) => {
 };
 export default connect(
     mapStateToProps,
-    {queryCategoryCharities}
+    {fetchCategoryCharities}
 )(CategoryCharities);

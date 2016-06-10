@@ -7,13 +7,14 @@ module.exports = function (app) {
     portalsRouter.use(bodyParser.json());
 
     var portalsDB = app.portalsDB;
+    var vendorsDB = app.vendorsDB;
     var portalBlocksMap = app.portalBlocksMap;
     var portalPagesMap = app.portalPagesMap;
 
     portalsRouter.get('/', function (req, res) {
         delete req.query["_"];
-        portalsDB.find(req.query).exec(function (error, portals) {
-            res.send({"status": "ok", "data": portals}
+        portalsDB.find({url: "justgive"}).exec(function (error, portals) {
+            res.send({"status": "ok", "data": portals[0]}
             )
         })
     });
@@ -42,7 +43,7 @@ module.exports = function (app) {
                 portals.forEach(function (portal) {
                     const portalId = portal.id;
                     const portalPages = portalPagesMap[""+portalId];
-                    const pageMap = {}
+                    const pageMap = {};
 
                     portalPages.forEach(function (portalPage) {
                         const portalPageName = portalPage.name;
@@ -55,8 +56,9 @@ module.exports = function (app) {
                     })
 
                     portal['pages'] = pageMap;
+                    portal['id'] = 1;
                 })
-                res.send({"status": "ok", "data": portals});
+                res.send({"status": "ok", "data": portals[0]});
             }
             else {
                 res.status(404);
@@ -64,11 +66,9 @@ module.exports = function (app) {
         });
     });
 
-    portalsRouter.put('/:id', function (req, res) {
-        var vendor = req.body.vendor;
-
-        portalsDB.update({id: req.params.id}, vendor, {}, function (err, count) {
-            res.send({'status': 'ok', 'data': [vendor]});
+    portalsRouter.get('/:id/vendor', function (req, res) {
+        vendorsDB.find({id: req.params.id}).exec(function (error, vendors) {
+            res.send({'status': 'ok', 'data': vendors});
         });
     });
 
@@ -78,6 +78,5 @@ module.exports = function (app) {
         });
     });
 
-    app.use('/ws/portals', portalsRouter);
-}
-;
+    app.use('/ws/portal', portalsRouter);
+};

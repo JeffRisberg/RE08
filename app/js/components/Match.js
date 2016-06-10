@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
  * @author Jeff Risberg
  * @since May 2016
  */
-class NMatch extends Component {
+class Match extends Component {
     constructor(props) {
         super(props);
     }
@@ -19,7 +19,7 @@ class NMatch extends Component {
     }
 
     render() {
-        if (this.props.context != null && this.props.context.donor != null) {
+        if (this.props.context != null) {
 
             const matchFrac = parseInt(this.props.block.percent) / 100.0;
             const headerText = this.props.block.headerText;
@@ -59,4 +59,4 @@ const mapStateToProps = (state, ownProps) => {
 };
 export default connect(
     mapStateToProps
-)(NMatch);
+)(Match);

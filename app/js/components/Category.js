@@ -1,10 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router'
 
 /**
  * Render one category
  *
- * @author Jeff Risberg
+ * @author peter Cowan, Jeff Risberg
  * @since April 2016
  */
 class Category extends React.Component {

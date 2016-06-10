@@ -1,50 +1,37 @@
-import { SET_CHARITIES, APPEND_CHARITIES, FETCH_CHARITY_SEARCH_RESULTS_SUCCESS, RESET_CHARITY_SEARCH_RESULTS, FETCH_CHARITY_SEARCH_RESULTS_REQUEST, FETCH_CHARITY_SEARCH_RESULTS_ERROR } from '../constants/ActionTypes'
+import { APPEND_CHARITIES, FETCH_CHARITY_SEARCH_RESULTS, RESET_CHARITY_SEARCH_RESULTS, FETCH_CHARITY_SEARCH_RESULTS_REQUEST, FETCH_CHARITY_SEARCH_RESULTS_ERROR } from '../constants/ActionTypes'
 
 const charities = (state = [], action = {}) => {
     switch (action.type) {
-        case SET_CHARITIES: // clear prior charities
-        {
-            const blockId = action.blockId;
-            const charities = action.charities;
 
-            const records = state.records;
-
-            var idList = [];
-            action.charities.forEach(record => {
-                records[record.ein] = record;
-                idList.push(record.ein);
-            });
-
-            const idLists = Object.assign({}, state.idLists, { [blockId]: idList });
-
-            return {idLists, records};
-        }
         case APPEND_CHARITIES:
         {
-            const blockId = action.blockId;
-            const charities = action.charities;
+            const updatedState = Object.assign({}, state);
 
-            var idList = [];
-            action.charities.forEach(record => {
-                state.records[record.ein] = record;
-                idList.push(record.ein);
-            });
+            const idList = [];
+            for (let key in action.charities) {
+                let charity = action.charities[key];
 
-            const idLists = Object.assign({}, state.idLists, { [blockId]: idList });
+                //console.log('charity ' + JSON.stringify(charity, null, 2))
+                const ein = charity.ein;
 
-            return {idLists, records};
+                if (idList.indexOf(ein) < 0) {
+                    idList.push(ein);
+                    //console.log('added ' + ein + ' to charities[' + action.blockId + '].idList')
+                }
+                updatedState.records[ein] = charity;
+            }
+
+            Object.assign(updatedState.idLists, { [action.blockId]: idList });
+
+            return updatedState;
         }
-        case FETCH_CHARITY_SEARCH_RESULTS_REQUEST:
-        {
-            return Object.assign({}, state, {searchResults: {loading: true}});
-        }
-        case FETCH_CHARITY_SEARCH_RESULTS_SUCCESS:
+        case FETCH_CHARITY_SEARCH_RESULTS:
         {
             const charityEins = action.charities.map((charity) => {
                 return charity.ein
             });
 
-            console.log('search result eins ' + JSON.stringify(charityEins, null, 2));
+            //console.log('search result eins ' + JSON.stringify(charityEins, null, 2));
 
             const updatedState = Object.assign({}, state, {
                 searchResults: {
@@ -53,13 +40,8 @@ const charities = (state = [], action = {}) => {
                     loading: false
                 }
             });
-            console.log('added search results to charity state: ' + JSON.stringify(updatedState, null, 2))
 
             return updatedState;
-        }
-        case FETCH_CHARITY_SEARCH_RESULTS_ERROR:
-        {
-            return Object.assign({}, state, {searchResults: {error: action.error, loading: false}});
         }
         case RESET_CHARITY_SEARCH_RESULTS:
         {

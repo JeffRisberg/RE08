@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 
 import Login from './Login'
 import Slider from './Slider'
+import Basket from './Basket'
+import CreditCardForm from './CreditCardForm'
 import CategoryList from './CategoryList'
 import CategoryCharities from './CategoryCharities'
+import Confirmation from './Confirmation'
+import GivingHistory from './GivingHistory'
 import TopCharitiesScroller from './TopCharitiesScroller'
 import Search from './Search'
 import Donate from './Donate'
+import GiftMessage from './GiftMessage'
 import Match from './Match'
 
 /**
@@ -43,7 +48,7 @@ class Block extends React.Component {
 
             return (
                 <div>
-                    <img src={"/resources"+block.url} height="250" width="100%"/>
+                    <img src={""+block.url} height="250" width="100%"/>
                     {(locationClassName !== undefined) ?
                         <div className={className}>
 
@@ -95,9 +100,34 @@ class Block extends React.Component {
                 <Donate block={block}/>
             )
         }
+        if (blockType === 'gift') {
+            return (
+                <GiftMessage block={block}/>
+            )
+        }
         if (blockType === 'match') {
             return (
                 <Match block={block}/>
+            )
+        }
+        if (blockType === 'creditCardForm') {
+            return (
+                <CreditCardForm block={block}/>
+            )
+        }
+        if (blockType === 'givingBasket') {
+            return (
+                <Basket block={block}/>
+            )
+        }
+        if (blockType === 'givingHistory') {
+            return (
+                <GivingHistory block={block}/>
+            )
+        }
+        if (blockType === 'confirmation') {
+            return (
+                <Confirmation block={block}/>
             )
         }
     }

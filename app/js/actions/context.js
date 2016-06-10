@@ -3,23 +3,24 @@
  */
 import fetch from 'isomorphic-fetch';
 
-import { push } from 'react-router-redux'
 import {setBlockState } from '../actions/blockStates'
+import {displayBasket, displayConfirmation, displayGift, displayLanding } from '../actions/pageName'
 
 import { SET_SELECTION, SET_PAGE_NAME, SET_CONTEXT, CLEAR_CONTEXT, APPEND_ORDERS } from '../constants/ActionTypes'
 import { SUCCESS, ERROR } from '../constants/StateTypes'
 
-export const toDonate = (ein) => {
+export const getDonation = (donationId) => {
     return function (dispatch, getState) {
-        dispatch({
-                type: SET_SELECTION,
-                name: 'ein',
-                value: ein
+        const state = getState();
+        const order = state.orders.records[state.context.orderId];
+
+        return order.donations.find((donation) => {
+            if (donation.id == donationId) {
+                return donation;
             }
-        );
-        dispatch(push('/page/Donate'));
-    };
-};
+        })
+    }
+}
 
 export const fetchContext = () => {
     return function (dispatch, getState) {
@@ -41,7 +42,7 @@ export const fetchContext = () => {
 
 export const setContext = (data) => {
     return function (dispatch, getState) {
-        console.log('raw context: ' + JSON.stringify(data))
+
         const order = Object.assign({}, data.order);
         delete order['activeItem'];
         dispatch({
@@ -80,7 +81,7 @@ export const login = (blockId, login, password) => {
                 if (json.status === "success") {
                     dispatch(setContext(json.data));
                     dispatch(setBlockState(blockId, SUCCESS));
-                    dispatch(push("/page/Landing"));
+                    dispatch(displayLanding());
                 } else {
                     dispatch(setBlockState(blockId, ERROR, json.messages[0]));
                 }
@@ -111,7 +112,7 @@ export const loginNewAccount = (formData) => {
             .then((json) => {
 
                 dispatch(setContext(json.data));
-                dispatch(push("/"));
+                dispatch(displayLanding());
             });
     };
 };
@@ -161,14 +162,14 @@ function afterDonation(donation, dispatch) {
     if (donation && donation.gift) {
         console.log('donation ' + donation.id + ' gift: ' + JSON.stringify(donation.gift));
         console.log('forwarding to gift');
-        dispatch(push('/giftMessage/' + donation.id));
+        dispatch(displayGift(donation));
     } else {
         console.log('forwarding to basket');
-        dispatch(push('/basket'));
+        dispatch(displayBasket());
     }
 }
 
-export const updateDonation = (id, formData) => {
+export const updateDonation = (formData, id) => {
     return function (dispatch, getState) {
 
         return fetch('/ws/context/donations/' + id, {
@@ -204,7 +205,7 @@ export const updateGift = (donationId, giftId, formData) => {
             .then(response => response.json())
             .then((json) => {
                 dispatch(setContext(json.data))
-                dispatch(push('/basket'));
+                dispatch(displayBasket());
             });
     };
 };
@@ -240,10 +241,11 @@ export const addDonationHistory = (donationIds) => {
             },
             body: JSON.stringify(donationIds)
         })
-            .then(response => {
+            .then(response => response.json())
+            .then((json) => {
                 console.log('donations ' + donationIds + ' added');
                 dispatch(setContext(json.data))
-                dispatch(push('/basket'));
+                dispatch(displayBasket());
             })
     };
 };
@@ -266,8 +268,9 @@ export const clearBasket = (token) => {
     };
 };
 
-export const checkout = (formData) => {
+export const checkout = (event, formData) => {
     return function (dispatch, getState) {
+        event.preventDefault();
 
         return fetch('/ws/context/checkout', {
             method: 'PUT',
@@ -280,11 +283,12 @@ export const checkout = (formData) => {
         })
             .then(response => response.json())
             .then((json) => {
-                var nextUrl = '/confirmation/' + getState().context.orderId;
 
-                dispatch(setContext(json.data))
+                var confOrderId = getState().context.orderId;
 
-                dispatch(push(nextUrl));
+                dispatch(setContext(json.data));
+
+                dispatch(displayConfirmation(confOrderId));
             });
     };
 };

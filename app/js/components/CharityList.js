@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 
 import Charity from './Charity'
 
@@ -22,7 +21,7 @@ class CharityList extends React.Component {
         });
 
         return (
-            <table className="table">
+                <table className="table">
                 <tbody>
                 {charityNodes}
                 </tbody>

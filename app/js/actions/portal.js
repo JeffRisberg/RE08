@@ -1,24 +1,21 @@
-/**
- * This is used for the portal area
- */
 import fetch from 'isomorphic-fetch';
 
 import { SET_PORTAL } from '../constants/ActionTypes'
+import { fetchVendor } from '../actions/vendor'
 
-export const fetchPortal = () => {
-    return function (dispatch, getState) {
-
-        const portalId = getState().context.portalId;
-
-        return fetch('/ws/portals/' + portalId, {})
+export const fetchPortal = (portalId) => {
+    return function (dispatch) {
+        return fetch('/ws/portal/' + portalId, {})
             .then(response => response.json())
             .then((json) => {
 
                 dispatch({
                         type: SET_PORTAL,
-                        portal: json.data[0]
+                        portal: json.data
                     }
                 );
+                console.log('fetching vendor for portal ' + json.data.id)
+                dispatch(fetchVendor(json.data.id));
             });
     };
 };
