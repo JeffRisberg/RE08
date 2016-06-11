@@ -5,14 +5,17 @@ import fetch from 'isomorphic-fetch';
 import { normalize } from 'normalizr'
 
 import { APPEND_ORDERS, APPEND_DONATIONS, APPEND_CHARITIES, SET_GIVING_HISTORY } from '../constants/ActionTypes'
+import {REQUEST, SUCCESS, ERROR} from '../constants/StateTypes'
 import {ORDER_SCHEMA } from '../constants/schemas'
+
+import {setBlockState } from '../actions/blockStates'
 
 const shouldFetchOrder = (state, orderId) => {
     return !state.orders.idList[orderId];
 };
 
 export const fetchOrderById = (orderId) => {
-    
+
     return function (dispatch, getState) {
 
         if (shouldFetchOrder(getState(), orderId)) {
@@ -24,13 +27,10 @@ export const fetchOrderById = (orderId) => {
                 }
             })
                 .then((response) => {
-                    console.log('got response: ' + JSON.stringify(response, null, 2))
                     return response.json()
                 })
                 .then((json) => {
-                    console.log('got json: ' + JSON.stringify(json, null, 2))
                     const normalizedJson = normalize(json.data, ORDER_SCHEMA);
-                    console.log('normalized json: ' + JSON.stringify(normalizedJson, null, 2))
 
                     const charitiesMap = normalizedJson.entities.charities;
                     const charities = [];
@@ -55,37 +55,54 @@ export const fetchOrderById = (orderId) => {
     };
 };
 
-const shouldFetchOrderHistory = (state, year) => {
+const shouldFetchOrderHistory = (state, year, offset, limit) => {
     console.log('state.orders.history[year] ' + state.orders.history[year]);
-//    console.log('state.orders.history[year].length ' + state.orders.history[year].length);
-    return state.orders.history[year] === undefined || state.orders.history[year].length == 0;
+    return state.orders.history[year] === undefined || state.orders.history[year].length == 0
+        || state.orders.history[year].pagination === undefined || state.orders.history[year].pagination == null
+        || state.orders.history[year].pagination.currentPage != (offset / limit) + 1;
 };
 
-export const queryOrderHistory = (context, year = new Date().getFullYear()) => {
+export const fetchOrderHistory = (blockId, year = new Date().getFullYear(), offset = 0, limit = 10) => {
     return function (dispatch, getState) {
 
-        if (shouldFetchOrderHistory(getState(), year)) {
-            var url = "/ws/donors/" + context.donor.id + "/history?year=" + year;
+        if (shouldFetchOrderHistory(getState(), year, offset, limit)) {
+            dispatch(setBlockState(blockId, REQUEST));
+
+            var url = "/ws/donors/" + getState().context.donor.id + "/history?year=" + year + "&offset=" + offset + "&limit=" + limit;
 
             return fetch(url, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'auth-token': context.token
+                    'auth-token': getState().context.token
                 }
             })
                 .then(response => response.json())
                 .then((json) => {
-                    dispatch({
-                        type: APPEND_ORDERS,
-                        orders: json.data
-                    });
-                    dispatch({
-                        type: SET_GIVING_HISTORY,
-                        orders: json.data,
-                        year: year
-                    });
+                    if (json.status === "success") {
+
+                        dispatch({
+                            type: APPEND_ORDERS,
+                            orders: json.data
+                        });
+                        dispatch({
+                            type: SET_GIVING_HISTORY,
+                            orders: json.data,
+                            year: year,
+                            pagination: json.pagination
+                        });
+
+                        dispatch(setBlockState(blockId, SUCCESS));
+
+                    } else {
+                        dispatch(setBlockState(blockId, ERROR, json.messages[0]));
+                    }
+                })
+                .catch((error) => {
+                    console.log('failed: ' + error);
+                    dispatch(setBlockState(blockId, ERROR));
                 });
+
         } else {
             Promise.resolve();
         }

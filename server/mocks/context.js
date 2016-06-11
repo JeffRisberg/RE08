@@ -7,6 +7,7 @@ module.exports = function (app) {
     contextRouter.use(bodyParser.json());
 
     var authTokenDB = app.authTokenDB;
+    var basketItemDB = app.basketItemDB;
     var charityDB = app.charityDB;
     var contextsDB = app.contextsDB;
     var donationDB = app.donationDB;
@@ -15,6 +16,7 @@ module.exports = function (app) {
     var transactionDB = app.transactionDB;
 
     var currentPortal = null;
+    var currentDonor = null;
 
     function generateUUID() {
         var d = new Date().getTime();
@@ -109,6 +111,7 @@ module.exports = function (app) {
                                         portalId: currentPortal.id
                                     };
                                     res.send({status: "success", data: context});
+                                    currentDonor = donor;
                                 });
                             } else {
                                 res.status(404).end();
@@ -135,6 +138,7 @@ module.exports = function (app) {
                         order: transactions[0]
                     };
                     res.send(JSON.stringify({data: context}));
+                    currentDonor = null;
                 })
             }
         });
@@ -188,26 +192,46 @@ module.exports = function (app) {
     });
 
     contextRouter.post('/donations/:ein', function (req, res) {
-        charityDB.find({ein: req.params.ein}).exec(function (error, charities) {
-            if (charities.length > 0)
+        var token = req.headers['auth-token'];
 
-            // Look for the most recently created record
-                basketItemDB.find({}).sort({id: -1}).limit(1).exec(function (err, basketItems) {
+        authTokenDB.find({token: token}).exec(function (err, tokens) {
+            if (tokens.length > 0) {
+                const authToken = tokens[0];
 
-                    req.body.charity = charities[0];
-                    req.body.charityId = charities[0].id;
+                charityDB.find({ein: req.params.ein}).exec(function (error, charities) {
+                    if (charities.length > 0)
 
-                    if (basketItems.length != 0)
-                        req.body.id = basketItems[0].id + 1;
-                    else
-                        req.body.id = 1;
+                    // Look for the most recently created record
+                        basketItemDB.find({}).sort({id: -1}).limit(1).exec(function (err, basketItems) {
 
-                    // Insert the new record
-                    basketItemDB.insert(req.body, function (err, newBasketItem) {
-                        res.status(201);
-                        res.send(JSON.stringify({donation: newBasketItem}));
-                    })
+                            req.body.charity = charities[0];
+                            req.body.charityId = charities[0].id;
+
+                            if (basketItems.length != 0)
+                                req.body.id = basketItems[0].id + 1;
+                            else
+                                req.body.id = 1;
+
+                            // Insert the new record
+                            basketItemDB.insert(req.body, function (err, newBasketItem) {
+
+                                // fetch the whole basket
+                                var order = {};
+                                basketItemDB.find({}).exec(function (err, basketItems) {
+
+                                    basketItems.forEach(function (item) {
+                                        //order.push(item);
+                                    })
+
+                                    order["activeItem"] = newBasketItem;
+
+                                    res.status(201);
+                                    res.send({status: "ok", data: {order: order, token: token, donor: currentDonor}});
+                                });
+                            })
+                        });
                 });
+            }
         });
     });
 

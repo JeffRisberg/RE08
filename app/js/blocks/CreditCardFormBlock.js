@@ -13,7 +13,7 @@ const formName = 'checkoutForm';
  * @author Peter Cowan, Jeff Risberg
  * @since April 2016
  */
-class CreditCardForm extends React.Component {
+class CreditCardFormBlock extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -52,7 +52,7 @@ class CreditCardForm extends React.Component {
                         <input type="number" className="form-control" id="expYear" name="expYear" placeholder="Expiration Year" onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
                     </div>
 
-                    <input type="submit" value="Checkout"/>
+                    <input type="submit" value="Complete Donation"/>
                 </form>
             </div>);
     }
@@ -68,4 +68,4 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     {setForm, handleFormFieldChange, clearForm, checkout}
-)(CreditCardForm);
+)(CreditCardFormBlock);

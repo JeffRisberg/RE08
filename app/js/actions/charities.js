@@ -88,7 +88,8 @@ export const getTopCharities = (blockId) => {
                         }
                     );
                     dispatch(setBlockState(blockId, SUCCESS));
-                }).catch((error) => {
+                })
+                .catch((error) => {
                     console.log('failed: ' + error)
                     dispatch(setBlockState(blockId, ERROR));
                 });

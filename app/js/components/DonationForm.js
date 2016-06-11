@@ -42,20 +42,19 @@ class DonationForm extends React.Component {
 
             const recurringDonationNode =
                 (recurringDonation ?
-                    (<tr>
-                            <td></td>
-                            <td>
-                                <input type="checkbox" name="isRecurring"/>
-                                Make this a recurring donation
-                            </td>
-                        </tr>
+                    (<p>
+                            <input type="checkbox" name="isRecurring"/>
+                            Make this a recurring donation
+                        </p>
                     ) : null);
 
             const shareNameNode =
                 (shareName ?
                     ( <span style={{fontSize: '14px', paddingRight: '20px'}}>
                                 <input type="checkbox" name="shareName" defaultChecked={this.props.form.shareName}
-                                       onChange={(e) => {console.log('shareName value: ' + this.props.form.shareName); this.props.handleFormFieldChange(formName, e)}}/>{' '}Name
+                                       onChange={(e) => {console.log('shareName value: ' + this.props.form.shareName); this.props.handleFormFieldChange(formName, e)}}/>{' '}
+                            <label htmlFor="shareName">Name</label>
+
                             </span>
                     ) : null);
 
@@ -63,7 +62,8 @@ class DonationForm extends React.Component {
                 (shareAddress ?
                     ( <span style={{fontSize: '14px', paddingRight: '20px'}}>
                                 <input type="checkbox" name="shareAddress" defaultChecked={this.props.form.shareAddress}
-                                       onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>{' '}Address
+                                       onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>{' '}
+                            <label htmlFor="shareAddress">Address</label>
                             </span>
                     ) : null);
 
@@ -71,7 +71,8 @@ class DonationForm extends React.Component {
                 (shareEmail ?
                     ( <span style={{fontSize: '14px', paddingRight: '20px'}}>
                                 <input type="checkbox" name="shareEmail" defaultChecked={this.props.form.shareEmail}
-                                       onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>{' '}Email
+                                       onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>{' '}
+                            <label htmlFor="shareEmail">Name</label>
                             </span>
                     ) : null);
 
@@ -87,45 +88,41 @@ class DonationForm extends React.Component {
                     </p>
 
                     <form onSubmit={(e) => {this.props.handleSubmit(e, this.props.form)}}>
-                        <p>{instructionalText}</p>
-
-                        <p>
-                            <input type="text" name="amount" size="10" value={this.props.form.amount}
+                        <div className="form-group">
+                            <label htmlFor="amount">{instructionalText}</label><br />
+                            <input type="text" className="form-control" id="amount" name="amount" value={this.props.form.amount}
                                    onChange={(e) => {this.props.handleFormFieldChange(formName, e); this.amountChanged()}}/>
-                        </p>
+                        </div>
 
                         {recurringDonationNode}
 
                         <p>Share My:</p>
 
-                        <p>
+                        <div className="form-group">
                             {shareNameNode}
                             {shareAddressNode}
                             {shareEmailNode}
-                        </p>
+                        </div>
 
-                        <p>Designation:</p>
-
-                        <p>
-                            <input type="text" name="designation" size="40" defaultValue={this.props.form.designation}
+                        <div className="form-group">
+                            <label htmlFor="designation">Designation</label><br />
+                            <input type="text" className="form-control" id="designation" name="designation" defaultValue={this.props.form.designation}
                                    onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
-                        </p>
+                        </div>
 
                         <p>Dedicate my donation to a friend of loved one:</p>
 
-                        <p>In the name of:</p>
-
-                        <p>
-                            <input type="text" name="giftName" size="40" defaultValue={this.props.form.giftName}
+                        <div className="form-group">
+                            <label htmlFor="giftName">In the name of:</label><br />
+                            <input type="text" className="form-control" id="giftName" name="giftName" defaultValue={this.props.form.giftName}
                                    onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
-                        </p>
+                        </div>
 
-                        <p>In memory of:</p>
-
-                        <p>
-                            <input type="text" name="memorialName" size="40" defaultValue={this.props.form.memorialName}
+                        <div className="form-group">
+                            <label htmlFor="memorialName">In memory of:</label><br />
+                            <input type="text" className="form-control" id="memorialName" name="memorialName" defaultValue={this.props.form.memorialName}
                                    onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
-                        </p>
+                        </div>
 
                         <div className="pull-right">
                             <input type="submit" value="Continue" className="btn btn-default"/>

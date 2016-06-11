@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import Donation from './Donation'
+import Donations from '../components/Donations'
 import { fetchOrderById } from '../actions/orders';
 
 /**
@@ -10,7 +10,7 @@ import { fetchOrderById } from '../actions/orders';
  * @author Peter Cowan
  * @since April 2016
  */
-class Confirmation extends React.Component {
+class ConfirmationBlock extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -27,25 +27,12 @@ class Confirmation extends React.Component {
             const donations = this.props.order.donations;
 
             if (donations != null && donations != undefined && donations.length > 0) {
-                var donationNodes = donations.map(function (donation) {
-                    return (
-                        <Donation donation={donation} key={donation.id}></Donation>
-                    );
-                });
-
                 return (
-                    <div className="content-region">
-                        <div className="content-header">Order Confirmation</div>
-
-                        <p>Thank you for your generous donations.</p>
-
+                    <div>
                         <p>Your confirmation number is {this.props.order.id}</p>
-
-                        <div style={{padding: '10px', border: '1px solid gray'}}>
-                            {donationNodes}
-                        </div>
-                    </div>
-                );
+                        <Donations order={this.props.order} displayButtons={this.props.block.displayButtons}
+                                                showCharityAddress={this.props.block.showCharityAddress} showCharityEin={this.props.block.showCharityEin} />
+                    </div>);
             }
         }
         return null;
@@ -69,4 +56,4 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(
     mapStateToProps,
     {fetchOrderById}
-)(Confirmation);
+)(ConfirmationBlock);

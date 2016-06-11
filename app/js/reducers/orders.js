@@ -24,8 +24,7 @@ const orders = (state = [], action = {}) => {
                 idList.push(order.id);
             });
 
-            var updatedState = Object.assign({}, state, {history: {[action.year]: {idList: idList}}});
-            return updatedState;
+            return Object.assign({}, state, {history: {[action.year]: {idList: idList, pagination: action.pagination}}});
         }
         default:
             return state;

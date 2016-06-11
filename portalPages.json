@@ -2,8 +2,17 @@
   "1": [
     {"name": "Landing", "id": "1"},
     {"name": "Login", "id": "2"},
-    {"name": "Donation", "id": "3"},
-    {"name": "Checkout", "id": "4"}
+    {"name": "Donate", "id": "3"},
+    {"name": "Checkout", "id": "4"},
+    {"name": "Test", "id": "5"},
+    {"name": "Search", "id": "6"},
+    {"name": "Slider", "id": "7"},
+    {"name": "Categories", "id": "8"},
+    {"name": "Gift", "id": "9"},
+    {"name": "Basket", "id": "10"},
+    {"name": "GivingHistory", "id": "11"},
+    {"name": "Confirmation", "id": "12"},
+    {"name": "TestLanding", "id": "111"}
   ],
   "2": [
     {"name": "Landing", "id": "5"},

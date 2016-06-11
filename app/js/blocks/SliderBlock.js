@@ -1,15 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import CategoryList from './CategoryList'
-import CharityList from './CharityList'
-import TopCharitiesScroller from './TopCharitiesScroller'
-
 /**
  * @author Jeff Risberg
  * @since May 2016
  */
-class Slider extends React.Component {
+class SliderBlock extends React.Component {
 
     render() {
         const block = this.props.block;
@@ -74,5 +70,5 @@ class Slider extends React.Component {
     }
 }
 
-export default Slider;
+export default SliderBlock;
 

@@ -31,7 +31,7 @@ class Header extends React.Component {
                     <div className="container">
                         <div className="logo col-md-4 col-xs-4">
                             <a onClick={this.props.displayLanding} style={{marginLeft: '10px'}}>
-                                <img src="/images/RE08Logo.jpg" className="hidden-xs"/>
+                                <img src="images/RE08Logo.jpg" className="hidden-xs"/>
                             </a>
                         </div>
 

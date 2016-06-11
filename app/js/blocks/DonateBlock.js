@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { addDonation, updateDonation } from '../actions/context';
 import { setSelection } from '../actions/selections';
 
-import DonationForm from './DonationForm'
+import DonationForm from '../components/DonationForm'
 
 /**
  * Donate screen
@@ -12,7 +12,7 @@ import DonationForm from './DonationForm'
  * @author Jeff Risberg, Peter Cowan, Brandon Risberg
  * @since May 2016
  */
-class Donate extends React.Component {
+class DonateBlock extends React.Component {
     constructor(props) {
         super(props);
 
@@ -76,4 +76,4 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     {setSelection, addDonation, updateDonation}
-)(Donate);
+)(DonateBlock);

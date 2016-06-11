@@ -23,7 +23,6 @@ import selections from './reducers/selections';
 import forms from './reducers/forms';
 
 import AppRoot from './components/AppRoot.js';
-import Page from './components/Page.js';
 
 import {SET_CONTEXT, CLEAR_CONTEXT} from './constants/ActionTypes.js';
 
@@ -78,9 +77,8 @@ load(store)
         ReactDOM.render(
             <Provider store={store}>
                 <Router history={hashHistory}>
-                    <Route path="/" component={AppRoot}>
-                        <IndexRoute component={Page}/>
-                        <Route path="page/:name" component={Page}/>
+                    <Route path="/(:pageName)" component={AppRoot}>
+                        <IndexRoute component={AppRoot}/>
                     </Route>
                 </Router>
             </Provider>,

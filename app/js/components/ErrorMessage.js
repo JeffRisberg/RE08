@@ -1,5 +1,6 @@
 import React from 'react'
-import { ERROR } from '../constants/StateTypes'
+
+import BlockStateHelper from '../helpers/BlockStateHelper'
 
 /**
  * Renders an Error Message from blockState
@@ -9,10 +10,14 @@ import { ERROR } from '../constants/StateTypes'
  */
 class ErrorMessage extends React.Component {
 
-    render() {
-        if (this.props.blockState && this.props.blockState.state === ERROR && this.props.blockState.message != null) {
+    constructor(props) {
+        super(props);
+    }
 
-            return (<div style={{color: 'red'}}>{this.props.blockState.message}</div>)
+    render() {
+        if (this.props.blockState.isError()) {
+
+            return (<div style={{color: 'red'}}>{this.props.blockState.getErrorMessage()}</div>)
         }
         return null;
     }

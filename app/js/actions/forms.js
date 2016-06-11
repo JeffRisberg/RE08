@@ -8,12 +8,7 @@ export const setForm = (name, formData = {}) => {
     }
 };
 
-export const handleFormFieldChange = (formName, event) => {
-    const fieldName = event.target.name;
-    const value = (event.target.type === 'checkbox') ? event.target.checked : (event.target.value != null) ? event.target.value.trim() : null;
-
-    console.log("changing " + fieldName + " to " + value);
-
+export const setFormField = (formName, fieldName, value) => {
     return {
         type: SET_FORM_FIELD,
         formName: formName,
@@ -22,11 +17,34 @@ export const handleFormFieldChange = (formName, event) => {
     }
 };
 
+export const handleFormFieldChange = (formName, event) => {
+    const fieldName = event.target.name;
+    const value = (event.target.type === 'checkbox') ? event.target.checked : (event.target.value != null) ? event.target.value.trim() : null;
+
+    console.log("changing " + fieldName + " to " + value);
+    return setFormField(formName, fieldName, value);
+};
+
 
 export const clearForm = (name) => {
     return {
         type: SET_FORM,
         formName: name
+    }
+};
+
+export const submitForm = (event, name, callback) => {
+    return function (dispatch, getState) {
+        event.preventDefault();
+
+        const form = getState().forms[name];
+        for (let fieldName in form) {
+
+            console.log(fieldName + ': ' + form[fieldName])
+        }
+        callback(form);
+
+        Promise.resolve();
     }
 };
 

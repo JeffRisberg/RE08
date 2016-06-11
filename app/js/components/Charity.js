@@ -1,52 +1,34 @@
 import React from 'react'
 
-import { connect } from 'react-redux';
-
-import { displayDonate } from '../actions/pageName';
-
 /**
  * Renders one charity
  *
- * @author Jeff Risberg
- * @since March 2016 (Revised May 2016)
+ * @author Jeff Risberg, Peter Cowan
+ * @since March 2016 (Revised May 2016) (Revised June 2016)
  */
 class Charity extends React.Component {
 
-    constructor() {
-        super();
-
-        this.handleDonate = this.handleDonate.bind(this);
-    }
-
-    handleDonate() {
-        this.props.displayDonate(this.props.charity.ein);
+    constructor(props) {
+        super(props);
     }
 
     render() {
+
+        const showDetails = (this.props.showDetails === "true");
+        const showAddress = (this.props.showAddress === "true");
+        const showEin = (this.props.showEin === "true");
         return (
-            <tr>
-                <td><p>
-                    <strong>{this.props.charity.name}</strong>
-                    <br/>
-                    {this.props.charity.city},&nbsp;
-                    {this.props.charity.state}&nbsp;
-                    {this.props.charity.zip}
-                    <br/>
-                    Tax ID: {this.props.charity.ein}
-                </p></td>
-                <td style={{textAlign: 'right'}}>
-                    <a onClick={this.handleDonate} className="btn">Donate Now</a>
-                </td>
-            </tr>
+            <p>
+                <strong>{this.props.charity.name}</strong>
+                <br/>
+                {(showDetails || showAddress) ? this.props.charity.city + ', ' +
+                this.props.charity.state + ' ' +
+                this.props.charity.zip : null}
+                <br/>
+                {showDetails || showEin ? "Tax ID:" + this.props.charity.ein : null}
+            </p>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-    };
-};
-export default connect(
-    mapStateToProps,
-    {displayDonate}
-)(Charity);
+export default Charity;

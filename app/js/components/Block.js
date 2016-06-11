@@ -1,19 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Login from './Login'
-import Slider from './Slider'
-import Basket from './Basket'
-import CreditCardForm from './CreditCardForm'
-import CategoryList from './CategoryList'
-import CategoryCharities from './CategoryCharities'
-import Confirmation from './Confirmation'
-import GivingHistory from './GivingHistory'
-import TopCharitiesScroller from './TopCharitiesScroller'
-import Search from './Search'
-import Donate from './Donate'
-import GiftMessage from './GiftMessage'
-import Match from './Match'
+import BasketBlock from '../blocks/BasketBlock'
+import CreateAccountBlock from '../blocks/CreateAccountBlock'
+import CreditCardFormBlock from '../blocks/CreditCardFormBlock'
+import CategoryListBlock from '../blocks/CategoryListBlock'
+import CategoryCharitiesBlock from '../blocks/CategoryCharitiesBlock'
+import ConfirmationBlock from '../blocks/ConfirmationBlock'
+import DonateBlock from '../blocks/DonateBlock'
+import GiftBlock from '../blocks/GiftBlock'
+import GivingHistoryBlock from '../blocks/GivingHistoryBlock'
+import HeaderBlock from '../blocks/HeaderBlock'
+import ImageBlock from '../blocks/ImageBlock'
+import LoginBlock from '../blocks/LoginBlock'
+import MatchBlock from '../blocks/MatchBlock'
+import SearchBlock from '../blocks/SearchBlock'
+import SliderBlock from '../blocks/SliderBlock'
+import TextBlock from '../blocks/TextBlock'
+import TopCharitiesScrollerBlock from '../blocks/TopCharitiesScrollerBlock'
 
 /**
  * Renders one block in a page.
@@ -27,109 +31,97 @@ class Block extends React.Component {
         const block = this.props.block;
         const blockType = block.type;
 
+        if (blockType === 'givingBasket') {
+            return (
+                <BasketBlock block={block}/>
+            )
+        }
+        if (blockType === 'createAccount') {
+            return (
+                <CreateAccountBlock block={block}/>
+            )
+        }
+        if (blockType === 'creditCardForm') {
+            return (
+                <CreditCardFormBlock block={block}/>
+            )
+        }
+        if (blockType === 'categories') {
+            return (
+                <CategoryListBlock block={block}/>
+            )
+        }
+        if (blockType === 'charities') {
+            return (
+                <CategoryCharitiesBlock block={block}/>
+            )
+        }
+        if (blockType === 'confirmation') {
+            return (
+                <ConfirmationBlock block={block}/>
+            )
+        }
+        if (blockType === 'donate') {
+            return (
+                <DonateBlock block={block}/>
+            )
+        }
+        if (blockType === 'gift') {
+            return (
+                <GiftBlock block={block}/>
+            )
+        }
+        if (blockType === 'givingHistory') {
+            return (
+                <GivingHistoryBlock block={block}/>
+            )
+        }
+        if (blockType === 'headerBlock') {
+            return (
+                <HeaderBlock block={block}/>
+            );
+        }
         if (blockType === 'hr') {
             return (
                 <hr/>
             )
         }
-        if (blockType === 'text') {
-            return (
-                <div dangerouslySetInnerHTML={{__html: block.text}}>
-                </div>
-            )
-        }
         if (blockType === 'image') {
-            const colorClassName = block.color;
-            const locationClassName = block.location;
-            const headerText = block.headerText;
-            const subText = block.subText;
-            const buttonText = block.buttonText;
-            const className = "branding-box " + colorClassName + " " + locationClassName;
-
             return (
-                <div>
-                    <img src={""+block.url} height="250" width="100%"/>
-                    {(locationClassName !== undefined) ?
-                        <div className={className}>
-
-                            <h1 dangerouslySetInnerHTML={{__html: headerText}}>
-                            </h1>
-
-                            <p dangerouslySetInnerHTML={{__html: subText}}>
-                            </p>
-                            <a href="" className="btn btn-promo"
-                               dangerouslySetInnerHTML={{__html: buttonText}}>
-                            </a>
-                        </div>
-                        : null}
-                </div>
-            )
+                <ImageBlock block={block}/>
+            );
         }
         if (blockType === 'login') {
             return (
-                <Login block={block}/>
-            )
-        }
-        if (blockType === 'slider') {
-            return (
-                <Slider block={block}/>
-            )
-        }
-        if (blockType === 'categories') {
-            return (
-                <CategoryList block={block}/>
-            )
-        }
-        if (blockType === 'charities') {
-            return (
-                <CategoryCharities block={block}/>
-            )
-        }
-        if (blockType === 'topCharities') {
-            return (
-                <TopCharitiesScroller block={block}/>
-            )
-        }
-        if (blockType === 'searchCharities') {
-            return (
-                <Search block={block}/>
-            )
-        }
-        if (blockType === 'donate') {
-            return (
-                <Donate block={block}/>
-            )
-        }
-        if (blockType === 'gift') {
-            return (
-                <GiftMessage block={block}/>
+                <LoginBlock block={block}/>
             )
         }
         if (blockType === 'match') {
             return (
-                <Match block={block}/>
+                <MatchBlock block={block}/>
             )
         }
-        if (blockType === 'creditCardForm') {
+        if (blockType === 'searchCharities') {
             return (
-                <CreditCardForm block={block}/>
+                <SearchBlock block={block}/>
             )
         }
-        if (blockType === 'givingBasket') {
+        if (blockType === 'slider') {
             return (
-                <Basket block={block}/>
+                <SliderBlock block={block}/>
             )
         }
-        if (blockType === 'givingHistory') {
+        if (blockType === 'text') {
             return (
-                <GivingHistory block={block}/>
-            )
+                <TextBlock block={block}/>
+            );
         }
-        if (blockType === 'confirmation') {
+        if (blockType === 'topCharities') {
             return (
-                <Confirmation block={block}/>
+                <TopCharitiesScrollerBlock block={block}/>
             )
         }
+        return null;
     }
 }
 

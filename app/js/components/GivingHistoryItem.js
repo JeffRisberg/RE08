@@ -28,7 +28,7 @@ class GivingHistoryItem extends React.Component {
                 <td>{moment(transDateTimeStr,"MMMM Do, YYYY h:mm:ss A").format("MM/DD/YYYY")}</td>
                 <td>{transactionId}</td>
                 <td>{charityName}</td>
-                <td>${amount.toFixed(2)}</td>
+                <td style={{textAlign: 'right'}}>${amount.toFixed(2)}</td>
             </tr>
         );
     }

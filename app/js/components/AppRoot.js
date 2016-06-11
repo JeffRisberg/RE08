@@ -2,9 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 import Header from './Header'
+import BlockGrid from './BlockGrid';
 import Footer from './Footer'
 
-import { fetchPortal } from '../actions/portal';
+import { fetchPortal, getPageBlocks } from '../actions/portal';
+import { setPage } from '../actions/pageName'
 import { fetchContext } from '../actions/context';
 
 /**
@@ -14,11 +16,18 @@ import { fetchContext } from '../actions/context';
 class AppRoot extends React.Component {
 
     componentDidMount() {
+        console.log('this.props.params.pageName: ' + this.props.params.pageName);
+        this.props.setPage(this.props.params.pageName);
         if (this.props.portal === undefined || this.props.portal == null
             || this.props.vendor === undefined || this.props.vendor == null) {
-            this.props.fetchContext()
-            this.props.fetchPortal(1)
+            this.props.fetchContext();
+            this.props.fetchPortal()
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('nextProps.params.pageName: ' + nextProps.params.pageName);
+        this.props.setPage(nextProps.params.pageName);
     }
 
     render() {
@@ -29,12 +38,14 @@ class AppRoot extends React.Component {
 
         var currentLocation = this.props.location.pathname;
 
+        const blocks = getPageBlocks(this.props.portal, this.props.pageName);
+
         return (
             <div className="container-fluid">
                 <Header currentLocation={currentLocation}/>
 
                 <div className="container" style={{minHeight: '400px'}}>
-                    {this.props.children}
+                    <BlockGrid blocks={blocks}/>
                 </div>
 
                 <div className="container">
@@ -59,6 +70,6 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    {fetchContext, fetchPortal}
+    {fetchContext, fetchPortal, setPage}
 )(AppRoot);
 

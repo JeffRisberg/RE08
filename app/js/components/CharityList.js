@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Charity from './Charity'
+import CharityItem from './CharityItem'
 
 /**
  * Renders a list of charity objects
@@ -16,7 +16,7 @@ class CharityList extends React.Component {
     render() {
         var charityNodes = this.props.charities.map(function (charity, index) {
             return (
-                <Charity charity={charity} key={index}></Charity>
+                <CharityItem charity={charity} key={index} showDetails="true"></CharityItem>
             );
         });
 

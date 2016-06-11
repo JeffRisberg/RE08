@@ -1,5 +1,5 @@
 /**
- * This is used for login and logout.
+ * Implements almost all user-related activity, such as login, logout, donate, view order history, checkout.
  */
 import fetch from 'isomorphic-fetch';
 
@@ -7,20 +7,20 @@ import {setBlockState } from '../actions/blockStates'
 import {displayBasket, displayConfirmation, displayGift, displayLanding } from '../actions/pageName'
 
 import { SET_SELECTION, SET_PAGE_NAME, SET_CONTEXT, CLEAR_CONTEXT, APPEND_ORDERS } from '../constants/ActionTypes'
-import { SUCCESS, ERROR } from '../constants/StateTypes'
+import { SUCCESS, ERROR, REQUEST } from '../constants/StateTypes'
 
 export const getDonation = (donationId) => {
     return function (dispatch, getState) {
         const state = getState();
         const order = state.orders.records[state.context.orderId];
-
+        console.log('props.params.donationId: ' + donationId)
         return order.donations.find((donation) => {
             if (donation.id == donationId) {
                 return donation;
             }
         })
     }
-}
+};
 
 export const fetchContext = () => {
     return function (dispatch, getState) {
@@ -65,6 +65,8 @@ export const login = (blockId, login, password) => {
     return function (dispatch, getState) {
 
         console.log('logging in ' + login);
+        dispatch(setBlockState(blockId, REQUEST));
+
         return fetch('/ws/context/login', {
             method: 'POST',
             headers: {
@@ -93,8 +95,10 @@ export const login = (blockId, login, password) => {
     };
 };
 
-export const loginNewAccount = (formData) => {
+export const loginNewAccount = (blockId, formData) => {
     return function (dispatch, getState) {
+
+        dispatch(setBlockState(blockId, REQUEST));
 
         console.log('logging in ' + formData.login);
         return fetch('/ws/context/loginNewAccount', {
@@ -110,9 +114,17 @@ export const loginNewAccount = (formData) => {
         })
             .then(response => response.json())
             .then((json) => {
-
-                dispatch(setContext(json.data));
-                dispatch(displayLanding());
+                if (json.status === "success") {
+                    dispatch(setContext(json.data));
+                    dispatch(setBlockState(blockId, SUCCESS));
+                    dispatch(displayLanding());
+                } else {
+                    dispatch(setBlockState(blockId, ERROR, json.messages[0]));
+                }
+            })
+            .catch((error) => {
+                console.log('failed: ' + error);
+                dispatch(setBlockState(blockId, ERROR, error));
             });
     };
 };
@@ -151,7 +163,7 @@ export const addDonation = (formData, ein) => {
         })
             .then(response => response.json())
             .then((json) => {
-                dispatch(setContext(json.data))
+                dispatch(setContext(json.data));
 
                 afterDonation(json.data.order.activeItem.donation, dispatch);
             });
@@ -282,8 +294,8 @@ export const checkout = (event, formData) => {
             body: JSON.stringify(formData)
         })
             .then(response => response.json())
-            .then((json) => {
 
+            .then((json) => {
                 var confOrderId = getState().context.orderId;
 
                 dispatch(setContext(json.data));

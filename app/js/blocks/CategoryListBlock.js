@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { fetchCategories } from '../actions/categories';
 import { setSelection } from '../actions/selections';
 
-import Category from './Category'
+import Category from '../components/Category'
 
 /**
  * Renders a list of category objects, and upon selection, broadcasts to selections.
@@ -13,7 +13,7 @@ import Category from './Category'
  * @author Jeffrey Risberg
  * @since May 2016
  */
-class CategoryList extends React.Component {
+class CategoryListBlock extends React.Component {
     constructor() {
         super();
     }
@@ -76,4 +76,4 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     {fetchCategories, setSelection}
-)(CategoryList);
+)(CategoryListBlock);

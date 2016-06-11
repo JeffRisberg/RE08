@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
  * @author Jeff Risberg
  * @since May 2016
  */
-class Match extends Component {
+class MatchBlock extends Component {
     constructor(props) {
         super(props);
     }
@@ -59,4 +59,4 @@ const mapStateToProps = (state, ownProps) => {
 };
 export default connect(
     mapStateToProps
-)(Match);
+)(MatchBlock);

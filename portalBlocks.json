@@ -10,7 +10,7 @@
     },
     {
       "row": "2", "col": "2", "width": "4", "type": "text",
-      "text": "<h2>Search</h2>Search by cause or by charity, by location, or by keyword."
+      "text": "<h2>Search</h2>[Search|/Search] by cause or by charity, by location, or by keyword."
     },
     {
       "row": "2", "col": "3", "width": "4", "type": "text",
@@ -20,44 +20,74 @@
       "row": "3", "col": "1", "width": "12", "type": "hr"
     },
     {
-      "row": "4", "col": "1", "width": "4", "type": "categories", "blockId": "catList1"
-    },
-    {
-      "row": "4", "col": "12", "width": "8", "type": "charities", "blockId": "charityList1",
-      "categorySourceId": "catList1",
-      "withImage": "true", "direction": "horizontal"
+      "row": "4", "col": "1", "width": "12", "type": "topCharities",
+      "id": "1-4-1-topCharities",
+      "name": "1-4-1-topCharities"
     },
     {
       "row": "5", "col": "1", "width": "12", "type": "hr"
     },
     {
-      "row": "6", "col": "1", "width": "4", "type": "categories", "blockId": "catList2"
+      "id": "1-6-1-categories",
+      "name": "1-6-1-categories",
+      "row": "6", "col": "1", "width": "4", "type": "categories"
     },
     {
-      "row": "6", "col": "12", "width": "8", "type": "charities", "blockId": "charityList2",
-      "categorySourceId": "catList2",
+      "id": "1-6-12-charities",
+      "name": "1-6-12-charities",
+      "row": "6", "col": "12", "width": "8", "type": "charities",
+      "categorySourceName": "1-6-1-categories",
       "withImage": "false", "direction": "vertical"
     }
   ],
   "2": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/Image02.jpg"
+      "url": "/images/Image01.jpg"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "text", "text": "If you have a login, enter it here:"
+      "row": "2", "col": "1", "width": "6", "type": "login",
+      "headerText": "Returning Donors",
+      "subHeaderText": "Already have an account?",
+      "id": "2-2-1-login",
+      "name": "2-2-1-login"
     },
     {
-      "row": "3", "col": "1", "width": "12", "type": "login"
+      "row": "2", "col": "2", "width": "6", "type": "createAccount",
+      "headerText": "Create a New Account",
+      "subHeaderText": "If you have not yet created an account with us, please do so now.",
+      "id": "2-3-2-createAcount",
+      "name": "2-3-2-createAcount"
     }
   ],
   "3": [
     {
+      "id": "3-1-1-donation",
+      "name": "3-1-1-donation",
       "row": "1", "col": "1", "width": "12", "type": "image",
       "url": "/images/Image01.jpg"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "donate"
+      "id": "3-2-1-donation",
+      "row": "2", "col": "1", "width": "12", "type": "text", "text": "&nbsp;"
+    },
+    {
+      "id": "3-3-1-donation",
+      "name": "3-3-1-donation",
+      "row": "3", "col": "1", "width": "6", "type": "donate",
+      "recurringDonation": false,
+      "instructionalText": "I would like to donate:",
+      "shareName": "true", "shareAddress": "true"
+    },
+    {
+      "id": "3-3-2-donation",
+      "name": "3-3-2-donation",
+      "row": "3", "col": "2", "width": "4", "type": "match", "donationSource": "3-3-1-donation",
+      "headerText": "75% Matching",
+      "mainText": "These donations are matched by Purina Corp. With your donation plus the match, the charity will receive:",
+      "percent": 75,
+      "startAt": 0,
+      "maxValue": 1000000
     }
   ],
   "4": [
@@ -66,114 +96,91 @@
       "url": "/images/Image01.jpg"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "checkout"
+      "row": "2", "col": "1", "width": "12", "type": "headerBlock",
+      "headerText": "Review And Complete Your Donations",
+      "subHeaderText": "Please confirm all your information, and choose a Payment Method (Visa, Mastercard, Discover or American Express, or use a Gift Card). When you are finished, please click the Complete Donation button.",
+      "size": "2",
+      "id": "4-2-1-headerBlock",
+      "name": "4-2-1-headerBlock"
+    },
+    {
+      "row": "3", "col": "1", "width": "12", "type": "headerBlock",
+      "headerText": "Donation Summary",
+      "subHeaderText": "Note: Your donation summary includes any donations saved to your basket during past sessions.",
+      "size": "3",
+      "id": "4-3-1-headerBlock",
+      "name": "4-3-1-headerBlock"
+    },
+    {
+      "row": "4", "col": "1", "width": "12", "type": "givingBasket",
+      "headerText": "Donations",
+      "displayButtons": "false",
+      "showCharityAddress": "false",
+      "showCharityEin": "false",
+      "id": "4-4-1-givingBasket",
+      "name": "4-4-1-givingBasket"
+    },
+    {
+      "row": "5", "col": "1", "width": "12", "type": "headerBlock",
+      "headerText": "Payment Method",
+      "subHeaderText": "Charge the total to your Credit Card.",
+      "size": "3",
+      "id": "4-5-1-headerBlock",
+      "name": "4-5-1-headerBlock"
+    },
+    {
+      "row": "5", "col": "1", "width": "12", "type": "creditCardForm",
+      "id": "4-5-12-creditCardForm",
+      "name": "4-5-12-creditCardForm"
+    },
+    {
+      "row": "6", "col": "1", "width": "12", "type": "text",
+      "text": "Please note the your credit card will be charged by JustGive and 4.5% plus 35 cents will be deducted from your transaction to cover processing and handling costs.<br/>"
+    },
+    {
+      "row": "7", "col": "1", "width": "12", "type": "text",
+      "text": "By clicking the &quot;Complete Donation&quot; button below I agree to the Terms and Conditions and I understand that my donation is non-refundable and that the donation will be disbursed on the 10th of the following month."
     }
   ],
   "5": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageCisco.jpg",
-      "color": "dk_purple", "location": "upleft",
-      "headerText": "CISCO EMPLOYEE GIVING",
-      "subText": "Choose charities that make the most impact.",
-      "buttonText": "Learn More",
-      "buttonLink": "www.justgive.org"
+      "url": "/images/Image01.jpg"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "text",
-      "text": "&nbsp;"
+      "row": "2",
+      "col": "1",
+      "width": "12",
+      "type": "text",
+      "text": "Testing the pageName/routing integration:"
     },
     {
-      "row": "3", "col": "1", "width": "4", "type": "image",
-      "url": "https://unsplash.it/300/200?image=883"
-    },
-    {
-      "row": "3", "col": "2", "width": "4", "type": "image",
-      "url": "/images/ImageCiscoSign.jpg"
-    },
-    {
-      "row": "3", "col": "3", "width": "4", "type": "text",
-      "text": "<h2>Give through Payroll Deductions</h2>These will be applied automatically - this is the easiest way to give! <p>Contact your HR rep if you have questions"
+      "row": "3", "col": "1", "width": "12", "type": "text", "text": "Seems to be working!"
     }
   ],
   "6": [
     {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageCisco.jpg"
-    },
-    {
-      "row": "2", "col": "1", "width": "12", "type": "login"
+      "id": "6-1-1-searchCharities",
+      "name": "6-1-1-searchCharities",
+      "row": "1", "col": "1", "width": "12", "type": "searchCharities",
+      "headerText": "Search for a Charity"
     }
   ],
   "7": [
     {
+      "id": "7-1-1-image",
+      "name": "7-1-1-image",
       "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageCisco.jpg"
+      "url": "/images/Image01.jpg"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "donate"
-    }
-  ],
-  "8": [
-    {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageCisco.jpg"
-    },
-    {
-      "row": "2", "col": "1", "width": "12", "type": "checkout"
-    }
-  ],
-  "9": [
-    {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageDalio.jpg"
-    },
-    {
-      "row": "2", "col": "1", "width": "6", "type": "text",
-      "text": "<h2>Search</h2>Search by cause or by charity, by location, or by keyword."
-    },
-    {
-      "row": "2", "col": "2", "width": "6", "type": "text",
-      "text": "<h2>Make donations</h2>Donate to your chosen charities."
-    },
-    {
-      "row": "3", "col": "1", "width": "12", "type": "topCharities", "blockId": "topCat1", "direction": "horizontal"
-    }
-  ],
-  "10": [
-    {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageDalio.jpg"
-    },
-    {
-      "row": "2", "col": "1", "width": "12", "type": "login"
-    }
-  ],
-  "11": [
-    {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageDalio.jpg"
-    },
-    {
-      "row": "2", "col": "1", "width": "12", "type": "donate"
-    }
-  ],
-  "12": [
-    {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageDalio.jpg"
-    },
-    {
-      "row": "2", "col": "1", "width": "12", "type": "checkout"
-    }
-  ],
-  "13": [
-    {
-      "row": "1", "col": "1", "width": "12", "type": "slider",
+      "id": "7-2-1-slider",
+      "name": "7-2-1-slider",
+      "row": "2", "col": "1", "width": "12", "type": "slider",
       "images": [
-        {"url": "/images/ImageWF.jpg"},
+        {"url": "/resources/images/ImageWF.jpg"},
         {
-          "url": "/images/Image01.jpg",
+          "url": "/resources/images/Image01.jpg",
           "color": "dk_purple", "location": "upleft",
           "headerText": "COMPANY GIVING FOR <span>GREATER GOOD</span>",
           "subText": "Connect your giving programs to your community and <span>social responsibility goals.</span> Choose solutions that make the most impact.",
@@ -181,7 +188,7 @@
           "buttonLink": "www.justgive.org"
         },
         {
-          "url": "/images/Image06.jpg",
+          "url": "/resources/images/Image06.jpg",
           "color": "disaster_red", "location": "upright",
           "headerText": "NONPROFITS: <span>GET MORE</span> ONLINE DONATIONS",
           "subText": "Our efficient tools and services—<span>with free donation buttons and fundraising pages</span>—help you raise more money.",
@@ -197,84 +204,94 @@
           "buttonLink": "www.justgive.org"
         }
       ]
-    },
-    {
-      "row": "2", "col": "1", "width": "12", "type": "text",
-      "text": "Wells Fargo rewards are your way to convert points to charitable donations"
     }
   ],
-  "14": [
+  "8": [
     {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageWF.jpg"
-    },
-    {
-      "row": "2", "col": "1", "width": "12", "type": "login"
+      "id": "1-1-12-searchCharities",
+      "name": "1-1-12-searchCharities",
+      "row": "1", "col": "1", "width": "12", "type": "categories"
     }
   ],
-  "15": [
+  "9": [
     {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageWF.jpg"
-    },
-    {
-      "row": "2", "col": "1", "width": "12", "type": "donate"
+      "row": "1", "col": "1", "width": "12", "type": "gift",
+      "headerText": "Gift Options",
+      "id": "9-1-1-gift",
+      "name": "9-1-1-gift"
     }
   ],
-  "16": [
+  "10": [
     {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageWF.jpg"
+      "row": "1", "col": "1", "width": "12", "type": "headerBlock",
+      "headerText": "Items in Your Basket",
+      "subHeaderText": "Review the items in your basket below. You may edit your selections or add new ones and will have another chance to review before payment. Note: Your donation summary includes any donations made to your basket during past sessions.",
+      "size": "2",
+      "id": "4-1-1-headerBlock",
+      "name": "4-1-1-headerBlock"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "checkout"
+      "row": "2", "col": "1", "width": "12", "type": "givingBasket",
+      "headerText": "Your Donations",
+      "displayButtons": "true",
+      "showCharityAddress": "true",
+      "showCharityEin": "false",
+      "id": "10-2-12-givingBasket",
+      "name": "10-2-12-givingBasket"
     }
   ],
-  "17": [
+  "11": [
+    {
+      "id": "11-1-12-givingHistory",
+      "name": "11-1-12-givingHistory",
+      "row": "1", "col": "1", "width": "12", "type": "givingHistory"
+    }
+  ],
+  "12": [
+    {
+      "row": "1", "col": "1", "width": "12", "type": "headerBlock",
+      "headerText": "Order Confirmation",
+      "subHeaderText": "Thank you for your generous donations.",
+      "size": "2",
+      "id": "4-1-1-headerBlock",
+      "name": "4-1-1-headerBlock"
+    },
+    {
+      "row": "2", "col": "1", "width": "12", "type": "hr"
+    },
+    {
+      "row": "4", "col": "1", "width": "12", "type": "confirmation",
+      "displayButtons": "false",
+      "showCharityAddress": "false",
+      "showCharityEin": "false",
+      "id": "12-4-1-confirmation",
+      "name": "12-4-1-confirmation"
+    }
+  ],
+  "111": [
     {
       "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageOU.jpg"
+      "url": "/images/Image01.jpg"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "text",
-      "text": "&nbsp;"
-    },
-    {
-      "row": "3", "col": "1", "width": "6", "type": "text",
+      "row": "2", "col": "1", "width": "4", "type": "text",
       "text": "<h2>Donate Now</h2>We support one-time or monthly donations"
     },
     {
-      "row": "3", "col": "2", "width": "6", "type": "image",
-      "url": "https://unsplash.it/300/200?image=882"
-    }
-  ],
-  "18": [
-    {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageOU.jpg"
+      "row": "2", "col": "2", "width": "4", "type": "text",
+      "text": "<h2>Search</h2>Search by cause or by charity, by location, or by keyword."
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "login"
-    }
-  ],
-  "19": [
-    {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageOU.jpg"
+      "row": "2", "col": "3", "width": "4", "type": "text",
+      "text": "<h2>Gift Cards</h2>Buy or redeem gift cards for your friends"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "donate"
-    }
-  ],
-  "20": [
-    {
-      "row": "1", "col": "1", "width": "12", "type": "image",
-      "url": "/images/ImageOU.jpg"
+      "row": "3", "col": "1", "width": "12", "type": "hr"
     },
     {
-      "row": "2", "col": "1", "width": "12", "type": "checkout"
+      "id": "1-4-1-topCharities",
+      "name": "1-4-1-topCharities",
+      "row": "4", "col": "1", "width": "12", "type": "topCharities"
     }
   ]
 }
-
-

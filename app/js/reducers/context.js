@@ -5,6 +5,7 @@ const context = (state = [], action = {}) => {
     case SET_CONTEXT:
     {
       var context = action.context;
+      console.log('context set: ' + JSON.stringify(context, null, 2))
       return context;
     }
     case CLEAR_CONTEXT:

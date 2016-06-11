@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Charity from './Charity'
+
 /**
  * Renders one donation.  Used on the Basket screen and the Confirmation screen.
  *
@@ -20,7 +22,7 @@ class Donation extends React.Component {
 
         return (
             <div style={{marginBottom: '15px'}}>
-                <a href="">{charityName}</a><br/>
+                <Charity charity={this.props.donation.charity} showAddress={this.props.showCharityAddress}  showCharityEin={this.props.showCharityEin}/><br/>
                 Amount: ${amount.toFixed(2)}
                 <br/>
                 Designation: {this.props.donation.designation}

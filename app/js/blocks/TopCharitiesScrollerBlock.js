@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
+import BlockStateHelper from '../helpers/BlockStateHelper'
+import ErrorMessage from '../components/ErrorMessage'
+import Spinner from '../components/Spinner'
 import { getTopCharities } from '../actions/charities';
 import {REQUEST, ERROR} from '../constants/StateTypes'
 
-import ListCharity from './ListCharity';
+import ListCharity from '../components/ListCharity';
 
 /**
  * Draws a left-right horizontal scroller of the top charities.
@@ -12,7 +15,7 @@ import ListCharity from './ListCharity';
  * @author Peter Cowan, Jeff Risberg
  * @since April 2016
  */
-class TopCharitiesScroller extends React.Component {
+class TopCharitiesScrollerBlock extends React.Component {
 
     constructor(props) {
         super(props);
@@ -24,8 +27,6 @@ class TopCharitiesScroller extends React.Component {
     }
 
     render() {
-        const spinner = (this.props.blockState && this.props.blockState.state === REQUEST) ? (<div><img src="/resources/images/spinner.gif" alt="&#128336;"/></div>) : null;
-        const errorMessage = (this.props.blockState && this.props.blockState.state === ERROR && this.props.blockState.message != null) ? (<div style={{color: 'red'}}>{this.props.topCharities.error}</div>) : null;
         const imageItems = this.getListItems();
 
         return (
@@ -35,8 +36,8 @@ class TopCharitiesScroller extends React.Component {
                 <div className="row">
                     <div className="col-md-12">
                         <ul className="horizontal-slide">
-                            {spinner}
-                            {errorMessage}
+                            <Spinner blockState={this.props.blockState}/>
+                            <ErrorMessage blockState={this.props.blockState}/>
                             {imageItems}
                         </ul>
                     </div>
@@ -64,11 +65,11 @@ class TopCharitiesScroller extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         topCharities: state.topCharities,
-        blockState: state.blockStates[ownProps.block.id]
+        blockState: new BlockStateHelper(state.blockStates[ownProps.block.id])
     };
 };
 
 export default connect(
     mapStateToProps,
     {getTopCharities}
-)(TopCharitiesScroller);
+)(TopCharitiesScrollerBlock);
