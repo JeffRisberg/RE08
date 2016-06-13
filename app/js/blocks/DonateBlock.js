@@ -7,7 +7,7 @@ import { setSelection } from '../actions/selections';
 import DonationForm from '../components/DonationForm'
 
 /**
- * Donate screen
+ * Donate block
  *
  * @author Jeff Risberg, Peter Cowan, Brandon Risberg
  * @since May 2016
@@ -47,11 +47,15 @@ class DonateBlock extends React.Component {
 
                 const giftName = (donation.gift != null) ? donation.gift.recipientName : null;
                 const memorialName = (donation.gift != null) ? donation.gift.memorialName : null;
-                return (<DonationForm charity={charity} handleSubmit={this.handleUpdateDonation} block={this.props.block} amountChanged={this.props.setSelection} formData={{ amount: donation.amount,
+                return (<DonationForm charity={charity} handleSubmit={this.handleUpdateDonation}
+                                      block={this.props.block}
+                                      amountChanged={this.props.setSelection}
+                                      formData={{ amount: donation.amount,
                         shareName: donation.shareName, shareEmail: donation.shareEmail, shareAddress: donation.shareAddress,
                         designation: donation.designation, giftName: giftName, memorialName: memorialName}}/>)
             } else {
-                return (<DonationForm charity={charity} handleSubmit={this.handleAddDonation} block={this.props.block} amountChanged={this.props.setSelection} formData={{ amount: null,
+                return (<DonationForm charity={charity} handleSubmit={this.handleAddDonation} block={this.props.block}
+                                      amountChanged={this.props.setSelection} formData={{ amount: null,
                         shareName: false, shareEmail: false, shareAddress: false,
                         designation: null, giftName: null, memorialName: null}}/>)
             }

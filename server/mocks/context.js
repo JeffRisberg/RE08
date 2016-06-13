@@ -199,13 +199,14 @@ module.exports = function (app) {
                 const authToken = tokens[0];
 
                 charityDB.find({ein: req.params.ein}).exec(function (error, charities) {
-                    if (charities.length > 0)
+                    if (charities.length > 0) {
 
-                    // Look for the most recently created record
+                        // Look for the most recently created record
                         basketItemDB.find({}).sort({id: -1}).limit(1).exec(function (err, basketItems) {
 
                             req.body.charity = charities[0];
                             req.body.charityId = charities[0].id;
+                            req.body.amount = parseInt(req.body.amount);
 
                             if (basketItems.length != 0)
                                 req.body.id = basketItems[0].id + 1;
@@ -215,21 +216,19 @@ module.exports = function (app) {
                             // Insert the new record
                             basketItemDB.insert(req.body, function (err, newBasketItem) {
 
-                                // fetch the whole basket
+                                // fetch the whole basket, and return as order
                                 var order = {};
                                 basketItemDB.find({}).exec(function (err, basketItems) {
 
-                                    basketItems.forEach(function (item) {
-                                        //order.push(item);
-                                    })
-
-                                    order["activeItem"] = newBasketItem;
+                                    order["donations"] = basketItems;
+                                    order["activeItem"] = {donation: newBasketItem};
 
                                     res.status(201);
                                     res.send({status: "ok", data: {order: order, token: token, donor: currentDonor}});
                                 });
                             })
                         });
+                    }
                 });
             }
         });

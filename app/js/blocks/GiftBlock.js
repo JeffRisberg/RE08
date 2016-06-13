@@ -16,6 +16,12 @@ function getDonation(state, donationId) {
 
 const formName = 'giftForm';
 
+/**
+ * Gift block
+ *
+ * @author Peter Cowan, Jeff Risberg
+ * @since May 2016
+ */
 class GiftBlock extends React.Component {
     constructor(props) {
         super(props);
@@ -59,30 +65,34 @@ class GiftBlock extends React.Component {
 
                     <div className="form-group">
                         <label htmlFor="recipientName">Name of person to notify: </label>
-                        <input type="text" className="form-control" id="recipientName" name="recipientName" placeholder="Name"
+                        <input type="text" className="form-control" id="recipientName" name="recipientName"
+                               placeholder="Name"
                                defaultValue={this.props.form.recipientName}
                                onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
                     </div>
 
                     {(donation.gift.memorialName)
                         ? <div className="form-group">
-                            <label htmlFor="memorialName">In memory of: </label>
-                            <input type="text" className="form-control" id="memorialName" name="memorialName" placeholder="Name"
-                                   defaultValue={this.props.form.memorialName}
-                                onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
-                        </div>
+                        <label htmlFor="memorialName">In memory of: </label>
+                        <input type="text" className="form-control" id="memorialName" name="memorialName"
+                               placeholder="Name"
+                               defaultValue={this.props.form.memorialName}
+                               onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
+                    </div>
                         : null}
 
                     <div className="form-group">
                         <label htmlFor="message">A personal message: </label>
-                        <textarea className="form-control" id="message" name="message" placeholder="Type your message here..."
-                               defaultValue={this.props.form.message}
-                               onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
+                        <textarea className="form-control" id="message" name="message"
+                                  placeholder="Type your message here..."
+                                  defaultValue={this.props.form.message}
+                                  onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="recipientEmail">Email address: </label>
-                        <input type="email" className="form-control" id="recipientEmail" name="recipientEmail" placeholder="Email Address"
+                        <input type="email" className="form-control" id="recipientEmail" name="recipientEmail"
+                               placeholder="Email Address"
                                defaultValue={this.props.form.recipientEmail}
                                onChange={(e) => {this.props.handleFormFieldChange(formName, e)}}/>
                     </div>
@@ -100,7 +110,6 @@ class GiftBlock extends React.Component {
 
         this.props.updateGift(donation.id, donation.gift.id, this.props.form)
     }
-
 }
 
 const mapStateToProps = (state, ownProps) => {
