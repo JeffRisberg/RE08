@@ -1,6 +1,6 @@
-{"_id":"1","id":"1","charityId":"1","amount":"45","transactionId":"1","flatCharge":"0.35"}
-{"_id":"2","id":"2","charityId":"2","amount":"300","transactionId":"1","flatCharge":"0.35"}
-{"_id":"3","id":"3","charityId":"1","amount":"80","transactionId":"2","flatCharge":"0.35"}
-{"_id":"4","id":"4","charityId":"3","amount":"120","transactionId":"2","flatCharge":"0.35"}
-{"_id":"5","id":"5","charityId":"5","amount":"240","transactionId":"2","flatCharge":"0.35"}
-{"_id":"6","id":"6","charityId":"4","amount":"78","transactionId":"3","flatCharge":"0.35"}
+{"_id":"1","id":"1","charityId":"1","amount":45,"transactionId":"1","flatCharge":0.35}
+{"_id":"2","id":"2","charityId":"2","amount":300,"transactionId":"1","flatCharge":0.35}
+{"_id":"3","id":"3","charityId":"1","amount":80,"transactionId":"2","flatCharge":0.35}
+{"_id":"4","id":"4","charityId":"3","amount":120,"transactionId":"2","flatCharge":0.35}
+{"_id":"5","id":"5","charityId":"5","amount":240,"transactionId":"2","flatCharge":0.35}
+{"_id":"6","id":"6","charityId":"4","amount":78,"transactionId":"3","flatCharge":0.35}
