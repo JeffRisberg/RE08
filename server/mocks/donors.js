@@ -40,18 +40,15 @@ module.exports = function (app) {
     donorsRouter.get("/:donorId/history", function (req, res) { // year=?
         const donorId = parseInt(req.params.donorId);
 
-        console.log(donorId);
         charityDB.find({}, function (error, charities) {
 
             donorDB.find({id: donorId}).limit(1).exec(function (err, donors) {
 
-                console.log(donors);
                 if (donors.length > 0) {
                     const donor = donors[0];
 
                     var orders = [];
                     transactionDB.find({donorId: donor.id}).exec(function (err, transactions) {
-                        console.log(transactions);
                         const transactionIds = transactions.map(function (tran) {
                             return tran.id
                         });
@@ -71,18 +68,37 @@ module.exports = function (app) {
                                 });
                                 don['donationId'] = don['id'];
                                 don['charityName'] = charity.name;
+                                don['charity'] = charity;
                                 don['transactionDate'] = 'Jan 8, 2016 10:55:20 PM';
                                 don['transactionDateTime'] = parseInt(transactionDate);
                                 don['amount'] = parseInt(don['amount']);
-                                console.log(don['amount'])
+                            });
+
+                            orders.push({
+                                batchReferenceCode: "TESTPROCESS",
+                                donations: donations
+                            });
+
+                            res.status(200);
+                            res.send({
+                                data: orders, status: "success", pagination: {
+                                    currentPage: 1,
+                                    firstPage: 1,
+                                    hasNextPage: false,
+                                    hasPreviousPage: false,
+                                    lastPage: 1,
+                                    lastResult: orders.length,
+                                    nextPage: 2,
+                                    offset: 0,
+                                    pages: [1],
+                                    previousPage: 0,
+                                    resultCount: orders.length,
+                                    resultsPerPage: orders.length,
+                                    totalPages: 1
+                                }
                             });
                         });
-
-                        orders.push(donations);
                     });
-
-                    res.status(200);
-                    res.send({data: orders});
                 }
                 else {
                     res.status(404);
@@ -208,7 +224,7 @@ module.exports = function (app) {
         });
     });
 
-    // No changes from here on down
+// No changes from here on down
     donorsRouter.post('/', function (req, res) {
         res.status(201).end();
     });
@@ -226,4 +242,5 @@ module.exports = function (app) {
     });
 
     app.use('/ws/donors', donorsRouter);
-};
+}
+;
