@@ -144,7 +144,9 @@ module.exports = function (app) {
         });
     });
 
-    /** return the giving history */
+    /**
+     * Return the giving history
+     */
     contextRouter.get("/:donorId/history", function (req, res) { // year=?
         const donorId = req.params.donorId;
 
@@ -238,38 +240,58 @@ module.exports = function (app) {
         var token = req.headers['auth-token'];
 
         authTokenDB.find({token: token}).exec(function (err, tokens) {
-            if (token.length > 0) {
-                const authToken = tokens[0];
+                if (tokens.length > 0) {
+                    const authToken = tokens[0];
 
-                // Take the basket items and create donations
-                basketItemDB.find({}).exec(function (err, basketItems) {
-                    basketItems.forEach(function (item) {
+                    // Take the basket items and create donations
+                    basketItemDB.find({}).exec(function (err, basketItems) {
+                        basketItems.forEach(function (item) {
 
-                        // Insert the new record
-                        const newDonation = {
-                            transactionId: authToken.orderId,
-                            charityId: item.charityId,
-                            amount: item.amount,
-                            flatCharge: 0.35
-                        };
-                        donationDB.insert(newDonation, function (err, newDonationResult) {
+                            // Insert the new record
+                            const newDonation = {
+                                transactionId: authToken.orderId,
+                                charityId: item.charityId,
+                                amount: item.amount,
+                                flatCharge: 0.35
+                            };
+                            donationDB.insert(newDonation, function (err, newDonationResult) {
+                            });
+                        });
+
+                        // Clear the basket
+                        basketItemDB.remove({}, {multi: true}, function (err, count) {
+
+                            // return the order
+                            donationDB.find({transactionId: authToken.orderId}).exec(function (err, donations) {
+
+                                charityDB.find({}, function (error, charities) {
+                                    donations.forEach(function (donation) {
+                                        var charityId = donation["charityId"];
+                                        var charity = null;
+
+                                        charities.forEach((c) => {
+                                            if (c.id == charityId) charity = c;
+                                        });
+                                        donation.charity = charity;
+                                    });
+
+                                    var order = {donations: donations}
+                                    res.status(201);
+                                    res.send({status: "ok", data: {order: order, token: token, donor: currentDonor}});
+                                });
+                            });
                         });
                     });
-
-                    // Clear the basket
-                    basketItemDB.remove({}, {multi: true}, function (err, count) {
-                    });
-                });
+                }
             }
-        });
-
-        res.send(JSON.stringify({status: "good", data: []}));
+        );
     });
 
     contextRouter.put('/clear', function (req, res) {
         basketItemDB.remove({}, {multi: true}, function (err, count) {
+            var order = {donations: []}
             res.status(201);
-            res.send(JSON.stringify({donations: []}));
+            res.send({status: "ok", data: {order: order, token: token, donor: currentDonor}});
         });
     });
 
