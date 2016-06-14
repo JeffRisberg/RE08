@@ -38,17 +38,20 @@ module.exports = function (app) {
 
     /** return the giving history */
     donorsRouter.get("/:donorId/history", function (req, res) { // year=?
-        const donorId = req.params.donorId;
+        const donorId = parseInt(req.params.donorId);
 
+        console.log(donorId);
         charityDB.find({}, function (error, charities) {
 
             donorDB.find({id: donorId}).limit(1).exec(function (err, donors) {
 
+                console.log(donors);
                 if (donors.length > 0) {
                     const donor = donors[0];
 
                     var orders = [];
                     transactionDB.find({donorId: donor.id}).exec(function (err, transactions) {
+                        console.log(transactions);
                         const transactionIds = transactions.map(function (tran) {
                             return tran.id
                         });
@@ -71,6 +74,7 @@ module.exports = function (app) {
                                 don['transactionDate'] = 'Jan 8, 2016 10:55:20 PM';
                                 don['transactionDateTime'] = parseInt(transactionDate);
                                 don['amount'] = parseInt(don['amount']);
+                                console.log(don['amount'])
                             });
                         });
 
@@ -88,10 +92,12 @@ module.exports = function (app) {
         })
     });
 
-    /** return a specific order for this donor (used for confirmation screen) */
+    /**
+     * return a specific order for this donor (used for confirmation screen)
+     */
     donorsRouter.get("/:donorId/history/:orderId", function (req, res) {
-        const donorId = req.params.donorId;
-        const orderId = req.params.orderId;
+        const donorId = parseInt(req.params.donorId);
+        const orderId = parseInt(req.params.orderId);
 
         charityDB.find({}, function (error, charities) {
 
