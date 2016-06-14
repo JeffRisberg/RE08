@@ -1,7 +1,7 @@
-{"_id":"1","id":"1","donorId":"1","transactionDate":1452158713166}
-{"_id":"2","id":"2","donorId":"1","transactionDate":1455158713166}
-{"_id":"3","id":"3","donorId":"2","transactionDate":1459158713166}
-{"id":4,"donorId":"1","_id":"GbHTkkEvjxlyfTZx"}
-{"id":4,"donorId":"1","_id":"SUeDSvJEsj4xqsd3"}
-{"id":4,"donorId":"1","_id":"ro5OBq36Xt08MXE9"}
-{"id":4,"donorId":"1","_id":"FnZzPmpOl0QGweXE"}
+{"_id":"1","id":"1","donorId":1,"transactionDate":1452158713166}
+{"_id":"2","id":"2","donorId":1,"transactionDate":1455158713166}
+{"_id":"3","id":"3","donorId":2,"transactionDate":1459158713166}
+{"id":4,"donorId":1,"_id":"GbHTkkEvjxlyfTZx"}
+{"id":4,"donorId":1,"_id":"SUeDSvJEsj4xqsd3"}
+{"id":4,"donorId":1,"_id":"ro5OBq36Xt08MXE9"}
+{"id":4,"donorId":1,"_id":"FnZzPmpOl0QGweXE"}

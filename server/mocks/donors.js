@@ -36,6 +36,58 @@ module.exports = function (app) {
         })
     });
 
+    /** return the giving history */
+    donorsRouter.get("/:donorId/history", function (req, res) { // year=?
+        const donorId = req.params.donorId;
+
+        charityDB.find({}, function (error, charities) {
+
+            donorDB.find({id: donorId}).limit(1).exec(function (err, donors) {
+
+                if (donors.length > 0) {
+                    const donor = donors[0];
+
+                    var orders = [];
+                    transactionDB.find({donorId: donor.id}).exec(function (err, transactions) {
+                        const transactionIds = transactions.map(function (tran) {
+                            return tran.id
+                        });
+
+                        var donations = [];
+                        donationDB.find({transactionId: {$in: transactionIds}}).exec(function (err, donations) {
+
+                            const transactionDate = transactions[0].transactionDate;
+
+                            // Substitute the charity record for the id field
+                            donations.map(function (don) {
+                                var charityId = don["charityId"];
+                                var charity = null;
+
+                                charities.forEach((c) => {
+                                    if (c.id == charityId) charity = c;
+                                });
+                                don['donationId'] = don['id'];
+                                don['charityName'] = charity.name;
+                                don['transactionDate'] = 'Jan 8, 2016 10:55:20 PM';
+                                don['transactionDateTime'] = parseInt(transactionDate);
+                                don['amount'] = parseInt(don['amount']);
+                            });
+                        });
+
+                        orders.push(donations);
+                    });
+
+                    res.status(200);
+                    res.send({data: orders});
+                }
+                else {
+                    res.status(404);
+                    res.send(JSON.stringify({data: null}));
+                }
+            });
+        })
+    });
+
     /** return a specific order for this donor (used for confirmation screen) */
     donorsRouter.get("/:donorId/history/:orderId", function (req, res) {
         const donorId = req.params.donorId;
@@ -64,53 +116,6 @@ module.exports = function (app) {
 
                     res.send({data: donations});
                 });
-            });
-        })
-    });
-
-    /** return the giving history */
-    donorsRouter.get("/:donorId/history", function (req, res) { // year=?
-        const donorId = req.params.donorId;
-
-        charityDB.find({}, function (error, charities) {
-
-            donorDB.find({id: donorId}).limit(1).exec(function (err, donors) {
-
-                if (donors.length > 0) {
-                    const donor = donors[0];
-
-                    transactionDB.find({donorId: donor.id}).exec(function (err, transactions) {
-                        const transactionIds = transactions.map(function (tran) {
-                            return tran.id
-                        });
-
-                        donationDB.find({transactionId: {$in: transactionIds}}).exec(function (err, donations) {
-
-                            const transactionDate = transactions[0].transactionDate;
-
-                            // Substitute the charity record for the id field
-                            donations.map(function (don) {
-                                var charityId = don["charityId"];
-                                var charity = null;
-
-                                charities.forEach((c) => {
-                                    if (c.id == charityId) charity = c;
-                                });
-                                don['donationId'] = don['id'];
-                                don['charityName'] = charity.name;
-                                don['transactionDate'] = 'Jan 8, 2016 10:55:20 PM';
-                                don['transactionDateTime'] = parseInt(transactionDate);
-                                don['amount'] = parseInt(don['amount']);
-                            });
-
-                            res.send({data: donations});
-                        });
-                    });
-                }
-                else {
-                    res.status(404);
-                    res.send(JSON.stringify({data: null}));
-                }
             });
         })
     });
