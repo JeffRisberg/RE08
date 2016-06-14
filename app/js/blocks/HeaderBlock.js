@@ -1,7 +1,7 @@
 import React from 'react'
 
 /**
- * The HeadeBlock component displays a title and description
+ * The HeaderBlock component displays a title and description
  *
  * @author Peter Cowan
  * @since June 2016

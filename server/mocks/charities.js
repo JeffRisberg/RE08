@@ -10,11 +10,26 @@ module.exports = function (app) {
 
     charitiesRouter.get('/', function (req, res) {
         delete req.query["_"];
-        charityDB.find(req.query).exec(function (error, charities) {
+        charityDB.find({}).exec(function (error, charities) {
             res.send({
-                'status': "ok",
-                'data': charities
-            })
+                data: charities,
+                status: "success",
+                pagination: {
+                    currentPage: 1,
+                    firstPage: 1,
+                    hasNextPage: false,
+                    hasPreviousPage: false,
+                    lastPage: 1,
+                    lastResult: charities.length,
+                    nextPage: 2,
+                    offset: 0,
+                    pages: [1],
+                    previousPage: 0,
+                    resultCount: charities.length,
+                    resultsPerPage: charities.length,
+                    totalPages: 1
+                }
+            });
         })
     });
 

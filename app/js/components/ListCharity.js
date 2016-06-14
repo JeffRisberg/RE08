@@ -25,7 +25,6 @@ class ListCharity extends React.Component {
     render() {
         const imagePath = '/images/' + this.props.listCharity.logoImage.path;
         const imageFile = this.props.listCharity.logoImage.fileName;
-        const charity = this.props.listCharity.charity;
 
         return (
             <li key={this.props.index} className="col-md-2">
