@@ -14,7 +14,6 @@ module.exports = function (app) {
     var portalsDB = app.portalsDB;
     var transactionDB = app.transactionDB;
 
-    var currentPortal = null;
     var currentDonor = null;
 
     function generateUUID() {
@@ -55,9 +54,6 @@ module.exports = function (app) {
 
                     authTokenDB.insert(newAuthToken, function (err, authTokenResult) {
                         res.status(201);
-
-                        currentPortal = portal;
-
                         res.send({
                             status: "ok",
                             data: {
