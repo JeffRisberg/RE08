@@ -9,7 +9,6 @@ module.exports = function (app) {
     var authTokenDB = app.authTokenDB;
     var basketItemDB = app.basketItemDB;
     var charityDB = app.charityDB;
-    var contextsDB = app.contextsDB;
     var donationDB = app.donationDB;
     var donorDB = app.donorDB;
     var portalsDB = app.portalsDB;
@@ -82,47 +81,44 @@ module.exports = function (app) {
             if (tokens.length > 0) {
                 const authToken = tokens[0];
 
-                transactionDB.find({id: authToken.orderId}).exec(function (err, transactions) {
-                    if (transactions.length > 0) {
-                        const transaction = transactions[0];
+                var login = req.body.login;
+                var password = req.body.password;
 
-                        var login = req.body.login;
-                        var password = req.body.password;
+                // FIXME:  should check password as well
+                donorDB.find({login: login}).limit(1).exec(function (err, donors) {
 
-                        // FIXME:  should check password as well
-                        donorDB.find({login: login}).limit(1).exec(function (err, donors) {
+                    if (donors.length != 0) {
+                        var donor = donors[0];
+                        var donorId = donor.id;
 
-                            if (donors.length != 0) {
-                                var donor = donors[0];
-                                var donorId = donor.id;
+                        basketItemDB.find({}).exec(function (err, donations) {
+                            var order = {donations: donations}
 
-                                var newAuthToken = {
+                            var newAuthToken = {
+                                token: token,
+                                donorId: donorId,
+                                orderId: authToken.orderId
+                            };
+
+                            authTokenDB.update({token: token}, newAuthToken, {}, function (err, authTokenResult) {
+                                res.status(201);
+                                var context = {
                                     token: token,
-                                    donorId: donorId,
-                                    orderId: authToken.orderId
+                                    donor: donor,
+                                    order: order
                                 };
-
-                                authTokenDB.update({token: token}, newAuthToken, {}, function (err, authTokenResult) {
-                                    res.status(201);
-                                    var context = {
-                                        token: token,
-                                        donor: donor,
-                                        order: transaction,
-                                        vendorId: currentPortal.vendorId,
-                                        portalId: currentPortal.id
-                                    };
-                                    res.send({status: "success", data: context});
-                                    currentDonor = donor;
-                                });
-                            } else {
-                                res.status(404).end();
-                            }
+                                res.send({status: "success", data: context});
+                                currentDonor = donor;
+                            });
                         });
                     }
                     else {
                         res.status(404).end();
                     }
                 });
+            }
+            else {
+                res.status(404).end();
             }
         });
     });
@@ -324,4 +320,5 @@ module.exports = function (app) {
     });
 
     app.use('/ws/context', contextRouter);
-};
+}
+;
