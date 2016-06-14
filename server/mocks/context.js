@@ -29,6 +29,7 @@ module.exports = function (app) {
         return uuid;
     }
 
+    // return initial context
     contextRouter.get('/', function (req, res) {
         delete req.query["_"];
         portalsDB.find({url: "justgive"}).exec(function (error, portals) {
@@ -287,7 +288,23 @@ module.exports = function (app) {
         );
     });
 
+    contextRouter.delete('/donations/:id', function (req, res) {
+        var token = req.headers['auth-token'];
+
+        basketItemDB.remove({id: parseInt(req.params.id)}, {}, function (err, count) {
+
+            basketItemDB.find({}).exec(function (err, donations) {
+                var order = {donations: donations}
+
+                res.status(201);
+                res.send({status: "ok", data: {order: order, token: token, donor: currentDonor}});
+            });
+        });
+    });
+
     contextRouter.put('/clear', function (req, res) {
+        var token = req.headers['auth-token'];
+
         basketItemDB.remove({}, {multi: true}, function (err, count) {
             var order = {donations: []}
             res.status(201);
@@ -296,4 +313,5 @@ module.exports = function (app) {
     });
 
     app.use('/ws/context', contextRouter);
-};
+}
+;

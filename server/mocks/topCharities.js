@@ -24,8 +24,12 @@ module.exports = function (app) {
                     charities.forEach((c) => {
                         if (c.id == charityId) charity = c;
                     });
-                    charity['logoImage'] = tc['logoImage'];
-                    result.push(charity)
+
+                    var listCharity = {};
+                    listCharity['id'] = charity.id;
+                    listCharity['logoImage'] = tc['logoImage'];
+                    listCharity['charity'] = charity;
+                    result.push(listCharity)
                 });
 
                 res.send({
