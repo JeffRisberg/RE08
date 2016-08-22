@@ -21,8 +21,10 @@ import topCharities from './reducers/topCharities';
 import pageName from './reducers/pageName';
 import selections from './reducers/selections';
 import forms from './reducers/forms';
+import fundraisers from './reducers/fundraisers';
 
 import AppRoot from './components/AppRoot.js';
+import FundraiserList from './components/FundraiserList';
 
 import {SET_CONTEXT, CLEAR_CONTEXT} from './constants/ActionTypes.js';
 
@@ -36,6 +38,7 @@ var initialContent = {
     },
     context: null,
     forms: {},
+    fundraisers: {idList: [], records: {}, loading: false, error: null},
     topCharities: {idList: [], records: {}, loading: false, error: null},
     orders: {idList: [], records: {}, history: {}},
     pageName: 'Landing',
@@ -50,6 +53,7 @@ const reducers = combineReducers({
     charities,
     context,
     forms,
+    fundraisers,
     topCharities,
     orders,
     pageName,
@@ -61,7 +65,7 @@ const reducers = combineReducers({
 
 //only store the context data for now to keep user logged in when there
 //is a hard refresh
-const storageEngine = filter(createEngine('justgive'), ['context','orders']);
+const storageEngine = filter(createEngine('justgive'), ['context', 'orders']);
 const storageMiddleware = storage.createMiddleware(storageEngine);
 
 const logger = createLogger();
@@ -77,6 +81,8 @@ load(store)
         ReactDOM.render(
             <Provider store={store}>
                 <Router history={hashHistory}>
+                    <Route path="/fundraisers" component={FundraiserList}>
+                    </Route>
                     <Route path="/(:pageName)" component={AppRoot}>
                         <IndexRoute component={AppRoot}/>
                     </Route>

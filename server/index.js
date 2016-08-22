@@ -27,6 +27,7 @@ app.portalPagesMap = require("../portalPages.json");
 
 app.vendorsDB = new nedb({filename: 'vendors', autoload: true});
 app.portalsDB = new nedb({filename: 'portals', autoload: true});
+app.fundraisersDB = new nedb({filename: 'fundraisers', autoload: true});
 
 app.authTokenDB = new nedb({filename: 'authTokens', autoload: true});
 app.basketItemDB = new nedb({filename: 'basketItems', autoload: true});
