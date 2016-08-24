@@ -18,23 +18,29 @@ class FundraiserList extends React.Component {
     }
 
     componentDidMount() {
+        console.log("call to componentDidMount");
         this.props.fetchFundraisers();
     }
 
     render() {
-        var fundraiserNodes = this.props.fundraisers.map(function (fundraiser, index) {
-            return (
-                <Fundraiser fundraiser={fundraiser} key={index}></Fundraiser>
-            );
-        });
+        if (this.props.fundraisers != undefined && this.props.fundraisers != null) {
+            var fundraiserNodes = this.props.fundraisers.map(function (fundraiser, index) {
+                return (
+                    <Fundraiser fundraiser={fundraiser} key={index}></Fundraiser>
+                );
+            });
 
-        return (
-            <table className="table">
-                <tbody>
-                {fundraiserNodes}
-                </tbody>
-            </table>
-        );
+            return (
+                <table className="table">
+                    <tbody>
+                    {fundraiserNodes}
+                    </tbody>
+                </table>
+            );
+        }
+        else {
+            return (<p>No fundraisers yet</p>);
+        }
     }
 }
 
