@@ -6,13 +6,14 @@ const orders = (state = [], action = {}) => {
         {
             const updatedState = Object.assign({}, state);
 
-            action.orders.forEach(order => {
-                const id = order.id;
+            action.orders.forEach(ghInfo => {
+                const id = "" + ghInfo.orderId + ghInfo.donationId +
+                    ghInfo.giftCertificateId + ghInfo.feeId;
 
                 if (updatedState.idList.indexOf(id) < 0) {
                     updatedState.idList.push(id);
                 }
-                updatedState.records[id] = order;
+                updatedState.records[id] = ghInfo;
             });
             return updatedState;
         }
@@ -20,11 +21,21 @@ const orders = (state = [], action = {}) => {
         {
             const idList = [];
 
-            action.orders.forEach(order => {
-                idList.push(order.id);
+            action.orders.forEach(ghInfo => {
+                const id = "" + ghInfo.orderId + ghInfo.donationId +
+                    ghInfo.giftCertificateId + ghInfo.feeId;
+
+                idList.push(id);
             });
 
-            return Object.assign({}, state, {history: {[action.year]: {idList: idList, pagination: action.pagination}}});
+            return Object.assign({}, state, {
+                history: {
+                    [action.year]: {
+                        idList: idList,
+                        pagination: action.pagination
+                    }
+                }
+            });
         }
         default:
             return state;

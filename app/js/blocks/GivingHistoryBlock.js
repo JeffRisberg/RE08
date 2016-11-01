@@ -54,32 +54,36 @@ class GivingHistoryBlock extends React.Component {
         if (this.props.context != undefined && this.props.context != null &&
             this.props.context.donor != undefined && this.props.context.donor != null) {
 
-            let checkDonationHandler = (donation) => {
-                return this.checkDonation(donation);
+            let checkDonationHandler = (ghInfo) => {
+                return this.checkDonation(ghInfo);
             };
             const givingHistoryItemNodes = (this.props.orders === undefined || this.props.orders == null)
-                ? null : this.props.orders.map(function (order, index) {
+                ? null : this.props.orders.map(function (ghInfo, index) {
 
-                return order.donations.map((donation) => {
-                    return (
-                        <GivingHistoryItem order={order} donation={donation} checkDonation={checkDonationHandler}
-                                           key={order.id + '' + donation.id}>
-                        </GivingHistoryItem>
-                    );
-                })
+                const key = "" + ghInfo.orderId + ghInfo.donationId +
+                    ghInfo.giftCertificateId + ghInfo.feeId;
+
+                return (
+                    <GivingHistoryItem ghInfo={ghInfo} checkDonation={checkDonationHandler}
+                                       key={key}>
+                    </GivingHistoryItem>
+                );
             });
 
             var currentYear = new Date().getFullYear();
             const selectOptions = [currentYear - 4, currentYear - 3, currentYear - 2, currentYear - 1, currentYear].map((year => {
-                return (<option>{year}</option>)
+                return (
+                    <option key={"year"+year}>{year}</option>
+                )
             }));
-
-            console.log('this.state.year: ' + this.state.year)
 
             let resultsNav = null;
             if (this.props.pagination != undefined && this.props.pagination !== null && this.props.pagination.resultCount > this.props.pagination.resultsPerPage) {
 
-                resultsNav = (<ResultsNav pagination={this.props.pagination} navigateToPage={(e, page) => {this.handleFetchOrderHistory(e, page)}}/>)
+                resultsNav = (
+                    <ResultsNav pagination={this.props.pagination}
+                                navigateToPage={(e, page) => {this.handleFetchOrderHistory(e, page)}}/>
+                )
             }
 
             return (
@@ -113,13 +117,17 @@ class GivingHistoryBlock extends React.Component {
                                 <th></th>
                                 <th>Date</th>
                                 <th>Transaction #</th>
-                                <th>Charity</th>
+                                <th>Charity/GiftCertificate/Fee</th>
                                 <th style={{textAlign: 'right'}}>Amount</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {(this.props.blockState.isLoading()) ? <tr><td><Spinner blockState={this.props.blockState}/></td></tr> : null}
-                            {(this.props.blockState.isError()) ? <tr><td><ErrorMessage blockState={this.props.blockState}/></td></tr> : null}
+                            {(this.props.blockState.isLoading()) ? <tr>
+                                <td><Spinner blockState={this.props.blockState}/></td>
+                            </tr> : null}
+                            {(this.props.blockState.isError()) ? <tr>
+                                <td><ErrorMessage blockState={this.props.blockState}/></td>
+                            </tr> : null}
                             {givingHistoryItemNodes}
                             </tbody>
                         </table>
@@ -138,11 +146,11 @@ class GivingHistoryBlock extends React.Component {
         }
     }
 
-    checkDonation(donationId) {
-        var index = this.state.donationIds.indexOf(donationId);
+    checkDonation(ghInfo) {
+        var index = this.state.donationIds.indexOf(ghInfo.donationId);
 
         if (this.state.donationIds[index] === undefined) {
-            this.state.donationIds.push(donationId);
+            this.state.donationIds.push(ghInfo.donationId);
         }
         else {
             if (index > -1) {
