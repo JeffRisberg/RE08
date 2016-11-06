@@ -76,7 +76,7 @@ module.exports = function (app) {
                                 givingHistories.push({
                                     orderId: don['transactionId'],
                                     completedDate: transactionDate,
-                                    type: 'donation',
+                                    type: 'Donation',
                                     donationId: don['id'],
                                     donationAmount: parseInt(don['amount']),
                                     charityId: don['charityId'],
