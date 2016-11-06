@@ -36,13 +36,13 @@ class AppRoot extends React.Component {
             return null;
         }
 
-        var currentLocation = this.props.location.pathname;
+        //var currentLocation = this.props.location.pathname;
 
         const blocks = getPageBlocks(this.props.portal, this.props.pageName);
 
         return (
             <div className="container-fluid">
-                <Header currentLocation={currentLocation}/>
+                <Header/>
 
                 <div className="container" style={{minHeight: '400px'}}>
                     <BlockGrid blocks={blocks}/>
@@ -55,10 +55,6 @@ class AppRoot extends React.Component {
         )
     }
 }
-
-AppRoot.contextTypes = {
-    location: React.PropTypes.object.isRequired
-};
 
 const mapStateToProps = (state) => {
     return {

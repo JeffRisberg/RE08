@@ -47,7 +47,7 @@ module.exports = function (app) {
                 if (donors.length > 0) {
                     const donor = donors[0];
 
-                    var orders = [];
+                    var givingHistories = [];
                     transactionDB.find({donorId: donor.id}).exec(function (err, transactions) {
                         const transactionIds = transactions.map(function (tran) {
                             return tran.id
@@ -72,28 +72,32 @@ module.exports = function (app) {
                                 don['transactionDate'] = 'Jan 8, 2016 10:55:20 PM';
                                 don['transactionDateTime'] = parseInt(transactionDate);
                                 don['amount'] = parseInt(don['amount']);
-                            });
 
-                            orders.push({
-                                batchReferenceCode: "TESTPROCESS",
-                                donations: donations
+                                givingHistories.push({
+                                    orderId: don['transactionId'],
+                                    completedDate: transactionDate,
+                                    type: 'donation',
+                                    donationId: don['id'],
+                                    donationAmount: parseInt(don['amount']),
+                                    charityId: don['charityId'],
+                                    charityName: charity.name});
                             });
 
                             res.status(200);
                             res.send({
-                                data: orders, status: "success", pagination: {
+                                data: givingHistories, status: "success", pagination: {
                                     currentPage: 1,
                                     firstPage: 1,
                                     hasNextPage: false,
                                     hasPreviousPage: false,
                                     lastPage: 1,
-                                    lastResult: orders.length,
+                                    lastResult: givingHistories.length,
                                     nextPage: 2,
                                     offset: 0,
                                     pages: [1],
                                     previousPage: 0,
-                                    resultCount: orders.length,
-                                    resultsPerPage: orders.length,
+                                    resultCount: givingHistories.length,
+                                    resultsPerPage: givingHistories.length,
                                     totalPages: 1
                                 }
                             });

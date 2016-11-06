@@ -12,7 +12,7 @@ import { fetchFundraisers } from '../actions/fundraisers';
  * Appears at top of screen
  *
  * @author Jeff Risberg, Brandon Risberg
- * @since April 30. 2016
+ * @since April 30, 2016
  */
 class Header extends React.Component {
 
@@ -62,9 +62,6 @@ class Header extends React.Component {
                         <div className="col-md-3" style={{textAlign: 'right'}}>
                             <a onClick={this.props.displayBasket} style={{marginLeft: '10px'}}><div className="basket"/></a>
                             <a onClick={this.props.displayGivingHistory} style={{marginLeft: '10px'}}><div className="giving-history"/></a>
-                            <NavLink to="/fundraisers" style={{marginLeft: '10px'}}>
-                                Fundraisers
-                            </NavLink>
                         </div>
                     </div>
                 </div>
