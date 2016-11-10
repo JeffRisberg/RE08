@@ -185,7 +185,7 @@ export const getPageBlocks = (portal, pageName) => {
             },
             {
                 "row": "7", "col": "1", "width": "12", "type": "text",
-                "text": "By clicking the &quot;Complete Donation&quot; button below I agree to the Terms and Conditions and I understand that my donation is non-refundable and that the donation will be disbursed on the 10th of the following month."
+                "text": "By clicking the &quot;Complete Donation&quot; button below I agree to the Terms and Conditions and I understand that my donation is non-refundable and that the donation will be disbursed on the 15th of the following month."
             }
         ],
         "5": [
