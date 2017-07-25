@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux'
-import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger';
-import * as storage from 'redux-storage'
+import { createLogger } from 'redux-logger'
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+import thunkMiddleware from 'redux-thunk';
+import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-localstorage';
-import filter from 'redux-storage-decorator-filter'
-
+import filter from 'redux-storage-decorator-filter';
 import blockStates from './reducers/blockStates';
 import orders from './reducers/orders';
 import categories from './reducers/categories';
@@ -22,11 +21,8 @@ import pageName from './reducers/pageName';
 import selections from './reducers/selections';
 import forms from './reducers/forms';
 import fundraisers from './reducers/fundraisers';
-
 import AppRoot from './components/AppRoot.js';
 import FundraiserList from './components/FundraiserList';
-
-import {SET_CONTEXT, CLEAR_CONTEXT} from './constants/ActionTypes.js';
 
 var initialContent = {
     blockStates: {},
@@ -34,13 +30,13 @@ var initialContent = {
     charities: {
         idLists: {},
         records: {},
-        searchResults: {charityEins: null, pagination: null, loading: false, error: null}
+        searchResults: { charityEins: null, pagination: null, loading: false, error: null }
     },
     context: null,
     forms: {},
-    fundraisers: {idList: [], records: {}, loading: false, error: null},
-    topCharities: {idList: [], records: {}, loading: false, error: null},
-    orders: {idList: [], records: {}, history: {}},
+    fundraisers: { idList: [], records: {}, loading: false, error: null },
+    topCharities: { idList: [], records: {}, loading: false, error: null },
+    orders: { idList: [], records: {}, history: {} },
     pageName: 'Landing',
     portal: null,
     selections: {},
@@ -69,13 +65,22 @@ const storageEngine = filter(createEngine('justgive'), ['context', 'orders']);
 const storageMiddleware = storage.createMiddleware(storageEngine);
 
 const logger = createLogger();
+
+const middlewares = [
+    routerMiddleware(hashHistory),
+    thunkMiddleware,
+    storageMiddleware,
+    logger
+];
+
 const store = createStore(
     reducers,
     initialContent,
-    applyMiddleware(routerMiddleware(hashHistory), thunkMiddleware, logger, storageMiddleware)
+    applyMiddleware(...middlewares)
 );
 
 const load = storage.createLoader(storageEngine);
+
 load(store)
     .then((newState) => {
         ReactDOM.render(

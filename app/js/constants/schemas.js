@@ -1,19 +1,18 @@
-import { Schema, arrayOf, normalize } from 'normalizr'
+import { schema, normalize } from 'normalizr'
 
-export const ORDER_SCHEMA = new Schema('orders')
-const DONATION_SCHEMA = new Schema('donations')
-export const CHARITY_SCHEMA = new Schema('charities', {idAttribute: 'ein'})
-export const LIST_CHARITY_SCHEMA = new Schema('listCharities')
-export const CONTEXT_SCHEMA = new Schema('context', {idAttribute: 'token'})
+export const ORDER_SCHEMA = new schema.Entity('orders')
+const DONATION_SCHEMA = new schema.Entity('donations')
+export const CHARITY_SCHEMA = new schema.Entity('charities', {idAttribute: 'ein'})
+export const LIST_CHARITY_SCHEMA = new schema.Entity('listCharities')
+export const CONTEXT_SCHEMA = new schema.Entity('context', {idAttribute: 'token'})
 
 ORDER_SCHEMA.define({
-    donations: arrayOf(DONATION_SCHEMA)
+    donations: [DONATION_SCHEMA]
 })
 
 DONATION_SCHEMA.define({
     charity: CHARITY_SCHEMA
 })
-
 
 LIST_CHARITY_SCHEMA.define({
     charity: CHARITY_SCHEMA
@@ -21,7 +20,7 @@ LIST_CHARITY_SCHEMA.define({
 
 export const normalizeCharities = (json) => {
 
-    const normalized = normalize({charities: json}, {charities: arrayOf(CHARITY_SCHEMA)});
+    const normalized = normalize({charities: json}, {charities: [CHARITY_SCHEMA]});
     return normalized.entities.charities;
 }
 
