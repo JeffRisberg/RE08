@@ -11,10 +11,8 @@ const formName = 'loginForm';
 /**
  * The login component handles login and logout of a donor.
  *
- * A jsonSchema form is used for input.
- *
  * @author Jeff Risberg, Peter Cowan
- * @since March 2016
+ * @since May 2016
  */
 class LoginBlock extends React.Component {
 

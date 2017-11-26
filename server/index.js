@@ -25,18 +25,18 @@ var nedb = require('nedb');
 app.portalBlocksMap = require("../portalBlocks.json");
 app.portalPagesMap = require("../portalPages.json");
 
-app.vendorsDB = new nedb({filename: 'vendors', autoload: true});
-app.portalsDB = new nedb({filename: 'portals', autoload: true});
-app.fundraisersDB = new nedb({filename: 'fundraisers', autoload: true});
+app.vendorsDB = new nedb({filename: 'db-content/vendors', autoload: true});
+app.portalsDB = new nedb({filename: 'db-content/portals', autoload: true});
+app.fundraisersDB = new nedb({filename: 'db-content/fundraisers', autoload: true});
 
-app.authTokenDB = new nedb({filename: 'authTokens', autoload: true});
-app.basketItemDB = new nedb({filename: 'basketItems', autoload: true});
-app.categoryDB = new nedb({filename: 'categories', autoload: true});
-app.charityDB = new nedb({filename: 'charities', autoload: true});
-app.donorDB = new nedb({filename: 'donors', autoload: true});
-app.donationDB = new nedb({filename: 'donations', autoload: true});
-app.topCharityDB = new nedb({filename: 'topCharities', autoload: true});
-app.transactionDB = new nedb({filename: 'transactions', autoload: true});
+app.authTokenDB = new nedb({filename: 'db-content/authTokens', autoload: true});
+app.basketItemDB = new nedb({filename: 'db-content/basketItems', autoload: true});
+app.categoryDB = new nedb({filename: 'db-content/categories', autoload: true});
+app.charityDB = new nedb({filename: 'db-content/charities', autoload: true});
+app.donorDB = new nedb({filename: 'db-content/donors', autoload: true});
+app.donationDB = new nedb({filename: 'db-content/donations', autoload: true});
+app.topCharityDB = new nedb({filename: 'db-content/topCharities', autoload: true});
+app.transactionDB = new nedb({filename: 'db-content/transactions', autoload: true});
 
 mocks.forEach(function (route) {
     route(app);
