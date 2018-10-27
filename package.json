@@ -27,7 +27,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "nedb": "^1.8.0",
     "react-hot-loader": "^4.3.11",
-    "webpack": "^4.21.0",
+    "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
@@ -38,7 +38,7 @@
     "normalizr": "^3.3.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-redux": "^5.0.7",
+    "react-redux": "^5.1.0",
     "react-router": "^3.0.5",
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.1",
