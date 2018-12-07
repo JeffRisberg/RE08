@@ -17,6 +17,13 @@ import { fetchFundraisers } from '../actions/fundraisers';
 class Header extends React.Component {
 
     render() {
+        let decision = amp.decide("textStyle", {
+            color:["red", "green", "blue"],
+            font: ["bold", "italic", "regular"]
+        }, { timeout: 500, ttl: 20 * 60 * 1000});
+
+        console.log(decision);
+
         var headerText = "Not logged in";
         let loginLogout = <a onClick={this.props.displayLogin} style={{marginLeft: '10px'}}>Login</a>;
         if (this.props.context != null && this.props.context.donor != null) {
