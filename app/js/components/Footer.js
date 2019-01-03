@@ -13,10 +13,10 @@ class Footer extends React.Component {
                 <div className="footer" style={{marginLeft: '+15px', marginRight: '+15px'}}>
                     <div className="row darkgrey footer-links">
                         <div className="col-md-6 text-left">
-                            Left
+                            JustGiving
                         </div>
                         <div className="col-md-6 text-right">
-                            Right
+                            Fundraising
                         </div>
                     </div>
                     <div className="row dark-gray copyright">
