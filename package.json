@@ -27,8 +27,8 @@
     "mini-css-extract-plugin": "^0.5.0",
     "nedb": "^1.8.0",
     "react-hot-loader": "^4.6.5",
-    "webpack": "^4.29.0",
-    "webpack-cli": "^3.2.1"
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
   },
   "dependencies": {
     "bootstrap": "^3.4.0",
