@@ -26,9 +26,9 @@
     "glob": "^7.1.4",
     "mini-css-extract-plugin": "^0.5.0",
     "nedb": "^1.8.0",
-    "react-hot-loader": "^4.12.3",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.5"
+    "react-hot-loader": "^4.12.9",
+    "webpack": "^4.37.0",
+    "webpack-cli": "^3.3.6"
   },
   "dependencies": {
     "bootstrap": "^3.4.1",
@@ -41,7 +41,7 @@
     "react-redux": "^5.1.1",
     "react-router": "^3.0.5",
     "react-router-redux": "^4.0.8",
-    "redux": "^4.0.1",
+    "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-storage": "^4.1.2",
     "redux-storage-decorator-filter": "1.1.8",
