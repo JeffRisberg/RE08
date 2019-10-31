@@ -9,12 +9,14 @@ const mocks = globSync('./mocks/**/*.js', {cwd: __dirname}).map(require);
 
 const PATH_STYLES = path.resolve(__dirname, '../app/styles');
 const PATH_IMAGES = path.resolve(__dirname, '../app/images');
+const PATH_FONTS = path.resolve(__dirname, '../app/fonts');
 const PATH_JS = path.resolve(__dirname, '../app/js');
 
 const PATH_DIST = path.resolve(__dirname, '../dist');
 
 app.use('/styles', express.static(PATH_STYLES));
 app.use('/images', express.static(PATH_IMAGES));
+app.use('/fonts', express.static(PATH_FONTS));
 app.use('/js', express.static(PATH_JS));
 app.use(express.static(PATH_DIST));
 
