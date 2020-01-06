@@ -65,7 +65,6 @@ export const login = (blockId, login, password) => {
     return function (dispatch, getState) {
 
         console.log('logging in ' + login);
-        amp.observe("Login", { lang: "en", partOfDay: "evening" });
 
         dispatch(setBlockState(blockId, REQUEST));
 
@@ -134,8 +133,6 @@ export const loginNewAccount = (blockId, formData) => {
 export const logout = () => {
     return function (dispatch, getState) {
 
-        amp.observe("Logout", { lang: "en", partOfDay: "evening" });
-
         return fetch('/ws/context/logout', {
             method: 'POST',
             headers: {
@@ -156,7 +153,6 @@ export const addDonation = (formData, ein) => {
     return function (dispatch, getState) {
 
         console.log('adding donation: ' + JSON.stringify(formData))
-        amp.observe("Donate", { lang: "en", partOfDay: "anytime" });
 
         return fetch('/ws/context/donations/' + ein, {
             method: 'POST',

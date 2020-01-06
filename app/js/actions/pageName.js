@@ -18,8 +18,6 @@ export const setPage = (pageName = 'Landing') => {
 };
 
 export const displayDonate = (ein) => {
-    amp.observe("Donate", { lang: "en", partOfDay: "anytime" });
-
     return function (dispatch, getState) {
         const pageName = 'Donate';
         dispatch({
