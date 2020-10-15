@@ -31,13 +31,13 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "bootstrap": "^4.5.2",
+    "bootstrap": "^4.5.3",
     "debug": "^4.2.0",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.29.1",
     "normalizr": "^3.6.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-redux": "^5.1.2",
     "react-router": "^3.2.6",
     "react-router-redux": "^4.0.8",
