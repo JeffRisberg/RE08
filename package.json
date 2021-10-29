@@ -27,25 +27,25 @@
     "mini-css-extract-plugin": "^0.12.0",
     "nedb": "^1.8.0",
     "react-hot-loader": "^4.13.0",
-    "webpack": "^5.59.1",
+    "webpack": "^5.61.0",
     "webpack-cli": "^4.0.0"
   },
   "dependencies": {
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^4.6.1",
     "debug": "^4.3.2",
     "isomorphic-fetch": "^3.0.0",
     "moment": "^2.29.1",
     "normalizr": "^3.6.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-redux": "^7.2.5",
+    "react-redux": "^7.2.6",
     "react-router": "^3.2.6",
     "react-router-redux": "^4.0.8",
-    "redux": "^4.1.1",
+    "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
     "redux-storage": "^4.1.2",
     "redux-storage-decorator-filter": "1.1.8",
     "redux-storage-engine-localstorage": "1.1.4",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.4.0"
   }
 }
