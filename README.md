@@ -6,12 +6,13 @@
 
 `webpack`
 
-`node start`
+`npm run start`
 
 # Then in one browser window
 
 `localhost:3000`
 
+login as 'jsmith@gmail.com'
 
 
 
