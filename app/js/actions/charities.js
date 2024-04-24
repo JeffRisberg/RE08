@@ -5,7 +5,6 @@ import fetch from 'isomorphic-fetch';
 
 import {APPEND_CHARITIES,
     FETCH_TOP_CHARITIES,
-    FETCH_CATEGORY_CHARITIES,
     FETCH_CHARITY_SEARCH_RESULTS, RESET_CHARITY_SEARCH_RESULTS, SET_BLOCK_STATE} from '../constants/ActionTypes'
 import {REQUEST, SUCCESS, ERROR} from '../constants/StateTypes'
 
