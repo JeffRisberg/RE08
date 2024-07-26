@@ -27,7 +27,7 @@
     "eslint-config-airbnb": "^19.0.0",
     "eslint-plugin-import": "^2.0.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-react": "^7.35.0",
     "file-loader": "^6.0.0",
     "glob": "^8.1.0",
     "husky": "^1.2.1",
